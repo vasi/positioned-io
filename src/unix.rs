@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{Result, Write};
 use std::os::unix::io::AsRawFd;
-use ::{ReadAt, WriteAt, Size};
+use super::{ReadAt, WriteAt, Size};
 
 extern crate nix;
 use self::nix::sys::uio;

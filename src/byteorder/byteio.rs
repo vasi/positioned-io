@@ -3,7 +3,7 @@ use extbyteorder::ByteOrder;
 use std::marker::PhantomData;
 use std::io::{Result, Read, Write};
 
-use ::{ReadAt, WriteAt};
+use super::super::{ReadAt, WriteAt};
 
 // Read/write with a given endianness.
 struct ByteIo<I, E: ByteOrder> {

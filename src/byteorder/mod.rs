@@ -4,7 +4,7 @@ use extbyteorder::ByteOrder;
 
 use std::io::{Result, Read, Write};
 
-use ::{ReadAt, WriteAt};
+use super::{ReadAt, WriteAt};
 
 // Read/write bytes at positions.
 trait ReadBytesExt {

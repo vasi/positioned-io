@@ -2,7 +2,7 @@ use std::io::{Read, Seek, SeekFrom};
 use std::fs::File;
 use std::str;
 
-use ::{ReadAt, Size, Cursor, SizeCursor};
+use super::{ReadAt, Size, Cursor, SizeCursor};
 
 #[test]
 fn test_read_at() {
