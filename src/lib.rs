@@ -1,5 +1,6 @@
 mod byteorder;
 mod cursor;
+pub use cursor::Cursor;
 
 extern crate byteorder as extbyteorder;
 
@@ -16,8 +17,8 @@ pub trait ReadAt {
                     let tmp = buf;
                     buf = &mut tmp[n..];
                     pos += n as u64;
-                },
-                Err(ref e) if e.kind() == ErrorKind::Interrupted => {},
+                }
+                Err(ref e) if e.kind() == ErrorKind::Interrupted => {}
                 Err(e) => return Err(e),
             }
         }
@@ -40,8 +41,8 @@ pub trait WriteAt {
                     let tmp = buf;
                     buf = &tmp[n..];
                     pos += n as u64;
-                },
-                Err(ref e) if e.kind() == ErrorKind::Interrupted => {},
+                }
+                Err(ref e) if e.kind() == ErrorKind::Interrupted => {}
                 Err(e) => return Err(e),
             }
         }

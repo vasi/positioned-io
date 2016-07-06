@@ -6,11 +6,13 @@ use std::io::{Result, Read, Write};
 use ::{ReadAt, WriteAt};
 
 // Read/write with a given endianness.
-struct ByteIo<I, E : ByteOrder> {
+struct ByteIo<I, E: ByteOrder> {
     io: I,
     endianness: PhantomData<E>,
 }
-impl<I, E: ByteOrder> ByteIo<I, E> where I: Read {
+impl<I, E: ByteOrder> ByteIo<I, E>
+    where I: Read
+{
     fn read_u8(&mut self) -> Result<u8> {
         unimplemented!()
     }
@@ -48,7 +50,9 @@ impl<I, E: ByteOrder> ByteIo<I, E> where I: Read {
         unimplemented!()
     }
 }
-impl<I, E: ByteOrder> ByteIo<I, E> where I: Write {
+impl<I, E: ByteOrder> ByteIo<I, E>
+    where I: Write
+{
     fn write_u8(&mut self, pos: u64, n: u8) -> Result<()> {
         unimplemented!()
     }
@@ -86,7 +90,9 @@ impl<I, E: ByteOrder> ByteIo<I, E> where I: Write {
         unimplemented!()
     }
 }
-impl<I, E: ByteOrder> ByteIo<I, E> where I: ReadAt {
+impl<I, E: ByteOrder> ByteIo<I, E>
+    where I: ReadAt
+{
     fn read_u8_at(&mut self) -> Result<u8> {
         unimplemented!()
     }
@@ -124,7 +130,9 @@ impl<I, E: ByteOrder> ByteIo<I, E> where I: ReadAt {
         unimplemented!()
     }
 }
-impl<I, E: ByteOrder> ByteIo<I, E> where I: WriteAt {
+impl<I, E: ByteOrder> ByteIo<I, E>
+    where I: WriteAt
+{
     fn write_u8_at(&mut self, pos: u64, n: u8) -> Result<()> {
         unimplemented!()
     }
