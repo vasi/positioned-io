@@ -11,7 +11,7 @@ use super::{ReadAt, Size, Cursor, SizeCursor, ByteIo};
 fn test_read_at() {
     let file = File::open("Cargo.toml").unwrap();
     let mut buf = [0; 4];
-    file.read_exact_at(buf.as_mut(), 10).unwrap();
+    file.read_exact_at(10, buf.as_mut()).unwrap();
     let s = str::from_utf8(buf.as_ref()).unwrap();
     assert_eq!(s, "name");
 }
