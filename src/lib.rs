@@ -1,6 +1,9 @@
 mod byteorder;
+pub use byteorder::{ReadBytesExt, WriteBytesExt};
+pub use byteorder::byteio::ByteIo;
 mod cursor;
 pub use cursor::{Cursor, SizeCursor};
+
 
 extern crate byteorder as extbyteorder;
 
