@@ -10,6 +10,8 @@ The major advantages of this type of I/O are:
 
 [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
 
+[![Build Status](https://travis-ci.org/vasi/positioned-io.svg?branch=master)](https://travis-ci.org/vasi/positioned-io)
+
 ### Example
 
 Read the fifth 512-byte sector of a file:
