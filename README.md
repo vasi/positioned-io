@@ -27,7 +27,7 @@ let bytes_read = try!(file.read_at(2048, &mut buf));
 
 ### Documentation
 
-TODO
+http://vasi.github.io/positioned-io/positioned_io/
 
 ### Usage
 
