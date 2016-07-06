@@ -1,8 +1,9 @@
 mod byteorder;
+mod cursor;
 
 extern crate byteorder as extbyteorder;
 
-use std::io::{self, Error, ErrorKind, Result, Read, Write};
+use std::io::{Error, ErrorKind, Result};
 
 // Read at a position.
 pub trait ReadAt {
@@ -49,27 +50,10 @@ pub trait WriteAt {
     fn flush(&mut self) -> Result<()>;
 }
 
-// Turn a positioned writer into a cursor.
-pub struct Cursor<I>(pub io::Cursor<I>);
-impl<I> Cursor<I> {
-    pub fn new(io: I, pos: u64) -> Self {
-        let mut curs = io::Cursor::new(io);
-        curs.set_position(pos);
-        Cursor(curs)
-    }
-}
-impl<T> Read for Cursor<T> where T: ReadAt {
-    fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
-        unimplemented!()
-    }
-}
-impl<T> Write for Cursor<T> where T: WriteAt {
-    fn write(&mut self, buf: &[u8]) -> Result<usize> {
-        unimplemented!()
-    }
-    fn flush(&mut self) -> Result<()> {
-        unimplemented!()
-    }
+// Trait to get the size of an IO object.
+pub trait Size {
+    // Can legitimiately return None if there's no size, eg: a socket.
+    fn size(&self) -> Result<Option<u64>>;
 }
 
 // Implementation for Unix files.
@@ -79,7 +63,6 @@ mod unix;
 // Other implementations?
 // - Windows files
 // - Byte arrays
-
 
 #[cfg(test)]
 mod test;
