@@ -19,6 +19,7 @@ pub use cursor::{Cursor, SizeCursor};
 extern crate byteorder as extbyteorder;
 
 use std::io::{Error, ErrorKind, Result};
+use std::fs::File;
 
 // Read at a position.
 pub trait ReadAt {
@@ -70,13 +71,27 @@ pub trait Size {
     // Can legitimiately return None if there's no size, eg: a socket.
     fn size(&self) -> Result<Option<u64>>;
 }
+impl Size for File {
+    fn size(&self) -> Result<Option<u64>> {
+        let md = try!(self.metadata());
+        if md.is_file() {
+            Ok(Some(md.len()))
+        } else {
+            Ok(None)
+        }
+    }
+}
 
 // Implementation for Unix files.
 #[cfg(unix)]
 mod unix;
 
+// Implementation for Windows files.
+#[cfg(windows)]
+mod windows;
+
+// Implementation for arrays.
 mod array;
-// Windows files?
 
 #[cfg(test)]
 mod test;

@@ -1,11 +1,10 @@
 use std::fs::File;
 use std::io::{Result, Write};
 use std::os::unix::io::AsRawFd;
-use super::{ReadAt, WriteAt, Size};
+use super::{ReadAt, WriteAt};
 
 extern crate nix;
 use self::nix::sys::uio;
-use self::nix::sys::stat::{fstat, SFlag, S_IFREG};
 
 impl ReadAt for File {
     fn read_at(&self, buf: &mut [u8], pos: u64) -> Result<usize> {
@@ -21,18 +20,5 @@ impl WriteAt for File {
     }
     fn flush(&mut self) -> Result<()> {
         Write::flush(self)
-    }
-}
-
-impl Size for File {
-    fn size(&self) -> Result<Option<u64>> {
-        let fd = self.as_raw_fd();
-        let stat = try!(fstat(fd));
-
-        // Only regular files have a size.
-        if SFlag::from_bits_truncate(stat.st_mode).contains(S_IFREG) {
-            return Ok(Some(stat.st_size as u64));
-        }
-        Ok(None)
     }
 }
