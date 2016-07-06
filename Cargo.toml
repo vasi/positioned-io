@@ -1,0 +1,10 @@
+[package]
+name = "positioned-io"
+version = "0.1.0"
+authors = ["Dave Vasilevsky <dave@vasilevsky.ca>"]
+
+[dependencies]
+byteorder = "0.5"
+
+[target.'cfg(unix)'.dependencies]
+nix = "0.6.0"
