@@ -284,8 +284,8 @@
 <span class='doccomment'>/// let curs = Cursor::new_pos(storage, 1 &lt;&lt; 30);</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// // Copy a segment to a file.</span>
-<span class='doccomment'>/// let input = curs.take(1 &lt;&lt; 20);</span>
-<span class='doccomment'>/// let output = try!(File::create(&quot;segment.out&quot;));</span>
+<span class='doccomment'>/// let mut input = curs.take(1 &lt;&lt; 20);</span>
+<span class='doccomment'>/// let mut output = try!(File::create(&quot;segment.out&quot;));</span>
 <span class='doccomment'>/// try!(io::copy(&amp;mut input, &amp;mut output));</span>
 <span class='doccomment'>/// # Ok(())</span>
 <span class='doccomment'>/// # }</span>
