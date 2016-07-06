@@ -3,8 +3,8 @@
 //!
 //! The major advantages of this type of I/O are:
 //!
-//! You don't need to seek before doing a random-access read or write, which is convenient.
-//! Reads don't modify the file at all, so don't require mutability.
+//! * You don't need to seek before doing a random-access read or write, which is convenient.
+//! * Reads don't modify the file at all, so don't require mutability.
 //!
 //! [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
 //!
