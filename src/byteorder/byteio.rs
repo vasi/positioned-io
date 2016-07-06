@@ -15,20 +15,29 @@ pub struct ByteIo<I, E: ByteOrder> {
     endianness: PhantomData<E>,
 }
 
-impl<I, E> ByteIo<I, E> where E: ByteOrder {
+impl<I, E> ByteIo<I, E>
+    where E: ByteOrder
+{
     pub fn new(io: I) -> Self {
-        ByteIo { io: io, endianness: PhantomData }
+        ByteIo {
+            io: io,
+            endianness: PhantomData,
+        }
     }
 }
 
 // Auto-coerce back to the base IO.
-impl<I, E> Deref for ByteIo<I, E> where E: ByteOrder {
+impl<I, E> Deref for ByteIo<I, E>
+    where E: ByteOrder
+{
     type Target = I;
     fn deref(&self) -> &I {
         &self.io
     }
 }
-impl<I, E> DerefMut for ByteIo<I, E> where E: ByteOrder {
+impl<I, E> DerefMut for ByteIo<I, E>
+    where E: ByteOrder
+{
     fn deref_mut(&mut self) -> &mut I {
         &mut self.io
     }

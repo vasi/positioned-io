@@ -1,9 +1,20 @@
+//! This crate allows you to specify an offset for reads and writes, without changing the current
+//! position in a file. This is similar to [pread() and pwrite()][pread] in C.
+//!
+//! The major advantages of this type of I/O are:
+//!
+//! You don't need to seek before doing a random-access read or write, which is convenient.
+//! Reads don't modify the file at all, so don't require mutability.
+//!
+//! [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
+//!
+
 mod byteorder;
 pub use byteorder::{ReadBytesExt, WriteBytesExt};
 pub use byteorder::byteio::ByteIo;
+
 mod cursor;
 pub use cursor::{Cursor, SizeCursor};
-
 
 extern crate byteorder as extbyteorder;
 
@@ -64,9 +75,8 @@ pub trait Size {
 #[cfg(unix)]
 mod unix;
 
-// Other implementations?
-// - Windows files
-// - Byte arrays
+mod array;
+// Windows files?
 
 #[cfg(test)]
 mod test;

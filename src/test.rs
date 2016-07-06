@@ -53,7 +53,7 @@ fn test_size_cursor() {
 #[test]
 fn test_byteio() {
     let file = File::open("Cargo.toml").unwrap();
-    let io : ByteIo<_, LittleEndian> = ByteIo::new(file);
+    let io: ByteIo<_, LittleEndian> = ByteIo::new(file);
     let r = io.read_i32_at(3).unwrap();
     assert_eq!(0x67616b63, r);
 }

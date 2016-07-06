@@ -7,7 +7,7 @@ use std::io::Result;
 use super::{ReadAt, WriteAt};
 
 // Read/write bytes at positions.
-pub trait ReadBytesExt : ReadAt {
+pub trait ReadBytesExt: ReadAt {
     fn read_u8_at(&self, pos: u64) -> Result<u8> {
         let mut buf = [0; 1];
         try!(self.read_exact_at(&mut buf, pos));
@@ -69,7 +69,7 @@ pub trait ReadBytesExt : ReadAt {
         Ok(T::read_f64(&buf))
     }
 }
-pub trait WriteBytesExt : WriteAt {
+pub trait WriteBytesExt: WriteAt {
     fn write_u8_at(&mut self, pos: u64, n: u8) -> Result<()> {
         self.write_all_at(&[n], pos)
     }
