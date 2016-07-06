@@ -40,8 +40,8 @@ use super::{ReadAt, WriteAt, Size};
 /// let curs = Cursor::new_pos(storage, 1 << 30);
 ///
 /// // Copy a segment to a file.
-/// let input = curs.take(1 << 20);
-/// let output = try!(File::create("segment.out"));
+/// let mut input = curs.take(1 << 20);
+/// let mut output = try!(File::create("segment.out"));
 /// try!(io::copy(&mut input, &mut output));
 /// # Ok(())
 /// # }
