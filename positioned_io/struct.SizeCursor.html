@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SizeCursor` struct in crate `positioned_io`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SizeCursor">
+
+    <title>positioned_io::SizeCursor - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>positioned_io</a></p><script>window.sidebarCurrent = {name: 'SizeCursor', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>positioned_io</a>::<wbr><a class='struct' href=''>SizeCursor</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-396' class='srclink' href='../src/positioned_io/src/cursor.rs.html#143' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SizeCursor&lt;I: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a>&gt;(_);</pre><div class='docblock'><p>Adapts a <code>ReadAt</code> or <code>WriteAt</code> into a <code>Read</code> or <code>Write</code>, with better seeking.</p>
+
+<p>This is just like <a href="struct.Cursor.html"><code>Cursor</code></a>, except that it requires an object that implements
+<a href="trait.Size.html"><code>Size</code></a>, and that it can seek from the end of the I/O object.</p>
+
+<p>Eventually it will be legal to specialize <code>Cursor</code> for types that implement <code>Size</code>, see
+<a href="https://github.com/rust-lang/rfcs/pull/1210">RFC 1210</a>.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;I&gt; <a class='struct' href='../positioned_io/struct.SizeCursor.html' title='positioned_io::SizeCursor'>SizeCursor</a>&lt;I&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a></span></code></h3><div class='impl-items'><h4 id='method.new_pos' class='method'><code>fn <a href='#method.new_pos' class='fnname'>new_pos</a>(io: I, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; Self</code></h4>
+<div class='docblock'><p>Create a new <code>SizeCursor</code> which starts reading at a specified offset.</p>
+
+<p>Pass in a <code>ReadAt</code> or <code>WriteAt</code> as <code>io</code>.</p>
+</div><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(io: I) -&gt; Self</code></h4>
+<div class='docblock'><p>Create a new <code>SizeCursor</code> which starts reading at offset zero.</p>
+
+<p>Pass in a <code>ReadAt</code> or <code>WriteAt</code> as <code>io</code>.</p>
+</div></div><h2 id='deref-methods'>Methods from <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='../positioned_io/struct.Cursor.html' title='positioned_io::Cursor'>Cursor</a>&lt;I&gt;&gt;</h2><div class='impl-items'><h4 id='method.into_inner' class='method'><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; I</code></h4>
+<div class='docblock'><p>Consume <code>self</code> and yield the inner <code>ReadAt</code> or <code>WriteAt</code>.</p>
+</div><h4 id='method.get_ref' class='method'><code>fn <a href='#method.get_ref' class='fnname'>get_ref</a>(&amp;self) -&gt; &amp;I</code></h4>
+<div class='docblock'><p>Borrow the inner <code>ReadAt</code> or <code>WriteAt</code>.</p>
+</div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut I</code></h4>
+<div class='docblock'><p>Borrow the inner <code>ReadAt</code> or <code>WriteAt</code> mutably.</p>
+</div><h4 id='method.position' class='method'><code>fn <a href='#method.position' class='fnname'>position</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
+<div class='docblock'><p>Get the current read/write position.</p>
+</div><h4 id='method.set_position' class='method'><code>fn <a href='#method.set_position' class='fnname'>set_position</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
+<div class='docblock'><p>Set the current read/write position.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;I&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../positioned_io/struct.SizeCursor.html' title='positioned_io::SizeCursor'>SizeCursor</a>&lt;I&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a></span></code></h3><div class='impl-items'><h4 id='associatedtype.Target' class='type'><code>type <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#associatedtype.Target' class='type'>Target</a> = <a class='struct' href='../positioned_io/struct.Cursor.html' title='positioned_io::Cursor'>Cursor</a>&lt;I&gt;</code></h4>
+<h4 id='method.deref' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#tymethod.deref' class='fnname'>deref</a>(&amp;self) -&gt; &amp;<a class='struct' href='../positioned_io/struct.Cursor.html' title='positioned_io::Cursor'>Cursor</a>&lt;I&gt;</code></h4>
+</div><h3 class='impl'><code>impl&lt;I&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../positioned_io/struct.SizeCursor.html' title='positioned_io::SizeCursor'>SizeCursor</a>&lt;I&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a></span></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#tymethod.deref_mut' class='fnname'>deref_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../positioned_io/struct.Cursor.html' title='positioned_io::Cursor'>Cursor</a>&lt;I&gt;</code></h4>
+</div><h3 class='impl'><code>impl&lt;I&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Seek.html' title='std::io::Seek'>Seek</a> for <a class='struct' href='../positioned_io/struct.SizeCursor.html' title='positioned_io::SizeCursor'>SizeCursor</a>&lt;I&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a></span></code></h3><div class='impl-items'><h4 id='method.seek' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/std/io/trait.Seek.html#tymethod.seek' class='fnname'>seek</a>(&amp;mut self, pos: <a class='enum' href='https://doc.rust-lang.org/nightly/std/io/enum.SeekFrom.html' title='std::io::SeekFrom'>SeekFrom</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "positioned_io";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

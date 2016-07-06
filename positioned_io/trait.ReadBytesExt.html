@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `ReadBytesExt` trait in crate `positioned_io`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ReadBytesExt">
+
+    <title>positioned_io::ReadBytesExt - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>positioned_io</a></p><script>window.sidebarCurrent = {name: 'ReadBytesExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>positioned_io</a>::<wbr><a class='trait' href=''>ReadBytesExt</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-180' class='srclink' href='../src/positioned_io/src/byteorder/mod.rs.html#35-108' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait ReadBytesExt: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> {
+    fn <a href='#method.read_u8_at' class='fnname'>read_u8_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt; { ... }
+    fn <a href='#method.read_i8_at' class='fnname'>read_i8_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>&gt; { ... }
+    fn <a href='#method.read_u16_at' class='fnname'>read_u16_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt; { ... }
+    fn <a href='#method.read_i16_at' class='fnname'>read_i16_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>&gt; { ... }
+    fn <a href='#method.read_u32_at' class='fnname'>read_u32_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt; { ... }
+    fn <a href='#method.read_i32_at' class='fnname'>read_i32_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt; { ... }
+    fn <a href='#method.read_u64_at' class='fnname'>read_u64_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt; { ... }
+    fn <a href='#method.read_i64_at' class='fnname'>read_i64_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt; { ... }
+    fn <a href='#method.read_uint_at' class='fnname'>read_uint_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt; { ... }
+    fn <a href='#method.read_int_at' class='fnname'>read_int_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt; { ... }
+    fn <a href='#method.read_f32_at' class='fnname'>read_f32_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>&gt; { ... }
+    fn <a href='#method.read_f64_at' class='fnname'>read_f64_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt; { ... }
+}</pre><div class='docblock'><p>Extends <code>ReadAt</code> with methods for reading numbers at offsets.</p>
+
+<p>For most of these methods, you need to explicitly add a <code>ByteOrder</code> type parameter. See
+<a href="http://burntsushi.net/rustdoc/byteorder/trait.ReadBytesExt.html"><code>byteorder::ReadBytesExt</code></a>.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<p>Read an integer from the middle of a byte array:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>positioned_io</span>::<span class='ident'>ReadBytesExt</span>;
+
+<span class='kw'>let</span> <span class='ident'>buf</span> <span class='op'>=</span> [<span class='number'>0</span>, <span class='number'>5</span>, <span class='number'>254</span>, <span class='number'>212</span>, <span class='number'>0</span>, <span class='number'>3</span>];
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>buf</span>.<span class='ident'>as_ref</span>().<span class='ident'>read_i16_at</span>::<span class='op'>&lt;</span><span class='ident'>BigEndian</span><span class='op'>&gt;</span>(<span class='number'>2</span>));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>, <span class='op'>-</span><span class='number'>300</span>);</pre>
+</div>
+            <h2 id='provided-methods'>Provided Methods</h2>
+            <div class='methods'>
+        <h3 id='method.read_u8_at' class='method stab '><code>fn <a href='#method.read_u8_at' class='fnname'>read_u8_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned 8-bit integer at an offset.</p>
+</div><h3 id='method.read_i8_at' class='method stab '><code>fn <a href='#method.read_i8_at' class='fnname'>read_i8_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>&gt;</code></h3><div class='docblock'><p>Reads a signed 8-bit integer at an offset.</p>
+</div><h3 id='method.read_u16_at' class='method stab '><code>fn <a href='#method.read_u16_at' class='fnname'>read_u16_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned 16-bit integer at an offset.</p>
+</div><h3 id='method.read_i16_at' class='method stab '><code>fn <a href='#method.read_i16_at' class='fnname'>read_i16_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>&gt;</code></h3><div class='docblock'><p>Reads a signed 16-bit integer at an offset.</p>
+</div><h3 id='method.read_u32_at' class='method stab '><code>fn <a href='#method.read_u32_at' class='fnname'>read_u32_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned 32-bit integer at an offset.</p>
+</div><h3 id='method.read_i32_at' class='method stab '><code>fn <a href='#method.read_i32_at' class='fnname'>read_i32_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt;</code></h3><div class='docblock'><p>Reads a signed 32-bit integer at an offset.</p>
+</div><h3 id='method.read_u64_at' class='method stab '><code>fn <a href='#method.read_u64_at' class='fnname'>read_u64_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned 64-bit integer at an offset.</p>
+</div><h3 id='method.read_i64_at' class='method stab '><code>fn <a href='#method.read_i64_at' class='fnname'>read_i64_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt;</code></h3><div class='docblock'><p>Reads a signed 64-bit integer at an offset.</p>
+</div><h3 id='method.read_uint_at' class='method stab '><code>fn <a href='#method.read_uint_at' class='fnname'>read_uint_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned <code>nbytes</code>-bit integer at an offset.</p>
+</div><h3 id='method.read_int_at' class='method stab '><code>fn <a href='#method.read_int_at' class='fnname'>read_int_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt;</code></h3><div class='docblock'><p>Reads a signed <code>nbytes</code>-bit integer at an offset.</p>
+</div><h3 id='method.read_f32_at' class='method stab '><code>fn <a href='#method.read_f32_at' class='fnname'>read_f32_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>&gt;</code></h3><div class='docblock'><p>Reads a single-precision floating point number at an offset.</p>
+</div><h3 id='method.read_f64_at' class='method stab '><code>fn <a href='#method.read_f64_at' class='fnname'>read_f64_at</a>&lt;T: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt;(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt;</code></h3><div class='docblock'><p>Reads a double-precision floating point number at an offset.</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    </ul><script type="text/javascript" async
+                         src="../implementors/positioned_io/trait.ReadBytesExt.js">
+                 </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "positioned_io";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Slice","A window into another `ReatAt` or `WriteAt`."]]});

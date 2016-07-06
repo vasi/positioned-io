@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["byteio",""]],"trait":[["ReadBytesExt","Extends `ReadAt` with methods for reading numbers at offsets."],["WriteBytesExt","Extends `WriteAt` with methods for writing numbers at offsets."]]});

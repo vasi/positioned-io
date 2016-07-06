@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `ByteIo` struct in crate `positioned_io`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ByteIo">
+
+    <title>positioned_io::ByteIo - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>positioned_io</a></p><script>window.sidebarCurrent = {name: 'ByteIo', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>positioned_io</a>::<wbr><a class='struct' href=''>ByteIo</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-16' class='srclink' href='../src/positioned_io/src/byteorder/byteio.rs.html#40-43' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct ByteIo&lt;I, E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p>Read or write with a given inherent byte-order.</p>
+
+<p>If you know that you&#39;ll always be using a single endianness, an instance of <code>ByteIo</code> will
+allow you to omit the endian specifier on every read or write.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>positioned_io</span>::<span class='ident'>ByteIo</span>;
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>8</span>];
+{
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>io</span> : <span class='ident'>ByteIo</span><span class='op'>&lt;</span>_, <span class='ident'>BigEndian</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>ByteIo</span>::<span class='ident'>new</span>(<span class='ident'>buf</span>.<span class='ident'>as_mut</span>());
+    <span class='comment'>// All writes will automatically be BigEndian.</span>
+    <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>io</span>.<span class='ident'>write_u16</span>(<span class='number'>300</span>));
+    <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>io</span>.<span class='ident'>write_u32</span>(<span class='number'>1_000_000</span>));
+    <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>io</span>.<span class='ident'>write_i16</span>(<span class='op'>-</span><span class='number'>1</span>));
+ }
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>buf</span>, [<span class='number'>1</span>, <span class='number'>44</span>, <span class='number'>0</span>, <span class='number'>15</span>, <span class='number'>66</span>, <span class='number'>64</span>, <span class='number'>255</span>, <span class='number'>255</span>]);</pre>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;I, E&gt; <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a></span></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(io: I) -&gt; Self</code></h4>
+<div class='docblock'><p>Create a new <code>ByteIo</code> from some sort of reader or writer.</p>
+
+<p>You will need to specify the byte-order when creating a ByteIo.</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>positioned_io</span>::<span class='ident'>ByteIo</span>;
+
+<span class='kw'>let</span> <span class='ident'>buf</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>10</span>];
+<span class='comment'>// Add a type specifier for the byte order.</span>
+<span class='kw'>let</span> <span class='ident'>io</span> : <span class='ident'>ByteIo</span><span class='op'>&lt;</span>_, <span class='ident'>BigEndian</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>ByteIo</span>::<span class='ident'>new</span>(<span class='ident'>buf</span>.<span class='ident'>as_ref</span>());</pre>
+</div></div><h3 class='impl'><code>impl&lt;I, E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></code></h3><div class='impl-items'><h4 id='method.read_u16' class='method'><code>fn <a href='#method.read_u16' class='fnname'>read_u16</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;</code></h4>
+<div class='docblock'><p>Reads an unsigned 16-bit integer.</p>
+</div><h4 id='method.read_i16' class='method'><code>fn <a href='#method.read_i16' class='fnname'>read_i16</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a signed 16-bit integer.</p>
+</div><h4 id='method.read_u32' class='method'><code>fn <a href='#method.read_u32' class='fnname'>read_u32</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h4>
+<div class='docblock'><p>Reads an unsigned 32-bit integer.</p>
+</div><h4 id='method.read_i32' class='method'><code>fn <a href='#method.read_i32' class='fnname'>read_i32</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a signed 32-bit integer.</p>
+</div><h4 id='method.read_u64' class='method'><code>fn <a href='#method.read_u64' class='fnname'>read_u64</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads an unsigned 64-bit integer.</p>
+</div><h4 id='method.read_i64' class='method'><code>fn <a href='#method.read_i64' class='fnname'>read_i64</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a signed 64-bit integer.</p>
+</div><h4 id='method.read_uint' class='method'><code>fn <a href='#method.read_uint' class='fnname'>read_uint</a>(&amp;mut self, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads an unsigned <code>nbytes</code>-bit integer.</p>
+</div><h4 id='method.read_int' class='method'><code>fn <a href='#method.read_int' class='fnname'>read_int</a>(&amp;mut self, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a signed <code>nbytes</code>-bit integer.</p>
+</div><h4 id='method.read_f32' class='method'><code>fn <a href='#method.read_f32' class='fnname'>read_f32</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a single-precision floating point number.</p>
+</div><h4 id='method.read_f64' class='method'><code>fn <a href='#method.read_f64' class='fnname'>read_f64</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a double-precision floating point number.</p>
+</div></div><h3 class='impl'><code>impl&lt;I, E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a></span></code></h3><div class='impl-items'><h4 id='method.write_u16' class='method'><code>fn <a href='#method.write_u16' class='fnname'>write_u16</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes an unsigned 16-bit integer.</p>
+</div><h4 id='method.write_i16' class='method'><code>fn <a href='#method.write_i16' class='fnname'>write_i16</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a signed 16-bit integer.</p>
+</div><h4 id='method.write_u32' class='method'><code>fn <a href='#method.write_u32' class='fnname'>write_u32</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes an unsigned 32-bit integer.</p>
+</div><h4 id='method.write_i32' class='method'><code>fn <a href='#method.write_i32' class='fnname'>write_i32</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a signed 32-bit integer.</p>
+</div><h4 id='method.write_u64' class='method'><code>fn <a href='#method.write_u64' class='fnname'>write_u64</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes an unsigned 64-bit integer.</p>
+</div><h4 id='method.write_i64' class='method'><code>fn <a href='#method.write_i64' class='fnname'>write_i64</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a signed 64-bit integer.</p>
+</div><h4 id='method.write_uint' class='method'><code>fn <a href='#method.write_uint' class='fnname'>write_uint</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes an unsigned <code>nbytes</code>-bit integer.</p>
+</div><h4 id='method.write_int' class='method'><code>fn <a href='#method.write_int' class='fnname'>write_int</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a signed <code>nbytes</code>-bit integer.</p>
+</div><h4 id='method.write_f32' class='method'><code>fn <a href='#method.write_f32' class='fnname'>write_f32</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a single-precision floating point number.</p>
+</div><h4 id='method.write_f64' class='method'><code>fn <a href='#method.write_f64' class='fnname'>write_f64</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a double-precision floating point number.</p>
+</div></div><h3 class='impl'><code>impl&lt;I, E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a></span></code></h3><div class='impl-items'><h4 id='method.read_u16_at' class='method'><code>fn <a href='#method.read_u16_at' class='fnname'>read_u16_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;</code></h4>
+<div class='docblock'><p>Reads an unsigned 16-bit integer at an offset.</p>
+</div><h4 id='method.read_i16_at' class='method'><code>fn <a href='#method.read_i16_at' class='fnname'>read_i16_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a signed 16-bit integer at an offset.</p>
+</div><h4 id='method.read_u32_at' class='method'><code>fn <a href='#method.read_u32_at' class='fnname'>read_u32_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h4>
+<div class='docblock'><p>Reads an unsigned 32-bit integer at an offset.</p>
+</div><h4 id='method.read_i32_at' class='method'><code>fn <a href='#method.read_i32_at' class='fnname'>read_i32_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a signed 32-bit integer at an offset.</p>
+</div><h4 id='method.read_u64_at' class='method'><code>fn <a href='#method.read_u64_at' class='fnname'>read_u64_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads an unsigned 64-bit integer at an offset.</p>
+</div><h4 id='method.read_i64_at' class='method'><code>fn <a href='#method.read_i64_at' class='fnname'>read_i64_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a signed 64-bit integer at an offset.</p>
+</div><h4 id='method.read_uint_at' class='method'><code>fn <a href='#method.read_uint_at' class='fnname'>read_uint_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads an unsigned <code>nbytes</code>-bit integer at an offset.</p>
+</div><h4 id='method.read_int_at' class='method'><code>fn <a href='#method.read_int_at' class='fnname'>read_int_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a signed <code>nbytes</code>-bit integer at an offset.</p>
+</div><h4 id='method.read_f32_at' class='method'><code>fn <a href='#method.read_f32_at' class='fnname'>read_f32_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a single-precision floating point number at an offset.</p>
+</div><h4 id='method.read_f64_at' class='method'><code>fn <a href='#method.read_f64_at' class='fnname'>read_f64_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a double-precision floating point number at an offset.</p>
+</div></div><h3 class='impl'><code>impl&lt;I, E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.WriteAt.html' title='positioned_io::WriteAt'>WriteAt</a></span></code></h3><div class='impl-items'><h4 id='method.write_u16_at' class='method'><code>fn <a href='#method.write_u16_at' class='fnname'>write_u16_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes an unsigned 16-bit integer to an offset.</p>
+</div><h4 id='method.write_i16_at' class='method'><code>fn <a href='#method.write_i16_at' class='fnname'>write_i16_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a signed 16-bit integer to an offset.</p>
+</div><h4 id='method.write_u32_at' class='method'><code>fn <a href='#method.write_u32_at' class='fnname'>write_u32_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes an unsigned 32-bit integer to an offset.</p>
+</div><h4 id='method.write_i32_at' class='method'><code>fn <a href='#method.write_i32_at' class='fnname'>write_i32_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a signed 32-bit integer to an offset.</p>
+</div><h4 id='method.write_u64_at' class='method'><code>fn <a href='#method.write_u64_at' class='fnname'>write_u64_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes an unsigned 64-bit integer to an offset.</p>
+</div><h4 id='method.write_i64_at' class='method'><code>fn <a href='#method.write_i64_at' class='fnname'>write_i64_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a signed 64-bit integer to an offset.</p>
+</div><h4 id='method.write_uint_at' class='method'><code>fn <a href='#method.write_uint_at' class='fnname'>write_uint_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes an unsigned <code>nbytes</code>-bit integer to an offset.</p>
+</div><h4 id='method.write_int_at' class='method'><code>fn <a href='#method.write_int_at' class='fnname'>write_int_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>, nbytes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a signed <code>nbytes</code>-bit integer to an offset.</p>
+</div><h4 id='method.write_f32_at' class='method'><code>fn <a href='#method.write_f32_at' class='fnname'>write_f32_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a single-precision floating point number to an offset.</p>
+</div><h4 id='method.write_f64_at' class='method'><code>fn <a href='#method.write_f64_at' class='fnname'>write_f64_at</a>(&amp;mut self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Writes a double-precision floating point number to an offset.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;I, E&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a></span></code></h3><div class='impl-items'><h4 id='associatedtype.Target' class='type'><code>type <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#associatedtype.Target' class='type'>Target</a> = I</code></h4>
+<h4 id='method.deref' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#tymethod.deref' class='fnname'>deref</a>(&amp;self) -&gt; &amp;I</code></h4>
+</div><h3 class='impl'><code>impl&lt;I, E&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a></span></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#tymethod.deref_mut' class='fnname'>deref_mut</a>(&amp;mut self) -&gt; &amp;mut I</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "positioned_io";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

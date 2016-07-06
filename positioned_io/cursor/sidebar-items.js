@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Cursor","Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`."],["SizeCursor","Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`, with better seeking."]]});
