@@ -2,7 +2,10 @@ use std::io::{Read, Seek, SeekFrom};
 use std::fs::File;
 use std::str;
 
-use super::{ReadAt, Size, Cursor, SizeCursor};
+extern crate byteorder;
+use self::byteorder::LittleEndian;
+
+use super::{ReadAt, Size, Cursor, SizeCursor, ByteIo};
 
 #[test]
 fn test_read_at() {
@@ -45,4 +48,12 @@ fn test_size_cursor() {
     assert_eq!(2, curs.read(&mut buf).unwrap());
     let s = str::from_utf8(buf.as_ref()).unwrap();
     assert!(s.contains("\n"));
+}
+
+#[test]
+fn test_byteio() {
+    let file = File::open("Cargo.toml").unwrap();
+    let io : ByteIo<_, LittleEndian> = ByteIo::new(file);
+    let r = io.read_i32_at(3).unwrap();
+    assert_eq!(0x67616b63, r);
 }
