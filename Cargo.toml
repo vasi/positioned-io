@@ -2,6 +2,9 @@
 name = "positioned-io"
 version = "0.1.0"
 authors = ["Dave Vasilevsky <dave@vasilevsky.ca>"]
+description = "Reading and writing at an offset"
+keywords = ["read", "write", "offset", "pread", "pwrite", "endian"]
+license = "MIT"
 
 [dependencies]
 byteorder = "0.5"
