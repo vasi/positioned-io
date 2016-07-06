@@ -1,6 +1,6 @@
 mod byteorder;
 mod cursor;
-pub use cursor::Cursor;
+pub use cursor::{Cursor, SizeCursor};
 
 extern crate byteorder as extbyteorder;
 

@@ -1,4 +1,5 @@
 use std::io::{Result, Read, Write, Seek, SeekFrom, Error, ErrorKind};
+use std::ops::{Deref, DerefMut};
 use ::{ReadAt, WriteAt, Size};
 
 // Turn a positioned writer into a cursor.
@@ -32,7 +33,7 @@ impl<I> Cursor<I> {
     }
 }
 
-impl<T> Seek for Cursor<T> {
+impl<I> Seek for Cursor<I> {
     fn seek(&mut self, pos: SeekFrom) -> Result<u64> {
         match pos {
             SeekFrom::Start(p) => self.pos = p,
@@ -44,15 +45,15 @@ impl<T> Seek for Cursor<T> {
                 self.pos = pos as u64;
             }
             SeekFrom::End(_) => {
-                return Err(Error::new(ErrorKind::InvalidInput, "unknown cursor size"))
+                return Err(Error::new(ErrorKind::InvalidInput, "seek from unknown end"))
             }
         };
         Ok(self.pos)
     }
 }
 
-impl<T> Read for Cursor<T>
-    where T: ReadAt
+impl<I> Read for Cursor<I>
+    where I: ReadAt
 {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
         let bytes = try!(self.get_ref().read_at(buf, self.pos));
@@ -60,8 +61,8 @@ impl<T> Read for Cursor<T>
         Ok(bytes)
     }
 }
-impl<T> Write for Cursor<T>
-    where T: WriteAt
+impl<I> Write for Cursor<I>
+    where I: WriteAt
 {
     fn write(&mut self, buf: &[u8]) -> Result<usize> {
         let pos = self.pos;
@@ -74,8 +75,44 @@ impl<T> Write for Cursor<T>
     }
 }
 
-
+// Rust doesn't let us implement seek for both the Size and non-Size cases.
+// Wait for RFC 1210 to land, in the meantime use this.
 pub struct SizeCursor<I: Size>(Cursor<I>);
+impl<I> SizeCursor<I> where I: Size {
+    pub fn new_pos(io: I, pos: u64) -> Self {
+        SizeCursor(Cursor::new_pos(io, pos))
+    }
+    pub fn new(io: I) -> Self {
+        SizeCursor(Cursor::new(io))
+    }
+}
 
-// Rust doesn't let us implement both the Size and non-Size cases.
-// Wait for RFC 1210 to land.
+// Automatically fall back to Cursor.
+impl<I> Deref for SizeCursor<I> where I: Size {
+    type Target = Cursor<I>;
+    fn deref(&self) -> &Cursor<I> {
+        &self.0
+    }
+}
+impl<I> DerefMut for SizeCursor<I> where I: Size {
+    fn deref_mut(&mut self) -> &mut Cursor<I> {
+        &mut self.0
+    }
+}
+
+// We know how to seek from the end for SizeCursor.
+impl<I> Seek for SizeCursor<I> where I: Size {
+    fn seek(&mut self, pos: SeekFrom) -> Result<u64> {
+        let pos = match pos {
+            SeekFrom::Start(p) => p as i64,
+            SeekFrom::Current(p) => self.pos as i64 + p,
+            SeekFrom::End(p) => match self.get_ref().size() {
+                Err(e) => return Err(e),
+                Ok(None) => return Err(Error::new(ErrorKind::InvalidData, "seek from unknown end")),
+                Ok(Some(s)) => s as i64 + p,
+            }
+        };
+        self.0.pos = pos as u64;
+        Ok(self.pos)
+    }
+}
