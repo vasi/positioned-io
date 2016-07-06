@@ -94,6 +94,9 @@ pub use byteorder::byteio::ByteIo;
 mod cursor;
 pub use cursor::{Cursor, SizeCursor};
 
+mod slice;
+pub use slice::Slice;
+
 extern crate byteorder as extbyteorder;
 
 use std::io::{Error, ErrorKind, Result};
@@ -269,8 +272,10 @@ mod unix;
 #[cfg(windows)]
 mod windows;
 
-// Implementation for arrays.
+// Implementation for arrays, vectors.
 mod array;
+mod vec;
+mod refs;
 
 #[cfg(test)]
 mod test;

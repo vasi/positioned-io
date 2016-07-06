@@ -10,7 +10,7 @@ impl<'a> ReadAt for &'a [u8] {
         }
         let pos = pos as usize;
         let bytes = min(buf.len(), self.len() - pos);
-        buf.copy_from_slice(&self[pos..(pos + bytes)]);
+        buf[..bytes].copy_from_slice(&self[pos..(pos + bytes)]);
         Ok(bytes)
     }
 }
