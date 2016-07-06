@@ -32,4 +32,10 @@ http://vasi.github.io/positioned-io/positioned_io/
 
 ### Usage
 
-TODO
+This crate works with Cargo and is on
+[crates.io](https://crates.io/crates/byteorder). Add it to your `Cargo.toml` like so:
+
+```toml
+[dependencies]
+positioned-io = "0.1.0"
+```
