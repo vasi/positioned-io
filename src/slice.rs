@@ -41,6 +41,7 @@ use std::io::{Result, Error, ErrorKind};
 ///     let mut slice = Slice::new(&mut v, 2, None);
 ///     try!(slice.write_all_at(3, &buf));
 /// }
+/// // The write goes right past the end.
 /// assert_eq!(v, vec![0, 1, 2, 3, 4, 9, 9, 9]);
 /// # Ok(())
 /// # }
@@ -71,6 +72,10 @@ impl<I> Slice<I> {
     }
 }
 impl<I> Slice<I> where I: Size {
+    /// Create a new `Slice` that goes to the end of `io`.
+    ///
+    /// Note that you can create a larger slice by passing a larger size to `new()`, but it won't
+    /// do you any good for reading.
     pub fn new_to_end(io: I, offset: u64) -> Result<Self> {
         match io.size() {
             Ok(Some(size)) => Ok(Self::new(io, offset, Some(size - offset))),

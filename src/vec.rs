@@ -12,7 +12,7 @@ impl ReadAt for Vec<u8> {
 impl WriteAt for Vec<u8> {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
         // Ensure no overflow.
-        if pos > usize::max_value() as u64 {
+        if pos > (usize::max_value() as u64) {
             return Err(Error::new(ErrorKind::InvalidInput, "vector size too big"));
         }
         let pos = pos as usize;

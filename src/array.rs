@@ -15,6 +15,12 @@ impl<'a> ReadAt for &'a [u8] {
     }
 }
 
+impl<'a> ReadAt for &'a mut [u8] {
+    fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
+        self.as_ref().read_at(pos, buf)
+    }
+}
+
 impl<'a> WriteAt for &'a mut [u8] {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
         if pos >= self.len() as u64 {
@@ -33,5 +39,11 @@ impl<'a> WriteAt for &'a mut [u8] {
 impl<'a> Size for &'a [u8] {
     fn size(&self) -> Result<Option<u64>> {
         Ok(Some(self.len() as u64))
+    }
+}
+
+impl<'a> Size for &'a mut [u8] {
+    fn size(&self) -> Result<Option<u64>> {
+        self.as_ref().size()
     }
 }
