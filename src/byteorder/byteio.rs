@@ -12,7 +12,7 @@ use super::{ReadBytesExt, WriteBytesExt};
 /// Trait for reading integers.
 ///
 /// Does not require an endianness parameter, so it's useful for trait objects.
-pub trait ReadInt : Read {
+pub trait ReadInt: Read {
     /// Reads an unsigned 16-bit integer.
     fn read_u16(&mut self) -> Result<u16>;
 
@@ -47,7 +47,7 @@ pub trait ReadInt : Read {
 /// Trait for writing integers.
 ///
 /// Does not require an endianness parameter, so it's useful for trait objects.
-pub trait WriteInt : Write {
+pub trait WriteInt: Write {
     /// Writes an unsigned 16-bit integer.
     fn write_u16(&mut self, n: u16) -> Result<()>;
 
@@ -82,7 +82,7 @@ pub trait WriteInt : Write {
 /// Trait for reading positioned integers.
 ///
 /// Does not require an endianness parameter, so it's useful for trait objects.
-pub trait ReadIntAt : ReadAt {
+pub trait ReadIntAt: ReadAt {
     /// Reads an unsigned 16-bit integer at an offset.
     fn read_u16_at(&self, pos: u64) -> Result<u16>;
 
@@ -112,13 +112,12 @@ pub trait ReadIntAt : ReadAt {
 
     /// Reads a double-precision floating point number at an offset.
     fn read_f64_at(&self, pos: u64) -> Result<f64>;
-
 }
 
 /// Trait for writing positioned integers.
 ///
 /// Does not require an endianness parameter, so it's useful for trait objects.
-pub trait WriteIntAt : WriteAt {
+pub trait WriteIntAt: WriteAt {
     /// Writes an unsigned 16-bit integer to an offset.
     fn write_u16_at(&mut self, pos: u64, n: u16) -> Result<()>;
 
@@ -148,7 +147,6 @@ pub trait WriteIntAt : WriteAt {
 
     /// Writes a double-precision floating point number to an offset.
     fn write_f64_at(&mut self, pos: u64, n: f64) -> Result<()>;
-
 }
 
 /// Read or write with a given inherent byte-order.
