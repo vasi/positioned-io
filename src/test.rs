@@ -6,7 +6,7 @@ use std::str;
 extern crate byteorder;
 use self::byteorder::LittleEndian;
 
-use super::{ReadAt, WriteAt, Size, Cursor, SizeCursor, ByteIo, Slice};
+use super::{ReadAt, WriteAt, Size, Cursor, SizeCursor, ByteIo, Slice, ReadIntAt};
 
 #[test]
 fn test_read_at() {

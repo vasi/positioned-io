@@ -8,6 +8,8 @@
 //!
 //! [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
 //!
+//! The repository is at https://github.com/vasi/positioned-io
+//!
 //!
 //! # Examples
 //!

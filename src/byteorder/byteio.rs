@@ -161,7 +161,7 @@ pub trait WriteIntAt: WriteAt {
 /// # extern crate byteorder;
 /// # use std::io;
 /// # use byteorder::BigEndian;
-/// use positioned_io::ByteIo;
+/// use positioned_io::{ByteIo, WriteInt};
 ///
 /// # fn foo() -> io::Result<()> {
 /// let mut buf = [0; 8];
