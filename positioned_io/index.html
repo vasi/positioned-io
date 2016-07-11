@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/positioned_io/src/lib.rs.html#1-281' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-0' class='srclink' href='../src/positioned_io/src/lib.rs.html#1-283' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This crate allows you to specify an offset for reads and writes, without changing the current
 position in a file. This is similar to <a href="http://man7.org/linux/man-pages/man2/pread.2.html"><code>pread()</code> and <code>pwrite()</code></a> in C.</p>
 
@@ -57,6 +57,8 @@ position in a file. This is similar to <a href="http://man7.org/linux/man-pages/
 <li>You don&#39;t need to seek before doing a random-access read or write, which is convenient.</li>
 <li>Reads don&#39;t modify the file at all, so don&#39;t require mutability.</li>
 </ul>
+
+<p>The repository is at <a href="https://github.com/vasi/positioned-io">https://github.com/vasi/positioned-io</a></p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Read the fifth 512-byte sector of a file:</p>
@@ -146,6 +148,20 @@ position in a file. This is similar to <a href="http://man7.org/linux/man-pages/
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class='trait' href='trait.ReadInt.html'
+                                  title='positioned_io::ReadInt'>ReadInt</a></td>
+                           <td class='docblock short'>
+                                <p>Trait for reading integers.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.ReadIntAt.html'
+                                  title='positioned_io::ReadIntAt'>ReadIntAt</a></td>
+                           <td class='docblock short'>
+                                <p>Trait for reading positioned integers.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class='trait' href='trait.Size.html'
                                   title='positioned_io::Size'>Size</a></td>
                            <td class='docblock short'>
@@ -164,6 +180,20 @@ position in a file. This is similar to <a href="http://man7.org/linux/man-pages/
                                   title='positioned_io::WriteBytesExt'>WriteBytesExt</a></td>
                            <td class='docblock short'>
                                 <p>Extends <code>WriteAt</code> with methods for writing numbers at offsets.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.WriteInt.html'
+                                  title='positioned_io::WriteInt'>WriteInt</a></td>
+                           <td class='docblock short'>
+                                <p>Trait for writing integers.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.WriteIntAt.html'
+                                  title='positioned_io::WriteIntAt'>WriteIntAt</a></td>
+                           <td class='docblock short'>
+                                <p>Trait for writing positioned integers.</p>
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>

@@ -308,6 +308,142 @@
 <span id="264">264</span>
 <span id="265">265</span>
 <span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>extbyteorder</span>::<span class='ident'>ByteOrder</span>;
 <span class='kw'>use</span> <span class='ident'>extbyteorder</span>::<span class='ident'>ReadBytesExt</span> <span class='kw'>as</span> <span class='ident'>ExtReadBytesExt</span>;
@@ -319,6 +455,146 @@
 
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::{<span class='ident'>ReadAt</span>, <span class='ident'>WriteAt</span>};
 <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>ReadBytesExt</span>, <span class='ident'>WriteBytesExt</span>};
+
+<span class='doccomment'>/// Trait for reading integers.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Does not require an endianness parameter, so it&#39;s useful for trait objects.</span>
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ReadInt</span>: <span class='ident'>Read</span> {
+    <span class='doccomment'>/// Reads an unsigned 16-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed 16-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_i16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i16</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads an unsigned 32-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_u32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed 32-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_i32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads an unsigned 64-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_u64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed 64-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_i64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads an unsigned `nbytes`-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_uint</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed `nbytes`-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_int</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a single-precision floating point number.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_f32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f32</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a double-precision floating point number.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_f64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span>;
+}
+
+<span class='doccomment'>/// Trait for writing integers.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Does not require an endianness parameter, so it&#39;s useful for trait objects.</span>
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>WriteInt</span>: <span class='ident'>Write</span> {
+    <span class='doccomment'>/// Writes an unsigned 16-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed 16-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_i16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes an unsigned 32-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_u32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed 32-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_i32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes an unsigned 64-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_u64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed 64-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_i64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes an unsigned `nbytes`-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_uint</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed `nbytes`-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_int</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a single-precision floating point number.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_f32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>f32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a double-precision floating point number.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_f64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+}
+
+<span class='doccomment'>/// Trait for reading positioned integers.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Does not require an endianness parameter, so it&#39;s useful for trait objects.</span>
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ReadIntAt</span>: <span class='ident'>ReadAt</span> {
+    <span class='doccomment'>/// Reads an unsigned 16-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_u16_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed 16-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_i16_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i16</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads an unsigned 32-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_u32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed 32-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_i32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads an unsigned 64-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_u64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed 64-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_i64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads an unsigned `nbytes`-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_uint_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed `nbytes`-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_int_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a single-precision floating point number at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_f32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f32</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a double-precision floating point number at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_f64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span>;
+}
+
+<span class='doccomment'>/// Trait for writing positioned integers.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Does not require an endianness parameter, so it&#39;s useful for trait objects.</span>
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>WriteIntAt</span>: <span class='ident'>WriteAt</span> {
+    <span class='doccomment'>/// Writes an unsigned 16-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_u16_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed 16-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_i16_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes an unsigned 32-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_u32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed 32-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_i32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes an unsigned 64-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_u64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed 64-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_i64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes an unsigned `nbytes`-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_uint_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed `nbytes`-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_int_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a single-precision floating point number to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_f32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>f32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a double-precision floating point number to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_f64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+}
 
 <span class='doccomment'>/// Read or write with a given inherent byte-order.</span>
 <span class='doccomment'>///</span>
@@ -332,7 +608,7 @@
 <span class='doccomment'>/// # extern crate byteorder;</span>
 <span class='doccomment'>/// # use std::io;</span>
 <span class='doccomment'>/// # use byteorder::BigEndian;</span>
-<span class='doccomment'>/// use positioned_io::ByteIo;</span>
+<span class='doccomment'>/// use positioned_io::{ByteIo, WriteInt};</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # fn foo() -&gt; io::Result&lt;()&gt; {</span>
 <span class='doccomment'>/// let mut buf = [0; 8];</span>
@@ -399,179 +675,175 @@
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
+<span class='comment'>// Allow use as a trait object.</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>Read</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>Read</span>
 {
-    <span class='doccomment'>/// Reads an unsigned 16-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read</span>(<span class='ident'>buf</span>)
+    }
+}
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>Write</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>Write</span>
+{
+    <span class='kw'>fn</span> <span class='ident'>write</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write</span>(<span class='ident'>buf</span>)
+    }
+    <span class='kw'>fn</span> <span class='ident'>flush</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>flush</span>()
+    }
+}
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ReadAt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>ReadAt</span>
+{
+    <span class='kw'>fn</span> <span class='ident'>read_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_at</span>(<span class='ident'>pos</span>, <span class='ident'>buf</span>)
+    }
+}
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>WriteAt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>WriteAt</span>
+{
+    <span class='kw'>fn</span> <span class='ident'>write_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_at</span>(<span class='ident'>pos</span>, <span class='ident'>buf</span>)
+    }
+    <span class='kw'>fn</span> <span class='ident'>flush</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>flush</span>()
+    }
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ReadInt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>Read</span>
+{
+    <span class='kw'>fn</span> <span class='ident'>read_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u16</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
-    <span class='doccomment'>/// Reads a signed 16-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i16</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_i16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i16</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_i16</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
-    <span class='doccomment'>/// Reads an unsigned 32-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_u32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u32</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
-    <span class='doccomment'>/// Reads a signed 32-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_i32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_i32</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
-    <span class='doccomment'>/// Reads an unsigned 64-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_u64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u64</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
-    <span class='doccomment'>/// Reads a signed 64-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_i64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_i64</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
-    <span class='doccomment'>/// Reads an unsigned `nbytes`-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_uint</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_uint</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_uint</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>nbytes</span>)
     }
-    <span class='doccomment'>/// Reads a signed `nbytes`-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_int</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_int</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_int</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>nbytes</span>)
     }
-    <span class='doccomment'>/// Reads a single-precision floating point number.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_f32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f32</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_f32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f32</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_f32</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
-    <span class='doccomment'>/// Reads a double-precision floating point number.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_f64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_f64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_f64</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
 }
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>WriteInt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>Write</span>
 {
-    <span class='doccomment'>/// Writes an unsigned 16-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u16</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes a signed 16-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_i16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_i16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_i16</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes an unsigned 32-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_u32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_u32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u32</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes a signed 32-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_i32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_i32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_i32</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes an unsigned 64-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_u64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_u64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u64</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes a signed 64-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_i64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_i64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_i64</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes an unsigned `nbytes`-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_uint</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_uint</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_uint</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>, <span class='ident'>nbytes</span>)
     }
-    <span class='doccomment'>/// Writes a signed `nbytes`-bit integer.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_int</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_int</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_int</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>, <span class='ident'>nbytes</span>)
     }
-    <span class='doccomment'>/// Writes a single-precision floating point number.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_f32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>f32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_f32</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>f32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_f32</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes a double-precision floating point number.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_f64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_f64</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_f64</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
 }
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ReadIntAt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>ReadAt</span>
 {
-    <span class='doccomment'>/// Reads an unsigned 16-bit integer at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u16_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_u16_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u16_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
-    <span class='doccomment'>/// Reads a signed 16-bit integer at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i16_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i16</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_i16_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i16</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_i16_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
-    <span class='doccomment'>/// Reads an unsigned 32-bit integer at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_u32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u32_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
-    <span class='doccomment'>/// Reads a signed 32-bit integer at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_i32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_i32_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
-    <span class='doccomment'>/// Reads an unsigned 64-bit integer at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_u64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_u64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u64_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
-    <span class='doccomment'>/// Reads a signed 64-bit integer at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_i64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_i64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_i64_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
-    <span class='doccomment'>/// Reads an unsigned `nbytes`-bit integer at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_uint_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_uint_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_uint_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>nbytes</span>)
     }
-    <span class='doccomment'>/// Reads a signed `nbytes`-bit integer at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_int_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_int_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_int_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>nbytes</span>)
     }
-    <span class='doccomment'>/// Reads a single-precision floating point number at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_f32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f32</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_f32_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f32</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_f32_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
-    <span class='doccomment'>/// Reads a double-precision floating point number at an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>read_f64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>read_f64_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_f64_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
 }
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>WriteIntAt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>WriteAt</span>
 {
-    <span class='doccomment'>/// Writes an unsigned 16-bit integer to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_u16_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_u16_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u16_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes a signed 16-bit integer to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_i16_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_i16_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_i16_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes an unsigned 32-bit integer to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_u32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_u32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u32_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes a signed 32-bit integer to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_i32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_i32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_i32_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes an unsigned 64-bit integer to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_u64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_u64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u64_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes a signed 64-bit integer to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_i64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_i64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_i64_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes an unsigned `nbytes`-bit integer to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_uint_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_uint_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_uint_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>, <span class='ident'>nbytes</span>)
     }
-    <span class='doccomment'>/// Writes a signed `nbytes`-bit integer to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_int_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_int_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i64</span>, <span class='ident'>nbytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_int_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>, <span class='ident'>nbytes</span>)
     }
-    <span class='doccomment'>/// Writes a single-precision floating point number to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_f32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>f32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_f32_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>f32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_f32_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
-    <span class='doccomment'>/// Writes a double-precision floating point number to an offset.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_f64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>write_f64_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>f64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_f64_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
 }
