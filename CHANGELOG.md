@@ -1,3 +1,8 @@
+# [0.2.1] - 2016-07-12
+
+* Remove dependency on nix.
+
+
 # [0.2.0] - 2016-07-11
 
 * Add traits ReadInt, ReadIntAt, WriteInt, WriteIntAt to describe behaviour of
