@@ -37,5 +37,5 @@ This crate works with Cargo and is on
 
 ```toml
 [dependencies]
-positioned-io = "0.1.0"
+positioned-io = "0.2.0"
 ```
