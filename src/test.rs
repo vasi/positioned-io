@@ -1,5 +1,5 @@
-use std::cell::RefCell;
-use std::io::{Read, Seek, SeekFrom};
+use std::cell::{Cell, RefCell};
+use std::io::{Read, Seek, SeekFrom, ErrorKind, Result, Error};
 use std::fs::File;
 use std::str;
 
@@ -13,6 +13,44 @@ fn test_read_at() {
     let file = File::open("Cargo.toml").unwrap();
     let mut buf = [0; 4];
     file.read_exact_at(10, buf.as_mut()).unwrap();
+    let s = str::from_utf8(buf.as_ref()).unwrap();
+    assert_eq!(s, "name");
+}
+
+// A ReadAt that has weird behavior.
+struct ReadCustom<I: ReadAt, F: Fn() -> Result<usize>> {
+    i: I,
+    fail: Cell<bool>,
+    onfail: F,
+}
+impl<I: ReadAt, F: Fn() -> Result<usize>> ReadCustom<I, F> {
+    fn new(i: I, f: F) -> Self {
+        ReadCustom {
+            i: i,
+            fail: Cell::new(true),
+            onfail: f,
+        }
+    }
+}
+impl<I: ReadAt, F: Fn() -> Result<usize>> ReadAt for ReadCustom<I, F> {
+    fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
+        let fail = self.fail.get();
+        self.fail.set(!fail);
+        if fail {
+            (self.onfail)()
+        } else {
+            self.i.read_at(pos, buf)
+        }
+    }
+}
+
+#[test]
+fn test_read_fails() {
+    let file = File::open("Cargo.toml").unwrap();
+    let interrupt = ReadCustom::new(file,
+                                    || Err(Error::new(ErrorKind::Interrupted, "interrupt!")));
+    let mut buf = [0; 4];
+    interrupt.read_exact_at(10, buf.as_mut()).unwrap();
     let s = str::from_utf8(buf.as_ref()).unwrap();
     assert_eq!(s, "name");
 }
