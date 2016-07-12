@@ -46,13 +46,25 @@ impl<I: ReadAt, F: Fn() -> Result<usize>> ReadAt for ReadCustom<I, F> {
 
 #[test]
 fn test_read_fails() {
+    // Test interrupts.
     let file = File::open("Cargo.toml").unwrap();
-    let interrupt = ReadCustom::new(file,
-                                    || Err(Error::new(ErrorKind::Interrupted, "interrupt!")));
     let mut buf = [0; 4];
-    interrupt.read_exact_at(10, buf.as_mut()).unwrap();
-    let s = str::from_utf8(buf.as_ref()).unwrap();
-    assert_eq!(s, "name");
+    {
+        let interrupt = ReadCustom::new(&file,
+                                    || Err(Error::new(ErrorKind::Interrupted, "interrupt!")));
+        interrupt.read_exact_at(10, buf.as_mut()).unwrap();
+        let s = str::from_utf8(buf.as_ref()).unwrap();
+        assert_eq!(s, "name");
+    }
+
+    // Test errors.
+    {
+        let fail = ReadCustom::new(&file, || Err(Error::new(ErrorKind::Other, "random fail")));
+        assert!(fail.read_exact_at(10, buf.as_mut()).is_err());
+    }
+
+    // Test EOF.
+    assert!(file.read_exact_at(10000, buf.as_mut()).is_err());
 }
 
 #[test]
