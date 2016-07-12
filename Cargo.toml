@@ -14,7 +14,7 @@ readme = "README.md"
 byteorder = "0.5"
 
 [target.'cfg(unix)'.dependencies]
-nix = "0.6.0"
+libc = "0.2.14"
 
 [target.'cfg(windows)'.dependencies]
 winapi = "0.2"
