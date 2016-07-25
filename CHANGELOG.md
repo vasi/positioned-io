@@ -1,3 +1,8 @@
+# [0.2.2] - 2016-07-24
+
+* At 8-bit operations to integer read/write traits.
+
+
 # [0.2.1] - 2016-07-12
 
 * Remove dependency on nix.

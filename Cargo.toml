@@ -1,6 +1,6 @@
 [package]
 name = "positioned-io"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Dave Vasilevsky <dave@vasilevsky.ca>"]
 description = "Reading and writing at an offset"
 keywords = ["read", "offset", "pread", "pwrite", "endian"]

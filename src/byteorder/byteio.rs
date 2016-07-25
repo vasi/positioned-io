@@ -13,7 +13,13 @@ use super::{ReadBytesExt, WriteBytesExt};
 ///
 /// Does not require an endianness parameter, so it's useful for trait objects.
 pub trait ReadInt: Read {
-    /// Reads an unsigned 16-bit integer.
+    /// Reads an unsigned 8-bit integer.
+    fn read_u8(&mut self) -> Result<u8>;
+
+    /// Reads a signed 8-bit integer.
+    fn read_i8(&mut self) -> Result<i8>;
+
+    /// Reads an unsigned 8-bit integer.
     fn read_u16(&mut self) -> Result<u16>;
 
     /// Reads a signed 16-bit integer.
@@ -48,6 +54,12 @@ pub trait ReadInt: Read {
 ///
 /// Does not require an endianness parameter, so it's useful for trait objects.
 pub trait WriteInt: Write {
+    /// Writes an unsigned 8-bit integer.
+    fn write_u8(&mut self, n: u8) -> Result<()>;
+
+    /// Writes a signed 8-bit integer.
+    fn write_i8(&mut self, n: i8) -> Result<()>;
+
     /// Writes an unsigned 16-bit integer.
     fn write_u16(&mut self, n: u16) -> Result<()>;
 
@@ -83,6 +95,12 @@ pub trait WriteInt: Write {
 ///
 /// Does not require an endianness parameter, so it's useful for trait objects.
 pub trait ReadIntAt: ReadAt {
+    /// Reads an unsigned 8-bit integer at an offset.
+    fn read_u8_at(&self, pos: u64) -> Result<u8>;
+
+    /// Reads a signed 8-bit integer at an offset.
+    fn read_i8_at(&self, pos: u64) -> Result<i8>;
+
     /// Reads an unsigned 16-bit integer at an offset.
     fn read_u16_at(&self, pos: u64) -> Result<u16>;
 
@@ -118,6 +136,12 @@ pub trait ReadIntAt: ReadAt {
 ///
 /// Does not require an endianness parameter, so it's useful for trait objects.
 pub trait WriteIntAt: WriteAt {
+    /// Writes an unsigned 8-bit integer to an offset.
+    fn write_u8_at(&mut self, pos: u64, n: u8) -> Result<()>;
+
+    /// Writes a signed 8-bit integer to an offset.
+    fn write_i8_at(&mut self, pos: u64, n: i8) -> Result<()>;
+
     /// Writes an unsigned 16-bit integer to an offset.
     fn write_u16_at(&mut self, pos: u64, n: u16) -> Result<()>;
 
@@ -267,6 +291,12 @@ impl<I, E: ByteOrder> WriteAt for ByteIo<I, E>
 impl<I, E: ByteOrder> ReadInt for ByteIo<I, E>
     where I: Read
 {
+    fn read_u8(&mut self) -> Result<u8> {
+        self.io.read_u8()
+    }
+    fn read_i8(&mut self) -> Result<i8> {
+        self.io.read_i8()
+    }
     fn read_u16(&mut self) -> Result<u16> {
         self.io.read_u16::<E>()
     }
@@ -301,6 +331,12 @@ impl<I, E: ByteOrder> ReadInt for ByteIo<I, E>
 impl<I, E: ByteOrder> WriteInt for ByteIo<I, E>
     where I: Write
 {
+    fn write_u8(&mut self, n: u8) -> Result<()> {
+        self.io.write_u8(n)
+    }
+    fn write_i8(&mut self, n: i8) -> Result<()> {
+        self.io.write_i8(n)
+    }
     fn write_u16(&mut self, n: u16) -> Result<()> {
         self.io.write_u16::<E>(n)
     }
@@ -335,6 +371,12 @@ impl<I, E: ByteOrder> WriteInt for ByteIo<I, E>
 impl<I, E: ByteOrder> ReadIntAt for ByteIo<I, E>
     where I: ReadAt
 {
+    fn read_u8_at(&self, pos: u64) -> Result<u8> {
+        self.io.read_u8_at(pos)
+    }
+    fn read_i8_at(&self, pos: u64) -> Result<i8> {
+        self.io.read_i8_at(pos)
+    }
     fn read_u16_at(&self, pos: u64) -> Result<u16> {
         self.io.read_u16_at::<E>(pos)
     }
@@ -369,6 +411,12 @@ impl<I, E: ByteOrder> ReadIntAt for ByteIo<I, E>
 impl<I, E: ByteOrder> WriteIntAt for ByteIo<I, E>
     where I: WriteAt
 {
+    fn write_u8_at(&mut self, pos: u64, n: u8) -> Result<()> {
+        self.io.write_u8_at(pos, n)
+    }
+    fn write_i8_at(&mut self, pos: u64, n: i8) -> Result<()> {
+        self.io.write_i8_at(pos, n)
+    }
     fn write_u16_at(&mut self, pos: u64, n: u16) -> Result<()> {
         self.io.write_u16_at::<E>(pos, n)
     }
