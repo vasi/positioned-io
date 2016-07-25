@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-672' class='srclink' href='../src/positioned_io/src/lib.rs.html#248-256' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-742' class='srclink' href='../src/positioned_io/src/lib.rs.html#248-256' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Size {
     fn <a href='#tymethod.size' class='fnname'>size</a>(&amp;self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;&gt;;
 }</pre><div class='docblock'><p>Trait to get the size of an I/O object.</p>
@@ -80,14 +80,14 @@ offsets always yields end-of-file.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;I&gt; <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> for <a class='struct' href='../positioned_io/struct.Slice.html' title='positioned_io::Slice'>Slice</a>&lt;I&gt;</code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a mut [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
-<li><code>impl <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> for <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></li>
-<li><code>impl&lt;'a, S: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> for &amp;'a S</code></li>
-<li><code>impl&lt;'a, S: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> for &amp;'a mut S</code></li>
-<li><code>impl&lt;'a, S&gt; <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> for &amp;'a <a class='struct' href='https://doc.rust-lang.org/nightly/core/cell/struct.RefCell.html' title='core::cell::RefCell'>RefCell</a>&lt;S&gt; <span class='where'>where S: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a></span></code></li>
-<li><code>impl <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> for <a class='struct' href='https://doc.rust-lang.org/nightly/std/fs/struct.File.html' title='std::fs::File'>File</a></code></li>
+    <li><code>impl&lt;I&gt; Size for <a class='struct' href='../positioned_io/struct.Slice.html' title='positioned_io::Slice'>Slice</a>&lt;I&gt;</code></li>
+<li><code>impl&lt;'a&gt; Size for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
+<li><code>impl&lt;'a&gt; Size for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a mut [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
+<li><code>impl Size for <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></li>
+<li><code>impl&lt;'a, S: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; Size for &amp;'a S</code></li>
+<li><code>impl&lt;'a, S: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; Size for &amp;'a mut S</code></li>
+<li><code>impl&lt;'a, S&gt; Size for &amp;'a <a class='struct' href='https://doc.rust-lang.org/nightly/core/cell/struct.RefCell.html' title='core::cell::RefCell'>RefCell</a>&lt;S&gt; <span class='where'>where S: <a class='trait' href='../positioned_io/trait.Size.html' title='positioned_io::Size'>Size</a></span></code></li>
+<li><code>impl Size for <a class='struct' href='https://doc.rust-lang.org/nightly/std/fs/struct.File.html' title='std::fs::File'>File</a></code></li>
 </ul><script type="text/javascript" async
                          src="../implementors/positioned_io/trait.Size.js">
                  </script></section>
@@ -113,6 +113,8 @@ offsets always yields end-of-file.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

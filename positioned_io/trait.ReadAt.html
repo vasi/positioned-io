@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-644' class='srclink' href='../src/positioned_io/src/lib.rs.html#129-160' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-714' class='srclink' href='../src/positioned_io/src/lib.rs.html#129-160' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ReadAt {
     fn <a href='#tymethod.read_at' class='fnname'>read_at</a>(&amp;self, pos: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, buf: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;;
 
@@ -85,15 +85,15 @@ end-of-file.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;I, E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a></span></code></li>
-<li><code>impl&lt;I&gt; <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for <a class='struct' href='../positioned_io/struct.Slice.html' title='positioned_io::Slice'>Slice</a>&lt;I&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a></span></code></li>
-<li><code>impl <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for <a class='struct' href='https://doc.rust-lang.org/nightly/std/fs/struct.File.html' title='std::fs::File'>File</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a mut [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
-<li><code>impl <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></li>
-<li><code>impl&lt;'a, R: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for &amp;'a R</code></li>
-<li><code>impl&lt;'a, R: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for &amp;'a mut R</code></li>
-<li><code>impl&lt;'a, R&gt; <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> for &amp;'a <a class='struct' href='https://doc.rust-lang.org/nightly/core/cell/struct.RefCell.html' title='core::cell::RefCell'>RefCell</a>&lt;R&gt; <span class='where'>where R: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a></span></code></li>
+    <li><code>impl&lt;I, E: <a class='trait' href='http://burntsushi.net/rustdoc/byteorder/byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; ReadAt for <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a></span></code></li>
+<li><code>impl&lt;I&gt; ReadAt for <a class='struct' href='../positioned_io/struct.Slice.html' title='positioned_io::Slice'>Slice</a>&lt;I&gt; <span class='where'>where I: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a></span></code></li>
+<li><code>impl ReadAt for <a class='struct' href='https://doc.rust-lang.org/nightly/std/fs/struct.File.html' title='std::fs::File'>File</a></code></li>
+<li><code>impl&lt;'a&gt; ReadAt for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
+<li><code>impl&lt;'a&gt; ReadAt for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a mut [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
+<li><code>impl ReadAt for <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></li>
+<li><code>impl&lt;'a, R: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; ReadAt for &amp;'a R</code></li>
+<li><code>impl&lt;'a, R: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; ReadAt for &amp;'a mut R</code></li>
+<li><code>impl&lt;'a, R&gt; ReadAt for &amp;'a <a class='struct' href='https://doc.rust-lang.org/nightly/core/cell/struct.RefCell.html' title='core::cell::RefCell'>RefCell</a>&lt;R&gt; <span class='where'>where R: <a class='trait' href='../positioned_io/trait.ReadAt.html' title='positioned_io::ReadAt'>ReadAt</a></span></code></li>
 </ul><script type="text/javascript" async
                          src="../implementors/positioned_io/trait.ReadAt.js">
                  </script></section>
@@ -119,6 +119,8 @@ end-of-file.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

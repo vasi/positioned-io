@@ -47,8 +47,10 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-16' class='srclink' href='../src/positioned_io/src/byteorder/byteio.rs.html#15-45' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-16' class='srclink' href='../src/positioned_io/src/byteorder/byteio.rs.html#15-51' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ReadInt: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> {
+    fn <a href='#tymethod.read_u8' class='fnname'>read_u8</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;;
+    fn <a href='#tymethod.read_i8' class='fnname'>read_i8</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>&gt;;
     fn <a href='#tymethod.read_u16' class='fnname'>read_u16</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;;
     fn <a href='#tymethod.read_i16' class='fnname'>read_i16</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>&gt;;
     fn <a href='#tymethod.read_u32' class='fnname'>read_u32</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;;
@@ -65,7 +67,9 @@
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.read_u16' class='method stab '><code>fn <a href='#tymethod.read_u16' class='fnname'>read_u16</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned 16-bit integer.</p>
+        <h3 id='tymethod.read_u8' class='method stab '><code>fn <a href='#tymethod.read_u8' class='fnname'>read_u8</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned 8-bit integer.</p>
+</div><h3 id='tymethod.read_i8' class='method stab '><code>fn <a href='#tymethod.read_i8' class='fnname'>read_i8</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>&gt;</code></h3><div class='docblock'><p>Reads a signed 8-bit integer.</p>
+</div><h3 id='tymethod.read_u16' class='method stab '><code>fn <a href='#tymethod.read_u16' class='fnname'>read_u16</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned 8-bit integer.</p>
 </div><h3 id='tymethod.read_i16' class='method stab '><code>fn <a href='#tymethod.read_i16' class='fnname'>read_i16</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>&gt;</code></h3><div class='docblock'><p>Reads a signed 16-bit integer.</p>
 </div><h3 id='tymethod.read_u32' class='method stab '><code>fn <a href='#tymethod.read_u32' class='fnname'>read_u32</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h3><div class='docblock'><p>Reads an unsigned 32-bit integer.</p>
 </div><h3 id='tymethod.read_i32' class='method stab '><code>fn <a href='#tymethod.read_i32' class='fnname'>read_i32</a>(&amp;mut self) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt;</code></h3><div class='docblock'><p>Reads a signed 32-bit integer.</p>
@@ -78,7 +82,7 @@
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;I, E: <a class='trait' href='../byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; <a class='trait' href='../positioned_io/trait.ReadInt.html' title='positioned_io::ReadInt'>ReadInt</a> for <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></code></li>
+    <li><code>impl&lt;I, E: <a class='trait' href='http://burntsushi.net/rustdoc/byteorder/byteorder/trait.ByteOrder.html' title='byteorder::ByteOrder'>ByteOrder</a>&gt; ReadInt for <a class='struct' href='../positioned_io/struct.ByteIo.html' title='positioned_io::ByteIo'>ByteIo</a>&lt;I, E&gt; <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></code></li>
 </ul><script type="text/javascript" async
                          src="../implementors/positioned_io/trait.ReadInt.js">
                  </script></section>
@@ -104,6 +108,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

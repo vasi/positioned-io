@@ -104,7 +104,7 @@
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>RefCell</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='prelude-ty'>Result</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>ReadAt</span>, <span class='ident'>WriteAt</span>, <span class='ident'>Size</span>};
+<span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>ReadAt</span>, <span class='ident'>WriteAt</span>, <span class='ident'>Size</span>};
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>R</span>: <span class='ident'>ReadAt</span> <span class='op'>+</span> ?<span class='ident'>Sized</span><span class='op'>&gt;</span> <span class='ident'>ReadAt</span> <span class='kw'>for</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>R</span> {
     <span class='kw'>fn</span> <span class='ident'>read_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
@@ -185,6 +185,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

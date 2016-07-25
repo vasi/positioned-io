@@ -162,7 +162,7 @@
 <span id="118">118</span>
 <span id="119">119</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>ReadAt</span>, <span class='ident'>WriteAt</span>, <span class='ident'>Size</span>};
+<span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>ReadAt</span>, <span class='ident'>WriteAt</span>, <span class='ident'>Size</span>};
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>::<span class='ident'>min</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='prelude-ty'>Result</span>, <span class='ident'>Error</span>, <span class='ident'>ErrorKind</span>};
@@ -222,7 +222,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The slice will be a view of `size` bytes, starting at `offset` in `io`. If you don&#39;t</span>
     <span class='doccomment'>/// pass a size, the size won&#39;t be limited.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>io</span>: <span class='ident'>I</span>, <span class='ident'>offset</span>: <span class='ident'>u64</span>, <span class='ident'>size</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>io</span>: <span class='ident'>I</span>, <span class='ident'>offset</span>: <span class='ident'>u64</span>, <span class='ident'>size</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>u64</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='ident'>Slice</span> {
             <span class='ident'>io</span>: <span class='ident'>io</span>,
             <span class='ident'>offset</span>: <span class='ident'>offset</span>,
@@ -246,9 +246,9 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Note that you can create a larger slice by passing a larger size to `new()`, but it won&#39;t</span>
     <span class='doccomment'>/// do you any good for reading.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new_to_end</span>(<span class='ident'>io</span>: <span class='ident'>I</span>, <span class='ident'>offset</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new_to_end</span>(<span class='ident'>io</span>: <span class='ident'>I</span>, <span class='ident'>offset</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='ident'>io</span>.<span class='ident'>size</span>() {
-            <span class='prelude-val'>Ok</span>(<span class='prelude-val'>Some</span>(<span class='ident'>size</span>)) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Self</span>::<span class='ident'>new</span>(<span class='ident'>io</span>, <span class='ident'>offset</span>, <span class='prelude-val'>Some</span>(<span class='ident'>size</span> <span class='op'>-</span> <span class='ident'>offset</span>))),
+            <span class='prelude-val'>Ok</span>(<span class='prelude-val'>Some</span>(<span class='ident'>size</span>)) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='self'>Self</span>::<span class='ident'>new</span>(<span class='ident'>io</span>, <span class='ident'>offset</span>, <span class='prelude-val'>Some</span>(<span class='ident'>size</span> <span class='op'>-</span> <span class='ident'>offset</span>))),
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>ErrorKind</span>::<span class='ident'>InvalidData</span>, <span class='string'>&quot;unknown base size&quot;</span>)),
         }
     }
@@ -305,6 +305,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

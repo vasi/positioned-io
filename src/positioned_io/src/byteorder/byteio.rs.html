@@ -444,6 +444,54 @@
 <span id="400">400</span>
 <span id="401">401</span>
 <span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>extbyteorder</span>::<span class='ident'>ByteOrder</span>;
 <span class='kw'>use</span> <span class='ident'>extbyteorder</span>::<span class='ident'>ReadBytesExt</span> <span class='kw'>as</span> <span class='ident'>ExtReadBytesExt</span>;
@@ -453,14 +501,20 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='prelude-ty'>Result</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Deref</span>, <span class='ident'>DerefMut</span>};
 
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::{<span class='ident'>ReadAt</span>, <span class='ident'>WriteAt</span>};
-<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>ReadBytesExt</span>, <span class='ident'>WriteBytesExt</span>};
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::{<span class='ident'>ReadAt</span>, <span class='ident'>WriteAt</span>};
+<span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>ReadBytesExt</span>, <span class='ident'>WriteBytesExt</span>};
 
 <span class='doccomment'>/// Trait for reading integers.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Does not require an endianness parameter, so it&#39;s useful for trait objects.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ReadInt</span>: <span class='ident'>Read</span> {
-    <span class='doccomment'>/// Reads an unsigned 16-bit integer.</span>
+    <span class='doccomment'>/// Reads an unsigned 8-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_u8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed 8-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_i8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i8</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads an unsigned 8-bit integer.</span>
     <span class='kw'>fn</span> <span class='ident'>read_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span>;
 
     <span class='doccomment'>/// Reads a signed 16-bit integer.</span>
@@ -495,6 +549,12 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Does not require an endianness parameter, so it&#39;s useful for trait objects.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>WriteInt</span>: <span class='ident'>Write</span> {
+    <span class='doccomment'>/// Writes an unsigned 8-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_u8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed 8-bit integer.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_i8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
     <span class='doccomment'>/// Writes an unsigned 16-bit integer.</span>
     <span class='kw'>fn</span> <span class='ident'>write_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
 
@@ -530,6 +590,12 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Does not require an endianness parameter, so it&#39;s useful for trait objects.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ReadIntAt</span>: <span class='ident'>ReadAt</span> {
+    <span class='doccomment'>/// Reads an unsigned 8-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_u8_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Reads a signed 8-bit integer at an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>read_i8_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i8</span><span class='op'>&gt;</span>;
+
     <span class='doccomment'>/// Reads an unsigned 16-bit integer at an offset.</span>
     <span class='kw'>fn</span> <span class='ident'>read_u16_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span>;
 
@@ -565,6 +631,12 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Does not require an endianness parameter, so it&#39;s useful for trait objects.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>WriteIntAt</span>: <span class='ident'>WriteAt</span> {
+    <span class='doccomment'>/// Writes an unsigned 8-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_u8_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
+    <span class='doccomment'>/// Writes a signed 8-bit integer to an offset.</span>
+    <span class='kw'>fn</span> <span class='ident'>write_i8_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
+
     <span class='doccomment'>/// Writes an unsigned 16-bit integer to an offset.</span>
     <span class='kw'>fn</span> <span class='ident'>write_u16_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
 
@@ -650,7 +722,7 @@
     <span class='doccomment'>/// let io : ByteIo&lt;_, BigEndian&gt; = ByteIo::new(buf.as_ref());</span>
     <span class='doccomment'>/// # }</span>
     <span class='doccomment'>/// ```</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>io</span>: <span class='ident'>I</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>io</span>: <span class='ident'>I</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='ident'>ByteIo</span> {
             <span class='ident'>io</span>: <span class='ident'>io</span>,
             <span class='ident'>endianness</span>: <span class='ident'>PhantomData</span>,
@@ -714,6 +786,12 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ReadInt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>Read</span>
 {
+    <span class='kw'>fn</span> <span class='ident'>read_u8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u8</span>()
+    }
+    <span class='kw'>fn</span> <span class='ident'>read_i8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_i8</span>()
+    }
     <span class='kw'>fn</span> <span class='ident'>read_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u16</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>()
     }
@@ -748,6 +826,12 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>WriteInt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>Write</span>
 {
+    <span class='kw'>fn</span> <span class='ident'>write_u8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u8</span>(<span class='ident'>n</span>)
+    }
+    <span class='kw'>fn</span> <span class='ident'>write_i8</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_i8</span>(<span class='ident'>n</span>)
+    }
     <span class='kw'>fn</span> <span class='ident'>write_u16</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u16</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>n</span>)
     }
@@ -782,6 +866,12 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>ReadIntAt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>ReadAt</span>
 {
+    <span class='kw'>fn</span> <span class='ident'>read_u8_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u8_at</span>(<span class='ident'>pos</span>)
+    }
+    <span class='kw'>fn</span> <span class='ident'>read_i8_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>i8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_i8_at</span>(<span class='ident'>pos</span>)
+    }
     <span class='kw'>fn</span> <span class='ident'>read_u16_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>read_u16_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>)
     }
@@ -816,6 +906,12 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span>: <span class='ident'>ByteOrder</span><span class='op'>&gt;</span> <span class='ident'>WriteIntAt</span> <span class='kw'>for</span> <span class='ident'>ByteIo</span><span class='op'>&lt;</span><span class='ident'>I</span>, <span class='ident'>E</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>WriteAt</span>
 {
+    <span class='kw'>fn</span> <span class='ident'>write_u8_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u8_at</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
+    }
+    <span class='kw'>fn</span> <span class='ident'>write_i8_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>i8</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_i8_at</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
+    }
     <span class='kw'>fn</span> <span class='ident'>write_u16_at</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>pos</span>: <span class='ident'>u64</span>, <span class='ident'>n</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>io</span>.<span class='ident'>write_u16_at</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>(<span class='ident'>pos</span>, <span class='ident'>n</span>)
     }
@@ -871,6 +967,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
