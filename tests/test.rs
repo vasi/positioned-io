@@ -1,6 +1,6 @@
 use std::cell::{Cell, RefCell};
 use std::io::{Read, Seek, SeekFrom, ErrorKind, Result, Error};
-use std::fs::File;
+use std::fs::{File, OpenOptions};
 use std::str;
 
 extern crate positioned_io;
@@ -27,6 +27,13 @@ fn test_mixed_read() {
     assert_eq!(&buf, b"9999");
     file.read_exact(&mut buf[..]).unwrap();
     assert_eq!(&buf, b"1592");
+}
+
+#[test]
+fn test_write_at() {
+    let mut file = OpenOptions::new().write(true).open("tests/pi.txt").unwrap();
+    let buf = b"3.14";
+    file.write_all_at(0, buf).unwrap();
 }
 
 // A ReadAt that has weird behavior.

@@ -1,9 +1,10 @@
 use std::fs::File;
 use std::io;
-use std::io::Write;
+use std::io::{Write, Seek, SeekFrom};
 use std::mem;
 use std::ptr;
 use std::cmp::min;
+use std::os::windows::fs::FileExt;
 
 use super::{ReadAt, WriteAt};
 
@@ -11,8 +12,7 @@ use std::os::windows::io::AsRawHandle;
 
 extern crate winapi;
 use self::winapi::shared::basetsd::SIZE_T;
-use self::winapi::shared::minwindef::{BOOL, DWORD, LPVOID};
-use self::winapi::um::fileapi::ReadFile;
+use self::winapi::shared::minwindef::{BOOL, DWORD};
 use self::winapi::um::handleapi::CloseHandle;
 use self::winapi::um::minwinbase::{OVERLAPPED_u, OVERLAPPED_u_s, OVERLAPPED};
 use self::winapi::um::sysinfoapi::GetSystemInfo;
@@ -24,22 +24,6 @@ fn result(e: BOOL) -> io::Result<()> {
         Err(io::Error::last_os_error())
     } else {
         Ok(())
-    }
-}
-
-fn overlapped(pos: u64) -> OVERLAPPED {
-    OVERLAPPED {
-        Internal: 0,
-        InternalHigh: 0,
-        u: unsafe {
-            let mut u: OVERLAPPED_u = mem::zeroed();
-            *u.s_mut() = OVERLAPPED_u_s {
-                Offset: pos as u32,
-                OffsetHigh: (pos >> 32) as u32,
-            };
-            u
-        },
-        hEvent: ptr::null_mut(),
     }
 }
 
@@ -99,9 +83,7 @@ impl ReadAt for File {
             let ptr = (aligned_ptr as *const u8).offset(alignment as isize);
             ptr::copy_nonoverlapping(ptr, buf.as_mut_ptr(), len as usize);
 
-            if 0 == UnmapViewOfFile(aligned_ptr) {
-                return Err(io::Error::last_os_error());
-            }
+            result(UnmapViewOfFile(aligned_ptr))?;
         }
 
         Ok(len as usize)
@@ -110,18 +92,10 @@ impl ReadAt for File {
 
 impl WriteAt for File {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
-        let mut bytes: DWORD = 0;
-        let mut ov = overlapped(pos);
-        result(unsafe {
-            ReadFile(
-                self.as_raw_handle() as HANDLE,
-                buf.as_ptr() as LPVOID,
-                buf.len() as DWORD,
-                &mut bytes,
-                &mut ov,
-            )
-        })?;
-        Ok(bytes as usize)
+        let cursor = self.seek(SeekFrom::Current(0))?;
+        let result = self.seek_write(buf, pos)?;
+        self.seek(SeekFrom::Start(cursor))?;
+        Ok(result)
     }
 
     fn flush(&mut self) -> io::Result<()> {
