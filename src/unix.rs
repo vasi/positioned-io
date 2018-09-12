@@ -1,8 +1,9 @@
-use super::{ReadAt, WriteAt};
 use std::fs::File;
 use std::io;
 use std::io::Write;
 use std::os::unix::fs::FileExt;
+
+use super::{ReadAt, WriteAt};
 
 impl ReadAt for File {
     #[inline]

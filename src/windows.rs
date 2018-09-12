@@ -1,3 +1,5 @@
+extern crate winapi;
+
 use std::fs::File;
 use std::io;
 use std::io::{Write, Seek, SeekFrom};
@@ -5,18 +7,16 @@ use std::mem;
 use std::ptr;
 use std::cmp::min;
 use std::os::windows::fs::FileExt;
-
-use super::{ReadAt, WriteAt};
-
 use std::os::windows::io::AsRawHandle;
 
-extern crate winapi;
-use self::winapi::shared::basetsd::SIZE_T;
-use self::winapi::shared::minwindef::{BOOL, DWORD};
-use self::winapi::um::handleapi::CloseHandle;
-use self::winapi::um::sysinfoapi::GetSystemInfo;
-use self::winapi::um::winnt::{HANDLE, PAGE_READONLY};
-use self::winapi::um::memoryapi::{CreateFileMappingW, MapViewOfFile, UnmapViewOfFile, FILE_MAP_READ};
+use winapi::shared::basetsd::SIZE_T;
+use winapi::shared::minwindef::{BOOL, DWORD};
+use winapi::um::handleapi::CloseHandle;
+use winapi::um::sysinfoapi::GetSystemInfo;
+use winapi::um::winnt::{HANDLE, PAGE_READONLY};
+use winapi::um::memoryapi::{CreateFileMappingW, MapViewOfFile, UnmapViewOfFile, FILE_MAP_READ};
+
+use super::{ReadAt, WriteAt};
 
 fn result(e: BOOL) -> io::Result<()> {
     if e == 0 {
