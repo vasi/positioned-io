@@ -1,7 +1,7 @@
-use super::{ReadAt, WriteAt, Size};
-
 use std::cmp::min;
 use std::io;
+
+use super::{ReadAt, WriteAt, Size};
 
 /// A window into another `ReadAt` or `WriteAt`.
 ///

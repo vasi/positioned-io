@@ -1,7 +1,7 @@
-use super::{ReadAt, Size, WriteAt};
-
 use std::io;
 use std::io::{Read, Seek, SeekFrom, Write};
+
+use super::{ReadAt, Size, WriteAt};
 
 /// Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`.
 ///
