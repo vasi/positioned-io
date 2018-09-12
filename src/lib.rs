@@ -202,7 +202,7 @@ pub trait ReadAt {
 ///
 /// # Examples
 ///
-/// ```
+/// ```no_run
 /// # use std::error::Error;
 /// #
 /// # fn try_main() -> Result<(), Box<Error>> {
@@ -277,7 +277,7 @@ pub trait WriteAt {
 ///
 /// # Examples
 ///
-/// ```
+/// ```no_run
 /// # use std::error::Error;
 /// #
 /// # fn try_main() -> Result<(), Box<Error>> {
