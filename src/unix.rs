@@ -5,6 +5,7 @@ use std::io::Write;
 use std::os::unix::fs::FileExt;
 
 impl ReadAt for File {
+    #[inline]
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
         FileExt::read_at(self, buf, pos)
     }

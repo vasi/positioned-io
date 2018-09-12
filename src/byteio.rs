@@ -34,72 +34,95 @@ use super::{ReadAt, WriteAt};
 /// [byteorder]: https://docs.rs/byteorder/1.2/byteorder/trait.ReadBytesExt.html
 pub trait ReadBytesAtExt: ReadAt {
     /// Reads an unsigned 8-bit integer at an offset.
+    #[inline]
     fn read_u8_at(&self, pos: u64) -> io::Result<u8> {
         let mut buf = [0; 1];
         self.read_exact_at(pos, &mut buf)?;
         Ok(buf[0])
     }
+
     /// Reads a signed 8-bit integer at an offset.
+    #[inline]
     fn read_i8_at(&self, pos: u64) -> io::Result<i8> {
         let mut buf = [0; 1];
         self.read_exact_at(pos, &mut buf)?;
         Ok(buf[0] as i8)
     }
+
     /// Reads an unsigned 16-bit integer at an offset.
+    #[inline]
     fn read_u16_at<T: ByteOrder>(&self, pos: u64) -> io::Result<u16> {
         let mut buf = [0; 2];
         self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_u16(&buf))
     }
+
     /// Reads a signed 16-bit integer at an offset.
+    #[inline]
     fn read_i16_at<T: ByteOrder>(&self, pos: u64) -> io::Result<i16> {
         let mut buf = [0; 2];
         self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_i16(&buf))
     }
+
     /// Reads an unsigned 32-bit integer at an offset.
+    #[inline]
     fn read_u32_at<T: ByteOrder>(&self, pos: u64) -> io::Result<u32> {
         let mut buf = [0; 4];
         self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_u32(&buf))
     }
+
     /// Reads a signed 32-bit integer at an offset.
+    #[inline]
     fn read_i32_at<T: ByteOrder>(&self, pos: u64) -> io::Result<i32> {
         let mut buf = [0; 4];
         self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_i32(&buf))
     }
+
     /// Reads an unsigned 64-bit integer at an offset.
+    #[inline]
     fn read_u64_at<T: ByteOrder>(&self, pos: u64) -> io::Result<u64> {
         let mut buf = [0; 8];
         self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_u64(&buf))
     }
+
     /// Reads a signed 64-bit integer at an offset.
+    #[inline]
     fn read_i64_at<T: ByteOrder>(&self, pos: u64) -> io::Result<i64> {
         let mut buf = [0; 8];
         self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_i64(&buf))
     }
+
     /// Reads an unsigned `nbytes`-bit integer at an offset.
+    #[inline]
     fn read_uint_at<T: ByteOrder>(&self, pos: u64, nbytes: usize) -> io::Result<u64> {
         let mut buf = [0; 8];
         self.read_exact_at(pos, &mut buf[..nbytes])?;
         Ok(T::read_uint(&buf[..nbytes], nbytes))
     }
+
     /// Reads a signed `nbytes`-bit integer at an offset.
+    #[inline]
     fn read_int_at<T: ByteOrder>(&self, pos: u64, nbytes: usize) -> io::Result<i64> {
         let mut buf = [0; 8];
         self.read_exact_at(pos, &mut buf[..nbytes])?;
         Ok(T::read_int(&buf[..nbytes], nbytes))
     }
+
     /// Reads a single-precision floating point number at an offset.
+    #[inline]
     fn read_f32_at<T: ByteOrder>(&self, pos: u64) -> io::Result<f32> {
         let mut buf = [0; 4];
         self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_f32(&buf))
     }
+
     /// Reads a double-precision floating point number at an offset.
+    #[inline]
     fn read_f64_at<T: ByteOrder>(&self, pos: u64) -> io::Result<f64> {
         let mut buf = [0; 8];
         self.read_exact_at(pos, &mut buf)?;
@@ -135,68 +158,91 @@ pub trait ReadBytesAtExt: ReadAt {
 /// [byteorder]: https://docs.rs/byteorder/1.2/byteorder/trait.WriteBytesExt.html
 pub trait WriteBytesAtExt: WriteAt {
     /// Writes an unsigned 8-bit integer to an offset.
+    #[inline]
     fn write_u8_at(&mut self, pos: u64, n: u8) -> io::Result<()> {
         self.write_all_at(pos, &[n])
     }
+
     /// Writes a signed 8-bit integer to an offset.
+    #[inline]
     fn write_i8_at(&mut self, pos: u64, n: i8) -> io::Result<()> {
         self.write_all_at(pos, &[n as u8])
     }
+
     /// Writes an unsigned 16-bit integer to an offset.
+    #[inline]
     fn write_u16_at<T: ByteOrder>(&mut self, pos: u64, n: u16) -> io::Result<()> {
         let mut buf = [0; 2];
         T::write_u16(&mut buf, n);
         self.write_all_at(pos, &buf)
     }
+
     /// Writes a signed 16-bit integer to an offset.
+    #[inline]
     fn write_i16_at<T: ByteOrder>(&mut self, pos: u64, n: i16) -> io::Result<()> {
         let mut buf = [0; 2];
         T::write_i16(&mut buf, n);
         self.write_all_at(pos, &buf)
     }
+
     /// Writes an unsigned 32-bit integer to an offset.
+    #[inline]
     fn write_u32_at<T: ByteOrder>(&mut self, pos: u64, n: u32) -> io::Result<()> {
         let mut buf = [0; 4];
         T::write_u32(&mut buf, n);
         self.write_all_at(pos, &buf)
     }
+
     /// Writes a signed 32-bit integer to an offset.
+    #[inline]
     fn write_i32_at<T: ByteOrder>(&mut self, pos: u64, n: i32) -> io::Result<()> {
         let mut buf = [0; 4];
         T::write_i32(&mut buf, n);
         self.write_all_at(pos, &buf)
     }
+
     /// Writes an unsigned 64-bit integer to an offset.
+    #[inline]
     fn write_u64_at<T: ByteOrder>(&mut self, pos: u64, n: u64) -> io::Result<()> {
         let mut buf = [0; 8];
         T::write_u64(&mut buf, n);
         self.write_all_at(pos, &buf)
     }
+
     /// Writes a signed 64-bit integer to an offset.
+    #[inline]
     fn write_i64_at<T: ByteOrder>(&mut self, pos: u64, n: i64) -> io::Result<()> {
         let mut buf = [0; 8];
         T::write_i64(&mut buf, n);
         self.write_all_at(pos, &buf)
     }
+
     /// Writes an unsigned `nbytes`-bit integer to an offset.
+    #[inline]
     fn write_uint_at<T: ByteOrder>(&mut self, pos: u64, n: u64, nbytes: usize) -> io::Result<()> {
         let mut buf = [0; 8];
         T::write_uint(&mut buf, n, nbytes);
         self.write_all_at(pos, &buf[..nbytes])
     }
+
     /// Writes a signed `nbytes`-bit integer to an offset.
+    #[inline]
     fn write_int_at<T: ByteOrder>(&mut self, pos: u64, n: i64, nbytes: usize) -> io::Result<()> {
         let mut buf = [0; 8];
         T::write_int(&mut buf, n, nbytes);
         self.write_all_at(pos, &buf[..nbytes])
     }
+
     /// Writes a single-precision floating point number to an offset.
+    #[inline]
     fn write_f32_at<T: ByteOrder>(&mut self, pos: u64, n: f32) -> io::Result<()> {
         let mut buf = [0; 4];
         T::write_f32(&mut buf, n);
         self.write_all_at(pos, &buf)
     }
+
     /// Writes a double-precision floating point number to an offset.
+    #[inline]
     fn write_f64_at<T: ByteOrder>(&mut self, pos: u64, n: f64) -> io::Result<()> {
         let mut buf = [0; 8];
         T::write_f64(&mut buf, n);
