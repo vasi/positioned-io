@@ -241,6 +241,13 @@ pub trait WriteAt {
     ///
     /// This should rarely do anything, since buffering is not very useful for
     /// positioned writes.
+    ///
+    /// This should be equivalent to
+    /// [`Write::flush()`](https://doc.rust-lang.org/std/io/trait.Write.html#tymethod.flush),
+    /// so it does not actually sync changes to disk when writing a `File`.
+    /// Use
+    /// [`File::sync_data()`](https://doc.rust-lang.org/std/fs/struct.File.html#method.sync_data)
+    /// instead.
     fn flush(&mut self) -> io::Result<()>;
 }
 
