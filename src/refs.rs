@@ -34,14 +34,16 @@ impl<'a, S: Size + ?Sized> Size for &'a mut S {
 }
 
 impl<'a, R> ReadAt for &'a RefCell<R>
-    where R: ReadAt
+where
+    R: ReadAt,
 {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
         self.borrow().read_at(pos, buf)
     }
 }
 impl<'a, W> WriteAt for &'a RefCell<W>
-    where W: WriteAt
+where
+    W: WriteAt,
 {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
         self.borrow_mut().write_at(pos, buf)
@@ -51,7 +53,8 @@ impl<'a, W> WriteAt for &'a RefCell<W>
     }
 }
 impl<'a, S> Size for &'a RefCell<S>
-    where S: Size
+where
+    S: Size,
 {
     fn size(&self) -> Result<Option<u64>> {
         self.borrow().size()

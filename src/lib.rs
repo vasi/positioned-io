@@ -103,8 +103,8 @@ pub use slice::Slice;
 
 extern crate byteorder as extbyteorder;
 
-use std::io::{Error, ErrorKind, Result};
 use std::fs::File;
+use std::io::{Error, ErrorKind, Result};
 
 /// Trait for reading at an offset.
 ///

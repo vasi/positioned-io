@@ -1,7 +1,7 @@
+use super::{ReadAt, WriteAt};
 use std::fs::File;
 use std::io::{Result, Write};
 use std::os::unix::fs::FileExt;
-use super::{ReadAt, WriteAt};
 
 impl ReadAt for File {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {

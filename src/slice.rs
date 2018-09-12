@@ -60,11 +60,7 @@ impl<I> Slice<I> {
     /// The slice will be a view of `size` bytes, starting at `offset` in `io`. If you don't
     /// pass a size, the size won't be limited.
     pub fn new(io: I, offset: u64, size: Option<u64>) -> Self {
-        Slice {
-            io,
-            offset,
-            size,
-        }
+        Slice { io, offset, size }
     }
 
     // Get the available bytes starting at some point.
@@ -77,7 +73,8 @@ impl<I> Slice<I> {
     }
 }
 impl<I> Slice<I>
-    where I: Size
+where
+    I: Size,
 {
     /// Create a new `Slice` that goes to the end of `io`.
     ///
@@ -92,7 +89,8 @@ impl<I> Slice<I>
 }
 
 impl<I> ReadAt for Slice<I>
-    where I: ReadAt
+where
+    I: ReadAt,
 {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
         let bytes = self.avail(pos, buf.len());
@@ -101,7 +99,8 @@ impl<I> ReadAt for Slice<I>
 }
 
 impl<I> WriteAt for Slice<I>
-    where I: WriteAt
+where
+    I: WriteAt,
 {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
         let bytes = self.avail(pos, buf.len());

@@ -1,6 +1,6 @@
-use std::io::{Result, Read, Write, Seek, SeekFrom, Error, ErrorKind};
+use super::{ReadAt, Size, WriteAt};
+use std::io::{Error, ErrorKind, Read, Result, Seek, SeekFrom, Write};
 use std::ops::{Deref, DerefMut};
-use super::{ReadAt, WriteAt, Size};
 
 /// Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`.
 ///
@@ -108,7 +108,8 @@ impl<I> Seek for Cursor<I> {
 }
 
 impl<I> Read for Cursor<I>
-    where I: ReadAt
+where
+    I: ReadAt,
 {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
         let bytes = self.get_ref().read_at(self.pos, buf)?;
@@ -117,7 +118,8 @@ impl<I> Read for Cursor<I>
     }
 }
 impl<I> Write for Cursor<I>
-    where I: WriteAt
+where
+    I: WriteAt,
 {
     fn write(&mut self, buf: &[u8]) -> Result<usize> {
         let pos = self.pos;
@@ -144,7 +146,8 @@ impl<I> Write for Cursor<I>
 #[derive(Debug, Clone)]
 pub struct SizeCursor<I: Size>(Cursor<I>);
 impl<I> SizeCursor<I>
-    where I: Size
+where
+    I: Size,
 {
     /// Create a new `SizeCursor` which starts reading at a specified offset.
     ///
@@ -162,7 +165,8 @@ impl<I> SizeCursor<I>
 
 // Automatically fall back to Cursor.
 impl<I> Deref for SizeCursor<I>
-    where I: Size
+where
+    I: Size,
 {
     type Target = Cursor<I>;
     fn deref(&self) -> &Cursor<I> {
@@ -170,7 +174,8 @@ impl<I> Deref for SizeCursor<I>
     }
 }
 impl<I> DerefMut for SizeCursor<I>
-    where I: Size
+where
+    I: Size,
 {
     fn deref_mut(&mut self) -> &mut Cursor<I> {
         &mut self.0
@@ -179,7 +184,8 @@ impl<I> DerefMut for SizeCursor<I>
 
 // We know how to seek from the end for SizeCursor.
 impl<I> Seek for SizeCursor<I>
-    where I: Size
+where
+    I: Size,
 {
     fn seek(&mut self, pos: SeekFrom) -> Result<u64> {
         let pos = match pos {

@@ -208,7 +208,8 @@ pub struct ByteIo<I, E: ByteOrder> {
 }
 
 impl<I, E> ByteIo<I, E>
-    where E: ByteOrder
+where
+    E: ByteOrder,
 {
     /// Create a new `ByteIo` from some sort of reader or writer.
     ///
@@ -238,7 +239,8 @@ impl<I, E> ByteIo<I, E>
 
 // Auto-coerce back to the base IO.
 impl<I, E> Deref for ByteIo<I, E>
-    where E: ByteOrder
+where
+    E: ByteOrder,
 {
     type Target = I;
     fn deref(&self) -> &I {
@@ -246,7 +248,8 @@ impl<I, E> Deref for ByteIo<I, E>
     }
 }
 impl<I, E> DerefMut for ByteIo<I, E>
-    where E: ByteOrder
+where
+    E: ByteOrder,
 {
     fn deref_mut(&mut self) -> &mut I {
         &mut self.io
@@ -255,14 +258,16 @@ impl<I, E> DerefMut for ByteIo<I, E>
 
 // Allow use as a trait object.
 impl<I, E: ByteOrder> Read for ByteIo<I, E>
-    where I: Read
+where
+    I: Read,
 {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
         self.io.read(buf)
     }
 }
 impl<I, E: ByteOrder> Write for ByteIo<I, E>
-    where I: Write
+where
+    I: Write,
 {
     fn write(&mut self, buf: &[u8]) -> Result<usize> {
         self.io.write(buf)
@@ -272,14 +277,16 @@ impl<I, E: ByteOrder> Write for ByteIo<I, E>
     }
 }
 impl<I, E: ByteOrder> ReadAt for ByteIo<I, E>
-    where I: ReadAt
+where
+    I: ReadAt,
 {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
         self.io.read_at(pos, buf)
     }
 }
 impl<I, E: ByteOrder> WriteAt for ByteIo<I, E>
-    where I: WriteAt
+where
+    I: WriteAt,
 {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
         self.io.write_at(pos, buf)
@@ -290,7 +297,8 @@ impl<I, E: ByteOrder> WriteAt for ByteIo<I, E>
 }
 
 impl<I, E: ByteOrder> ReadInt for ByteIo<I, E>
-    where I: Read
+where
+    I: Read,
 {
     fn read_u8(&mut self) -> Result<u8> {
         self.io.read_u8()
@@ -330,7 +338,8 @@ impl<I, E: ByteOrder> ReadInt for ByteIo<I, E>
     }
 }
 impl<I, E: ByteOrder> WriteInt for ByteIo<I, E>
-    where I: Write
+where
+    I: Write,
 {
     fn write_u8(&mut self, n: u8) -> Result<()> {
         self.io.write_u8(n)
@@ -370,7 +379,8 @@ impl<I, E: ByteOrder> WriteInt for ByteIo<I, E>
     }
 }
 impl<I, E: ByteOrder> ReadIntAt for ByteIo<I, E>
-    where I: ReadAt
+where
+    I: ReadAt,
 {
     fn read_u8_at(&self, pos: u64) -> Result<u8> {
         self.io.read_u8_at(pos)
@@ -410,7 +420,8 @@ impl<I, E: ByteOrder> ReadIntAt for ByteIo<I, E>
     }
 }
 impl<I, E: ByteOrder> WriteIntAt for ByteIo<I, E>
-    where I: WriteAt
+where
+    I: WriteAt,
 {
     fn write_u8_at(&mut self, pos: u64, n: u8) -> Result<()> {
         self.io.write_u8_at(pos, n)

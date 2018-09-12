@@ -204,7 +204,6 @@ pub trait WriteBytesExt: WriteAt {
     }
 }
 
-
 // Implement for everything that does positioned IO.
 impl<R: ReadAt> ReadBytesExt for R {}
 impl<W: WriteAt> WriteBytesExt for W {}
