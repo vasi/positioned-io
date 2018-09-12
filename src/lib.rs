@@ -1,5 +1,6 @@
-//! This crate allows you to specify an offset for reads and writes, without changing the current
-//! position in a file. This is similar to [`pread()` and `pwrite()`][pread] in C.
+//! This crate allows you to specify an offset for reads and writes,
+//! without changing the current position in a file. This is similar to
+//! [`pread()` and `pwrite()`][pread] in C.
 //!
 //! The major advantages of this type of I/O are:
 //!
@@ -12,17 +13,25 @@
 //!
 //! Read the fifth 512-byte sector of a file:
 //!
-//! ```no_run
-//! # use std::io;
+//! ```
+//! # use std::error::Error;
+//! #
+//! # fn try_main() -> Result<(), Box<Error>> {
 //! use std::fs::File;
 //! use positioned_io::ReadAt;
 //!
-//! # fn foo() -> io::Result<()> {
-//! // Note that file does not need to be mut!
-//! let file = File::open("foo.data")?;
-//! let mut buf = vec![0; 512];
+//! // note that file does not need to be mut
+//! let file = File::open("tests/pi.txt")?;
+//! let mut buf = [0; 512];
+//!
+//! // read up to 512 bytes
 //! let bytes_read = file.read_at(2048, &mut buf)?;
-//! # Ok(())
+//! #     assert!(buf.starts_with(b"4"));
+//! #     Ok(())
+//! # }
+//! #
+//! # fn main() {
+//! #     try_main().unwrap();
 //! # }
 //! ```
 //!
@@ -32,21 +41,24 @@
 //! # extern crate positioned_io;
 //! # extern crate byteorder;
 //! # use std::io;
+//! #
+//! # fn try_main() -> io::Result<()> {
 //! use std::fs::OpenOptions;
 //! use positioned_io::WriteAt;
 //! use byteorder::{ByteOrder, LittleEndian};
 //!
-//! # fn foo() -> io::Result<()> {
-//! // Put the integer in a buffer.
-//! let mut buf = vec![0; 4];
+//! // put the integer in a buffer
+//! let mut buf = [0; 4];
 //! LittleEndian::write_u32(&mut buf, 1234);
 //!
-//! // Write it to the file.
+//! // write it to the file
 //! let mut file = OpenOptions::new().write(true).open("foo.data")?;
 //! file.write_all_at(1 << 20, &buf)?;
-//! # Ok(())
+//! #     Ok(())
 //! # }
-//! # fn main() { foo().unwrap() }
+//! # fn main() {
+//! #     try_main().unwrap()
+//! # }
 //! ```
 //!
 //! Or, more simply:
@@ -55,35 +67,40 @@
 //! # extern crate positioned_io;
 //! # extern crate byteorder;
 //! # use std::io;
-//! # use std::fs::OpenOptions;
-//! # use byteorder::LittleEndian;
-//! // Extend files with writing integers at offsets.
+//! #
+//! # fn try_main() -> io::Result<()> {
+//! use std::fs::OpenOptions;
+//! use byteorder::LittleEndian;
 //! use positioned_io::WriteBytesAtExt;
 //!
-//! # fn foo() -> io::Result<()> {
 //! let mut file = OpenOptions::new().write(true).open("foo.data")?;
 //! file.write_u32_at::<LittleEndian>(1 << 20, 1234)?;
-//! # Ok(())
+//! #     Ok(())
 //! # }
-//! # fn main() { foo().unwrap() }
+//! # fn main() {
+//! #     try_main().unwrap()
+//! # }
 //! ```
 //!
-//! Read from anything else that supports ReadAt, like a byte array:
+//! Read from anything else that supports `ReadAt`, like a byte array:
 //!
 //! ```rust
 //! # extern crate positioned_io;
 //! # extern crate byteorder;
 //! # use std::io;
-//! # use byteorder::BigEndian;
+//! #
+//! # fn try_main() -> io::Result<()> {
+//! use byteorder::BigEndian;
 //! use positioned_io::ReadBytesAtExt;
 //!
-//! # fn foo() -> io::Result<()> {
 //! let buf = [0, 5, 254, 212, 0, 3];
 //! let n = buf.as_ref().read_i16_at::<BigEndian>(2)?;
 //! assert_eq!(n, -300);
-//! # Ok(())
+//! #     Ok(())
 //! # }
-//! # fn main() { foo().unwrap() }
+//! # fn main() {
+//! #     try_main().unwrap()
+//! # }
 //! ```
 
 #![doc(html_root_url = "https://docs.rs/positioned-io/0.2.2")]
