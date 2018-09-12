@@ -1,4 +1,5 @@
-## positioned-io
+positioned-io
+=============
 
 This crate allows you to specify an offset for reads and writes, without changing the current
 position in a file. This is similar to [`pread()` and `pwrite()`][pread] in C.
@@ -11,9 +12,10 @@ The major advantages of this type of I/O are:
 [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
 
 [![Build Status](https://travis-ci.org/vasi/positioned-io.svg?branch=master)](https://travis-ci.org/vasi/positioned-io)
-[![Crates.io](https://img.shields.io/crates/v/positioned-io.svg?maxAge=2592000)]()
+[![Crates.io](https://img.shields.io/crates/v/positioned-io.svg?maxAge=2592000)](https://crates.io/crates/positioned-io)
 
-### Example
+Example
+-------
 
 Read the fifth 512-byte sector of a file:
 
@@ -26,13 +28,15 @@ let mut buf = vec![0; 512];
 let bytes_read = try!(file.read_at(2048, &mut buf));
 ```
 
-### Documentation
+Documentation
+-------------
 
-http://vasi.github.io/positioned-io/positioned_io/
+https://docs.rs/positioned-io
 
-### Usage
+Usage
+-----
 
-This crate works with Cargo and is on
+This crate works with Cargo and depends on
 [crates.io](https://crates.io/crates/byteorder). Add it to your `Cargo.toml` like so:
 
 ```toml
