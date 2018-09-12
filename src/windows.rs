@@ -42,8 +42,7 @@ impl ReadAt for File {
             return Ok(0);
         }
 
-        // cast is safe because only relevant if less than buf.len()
-        let len = min((file_len - pos) as usize, buf.len());
+        let len = min(file_len - pos, buf.len() as u64) as usize;
 
         unsafe {
             let alignment = pos % allocation_granularity() as u64;
