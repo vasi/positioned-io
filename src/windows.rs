@@ -69,6 +69,7 @@ impl WriteAt for File {
         })?;
         Ok(bytes as usize)
     }
+
     fn flush(&mut self) -> Result<()> {
         Write::flush(self)
     }

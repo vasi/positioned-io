@@ -31,6 +31,7 @@ impl<'a> WriteAt for &'a mut [u8] {
         self[pos..(pos + bytes)].copy_from_slice(&buf[..bytes]);
         Ok(bytes)
     }
+
     fn flush(&mut self) -> Result<()> {
         Ok(())
     }

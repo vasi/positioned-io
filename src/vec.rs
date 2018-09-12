@@ -35,6 +35,7 @@ impl WriteAt for Vec<u8> {
 
         Ok(buf.len())
     }
+
     fn flush(&mut self) -> Result<()> {
         Ok(())
     }

@@ -42,10 +42,7 @@ pub struct ByteIo<I, E: ByteOrder> {
     endianness: PhantomData<E>,
 }
 
-impl<I, E> ByteIo<I, E>
-where
-    E: ByteOrder,
-{
+impl<I, E: ByteOrder> ByteIo<I, E> {
     /// Create a new `ByteIo` from some sort of reader or writer.
     ///
     /// You will need to specify the byte-order when creating a ByteIo.
