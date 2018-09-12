@@ -104,7 +104,7 @@ impl ReadAt for File {
             }
         }
 
-        Ok(buf.len())
+        Ok(len as usize)
     }
 }
 
