@@ -106,40 +106,54 @@ extern crate byteorder as extbyteorder;
 use std::fs::File;
 use std::io::{Error, ErrorKind, Result};
 
-/// Trait for reading at an offset.
+/// Trait for reading bytes at an offset.
 ///
-/// Implementations should be able to read bytes without changing any sort of read-position.
-/// Self should not change at all. Buffering reads is unlikely to be useful, since each time
-/// `read_at()` is called, the position may be completely different.
+/// Implementations should be able to read bytes without changing any sort of
+/// read position. Self should not change at all. Buffering reads is unlikely
+/// to be useful, since each time `read_at()` is called, the position may be
+/// completely different.
 ///
 /// # Examples
 ///
 /// Read the fifth 512-byte sector of a file:
 ///
-/// ```no_run
-/// # use std::io;
-/// # use std::fs::File;
+/// ```
+/// # use std::error::Error;
+/// #
+/// # fn try_main() -> Result<(), Box<Error>> {
+/// use std::fs::File;
 /// use positioned_io::ReadAt;
 ///
-/// # fn foo() -> io::Result<()> {
-/// let file = File::open("foo.data")?;
-/// let mut buf = vec![0; 512];
+/// let file = File::open("tests/pi.txt")?;
+/// let mut buf = [0; 512];
+///
+/// // read up to 512 bytes
 /// let bytes_read = file.read_at(2048, &mut buf)?;
-/// # Ok(())
+/// #     assert!(buf.starts_with(b"4"));
+/// #     Ok(())
+/// # }
+/// #
+/// # fn main() {
+/// #     try_main().unwrap();
 /// # }
 /// ```
 pub trait ReadAt {
-    /// Read bytes from an offset in this source into a buffer, returning how many bytes were read.
+    /// Read bytes from an offset in this source into a buffer, returning how
+    /// many bytes were read.
     ///
-    /// This function may yield fewer bytes than the size of `buf`, if it was interrupted or hit
-    /// end-of-file.
+    /// This function may yield fewer bytes than the size of `buf`, if it was
+    /// interrupted or hit the "end of file".
     ///
-    /// See [`Read::read()`](https://doc.rust-lang.org/std/io/trait.Read.html#tymethod.read).
+    /// See [`Read::read()`](https://doc.rust-lang.org/std/io/trait.Read.html#tymethod.read)
+    /// for details.
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize>;
 
-    /// Read the exact number of bytes required to fill `buf`, from an offset.
+    /// Read the exact number of bytes required to fill `buf` from an offset.
     ///
-    /// If only a lesser number of bytes can be read, will yield an error.
+    /// Errors if the "end of file" is encountered before filling the buffer.
+    ///
+    /// See [`Read::read_exact()`](https://doc.rust-lang.org/std/io/trait.Read.html#method.read_exact)
+    /// for details.
     fn read_exact_at(&self, mut pos: u64, mut buf: &mut [u8]) -> Result<()> {
         while !buf.is_empty() {
             match self.read_at(pos, buf) {
