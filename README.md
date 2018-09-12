@@ -12,7 +12,7 @@ The major advantages of this type of I/O are:
 [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
 
 [![Build Status](https://travis-ci.org/vasi/positioned-io.svg?branch=master)](https://travis-ci.org/vasi/positioned-io)
-[![Crates.io](https://img.shields.io/crates/v/positioned-io.svg?maxAge=2592000)](https://crates.io/crates/positioned-io)
+[![Crates.io](https://img.shields.io/crates/v/positioned-io.svg)](https://crates.io/crates/positioned-io)
 [![Documentation](https://docs.rs/positioned-io/badge.svg)](https://docs.rs/positioned-io)
 
 Example
@@ -37,10 +37,14 @@ https://docs.rs/positioned-io
 Usage
 -----
 
-This crate works with Cargo and depends on
-[byteorder](https://crates.io/crates/byteorder). Add it to your `Cargo.toml` like so:
+Add `positioned-io` to your `Cargo.toml` like so:
 
 ```toml
 [dependencies]
 positioned-io = "0.2"
 ```
+
+License
+-------
+
+positioned-io is licensed under the [MIT license](https://github.com/vasi/positioned-io/blob/master/LICENSE-MIT).
