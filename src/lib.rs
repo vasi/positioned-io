@@ -22,9 +22,9 @@
 //!
 //! // note that file does not need to be mut
 //! let file = File::open("tests/pi.txt")?;
-//! let mut buf = [0; 512];
 //!
 //! // read up to 512 bytes
+//! let mut buf = [0; 512];
 //! let bytes_read = file.read_at(2048, &mut buf)?;
 //! #     assert!(buf.starts_with(b"4"));
 //! #     Ok(())
@@ -142,9 +142,9 @@ use std::io;
 ///
 /// // note that file does not need to be mut
 /// let file = File::open("tests/pi.txt")?;
-/// let mut buf = [0; 512];
 ///
 /// // read up to 512 bytes
+/// let mut buf = [0; 512];
 /// let bytes_read = file.read_at(2048, &mut buf)?;
 /// #     assert!(buf.starts_with(b"4"));
 /// #     Ok(())
