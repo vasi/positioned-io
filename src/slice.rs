@@ -3,7 +3,7 @@ use super::{ReadAt, WriteAt, Size};
 use std::cmp::min;
 use std::io;
 
-/// A window into another `ReatAt` or `WriteAt`.
+/// A window into another `ReadAt` or `WriteAt`.
 ///
 /// Given an existing positioned I/O, this presents a limited view of it.
 ///
@@ -17,7 +17,7 @@ use std::io;
 ///
 /// # fn foo() -> io::Result<()> {
 /// let a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-/// let slice = Slice::new(a.as_ref(), 4, Some(4));
+/// let slice = Slice::new(&a[..], 4, Some(4));
 ///
 /// let mut buf = [0; 4];
 /// let bytes = slice.read_at(2, &mut buf)?;
@@ -37,10 +37,12 @@ use std::io;
 /// # fn foo() -> io::Result<()> {
 /// let mut v = vec![0, 1, 2, 3, 4, 5];
 /// let buf = [9; 3];
+///
 /// {
 ///     let mut slice = Slice::new(&mut v, 2, None);
 ///     slice.write_all_at(3, &buf)?;
 /// }
+///
 /// // The write goes right past the end.
 /// assert_eq!(v, vec![0, 1, 2, 3, 4, 9, 9, 9]);
 /// # Ok(())
@@ -57,13 +59,13 @@ pub struct Slice<I> {
 impl<I> Slice<I> {
     /// Create a new `Slice`.
     ///
-    /// The slice will be a view of `size` bytes, starting at `offset` in `io`. If you don't
-    /// pass a size, the size won't be limited.
+    /// The slice will be a view of `size` bytes, starting at `offset` in `io`.
+    /// If you do not pass a size, the size won't be limited.
     pub fn new(io: I, offset: u64, size: Option<u64>) -> Self {
         Slice { io, offset, size }
     }
 
-    // Get the available bytes starting at some point.
+    /// Get the available bytes starting at some point.
     fn avail(&self, pos: u64, bytes: usize) -> usize {
         match self.size {
             None => bytes,
@@ -72,14 +74,11 @@ impl<I> Slice<I> {
         }
     }
 }
-impl<I> Slice<I>
-where
-    I: Size,
-{
+impl<I: Size> Slice<I> {
     /// Create a new `Slice` that goes to the end of `io`.
     ///
-    /// Note that you can create a larger slice by passing a larger size to `new()`, but it won't
-    /// do you any good for reading.
+    /// Note that you can create a larger slice by passing a larger size to
+    /// `new()`, but it won't do you any good for reading.
     pub fn new_to_end(io: I, offset: u64) -> io::Result<Self> {
         match io.size() {
             Ok(Some(size)) => Ok(Self::new(io, offset, Some(size - offset))),
@@ -88,20 +87,14 @@ where
     }
 }
 
-impl<I> ReadAt for Slice<I>
-where
-    I: ReadAt,
-{
+impl<I: ReadAt> ReadAt for Slice<I> {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
         let bytes = self.avail(pos, buf.len());
         self.io.read_at(pos + self.offset, &mut buf[..bytes])
     }
 }
 
-impl<I> WriteAt for Slice<I>
-where
-    I: WriteAt,
-{
+impl<I: WriteAt> WriteAt for Slice<I> {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
         let bytes = self.avail(pos, buf.len());
         self.io.write_at(pos + self.offset, &buf[..bytes])
