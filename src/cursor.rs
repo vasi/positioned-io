@@ -76,12 +76,12 @@ impl<I> Cursor<I> {
     }
 
     /// Borrow the inner `ReadAt` or `WriteAt`.
-    pub fn get_ref(&self) -> &I {
+    pub fn as_inner(&self) -> &I {
         &self.io
     }
 
     /// Borrow the inner `ReadAt` or `WriteAt` mutably.
-    pub fn get_mut(&mut self) -> &mut I {
+    pub fn as_inner_mut(&mut self) -> &mut I {
         &mut self.io
     }
 
@@ -117,7 +117,7 @@ impl<I> Seek for Cursor<I> {
 
 impl<I: ReadAt> Read for Cursor<I> {
     fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
-        let bytes = self.get_ref().read_at(self.pos, buf)?;
+        let bytes = self.as_inner().read_at(self.pos, buf)?;
         self.pos += bytes as u64;
         Ok(bytes)
     }
@@ -126,13 +126,13 @@ impl<I: ReadAt> Read for Cursor<I> {
 impl<I: WriteAt> Write for Cursor<I> {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
         let pos = self.pos;
-        let bytes = self.get_mut().write_at(pos, buf)?;
+        let bytes = self.as_inner_mut().write_at(pos, buf)?;
         self.pos += bytes as u64;
         Ok(bytes)
     }
 
     fn flush(&mut self) -> io::Result<()> {
-        WriteAt::flush(self.get_mut())
+        WriteAt::flush(self.as_inner_mut())
     }
 }
 
@@ -188,11 +188,11 @@ impl<I: Size> SizeCursor<I> {
         self.cursor.io
     }
 
-    pub fn get_ref(&self) -> &I {
+    pub fn as_inner(&self) -> &I {
         &self.cursor.io
     }
 
-    pub fn get_mut(&mut self) -> &mut I {
+    pub fn as_inner_mut(&mut self) -> &mut I {
         &mut self.cursor.io
     }
 
@@ -228,7 +228,7 @@ impl<I: Size> Seek for SizeCursor<I> {
             SeekFrom::Start(p) => p as i64,
             SeekFrom::Current(p) => self.cursor.pos as i64 + p,
             SeekFrom::End(p) => {
-                match self.get_ref().size() {
+                match self.as_inner().size() {
                     Err(e) => return Err(e),
                     Ok(None) => {
                         return Err(io::Error::new(io::ErrorKind::InvalidData, "seek from unknown end"))
