@@ -77,7 +77,6 @@ where
     }
 }
 
-// TODO: Allow use as a trait object.
 impl<I: Read, E: ByteOrder> Read for ByteIo<I, E> {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
         self.io.read(buf)

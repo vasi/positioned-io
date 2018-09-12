@@ -280,3 +280,12 @@ mod windows;
 mod array;
 mod vec;
 mod refs;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct _AssertObjectSafe1(Box<dyn ReadAt>);
+    struct _AssertObjectSafe2(Box<dyn WriteAt>);
+    struct _AssertObjectSafe3(Box<dyn Size>);
+}
