@@ -11,11 +11,10 @@ use positioned_io::{ReadAt, WriteAt, Size, Cursor, SizeCursor, ByteIo, Slice};
 
 #[test]
 fn test_read_at() {
-    let file = File::open("Cargo.toml").unwrap();
+    let file = File::open("tests/pi.txt").unwrap();
     let mut buf = [0; 4];
     file.read_exact_at(10, buf.as_mut()).unwrap();
-    let s = str::from_utf8(buf.as_ref()).unwrap();
-    assert_eq!(s, "name");
+    assert_eq!(&buf, b"3589");
 }
 
 #[test]
