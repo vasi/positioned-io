@@ -59,6 +59,7 @@ impl<I> Cursor<I> {
     /// Create a new `Cursor` which starts reading at a specified offset.
     ///
     /// Pass in a `ReadAt` or `WriteAt` as `io`.
+    #[inline]
     pub fn new_pos(io: I, pos: u64) -> Self {
         Cursor { io, pos }
     }
@@ -66,31 +67,37 @@ impl<I> Cursor<I> {
     /// Create a new Cursor which starts reading at offset zero.
     ///
     /// Pass in a `ReadAt` or `WriteAt` as `io`.
+    #[inline]
     pub fn new(io: I) -> Self {
         Self::new_pos(io, 0)
     }
 
     /// Consume `self` and yield the inner `ReadAt` or `WriteAt`.
+    #[inline]
     pub fn into_inner(self) -> I {
         self.io
     }
 
     /// Borrow the inner `ReadAt` or `WriteAt`.
+    #[inline]
     pub fn as_inner(&self) -> &I {
         &self.io
     }
 
     /// Borrow the inner `ReadAt` or `WriteAt` mutably.
+    #[inline]
     pub fn as_inner_mut(&mut self) -> &mut I {
         &mut self.io
     }
 
     /// Get the current read/write position.
+    #[inline]
     pub fn position(&self) -> u64 {
         self.pos
     }
 
     /// Set the current read/write position.
+    #[inline]
     pub fn set_position(&mut self, pos: u64) {
         self.pos = pos;
     }
@@ -131,6 +138,7 @@ impl<I: WriteAt> Write for Cursor<I> {
         Ok(bytes)
     }
 
+    #[inline]
     fn flush(&mut self) -> io::Result<()> {
         WriteAt::flush(self.as_inner_mut())
     }
@@ -158,64 +166,78 @@ impl<I: Size> SizeCursor<I> {
     /// Create a new `SizeCursor` which starts reading at a specified offset.
     ///
     /// Pass in a `ReadAt` or `WriteAt` as `io`.
+    #[inline]
     pub fn new_pos(io: I, pos: u64) -> Self {
         SizeCursor {
             cursor: Cursor::new_pos(io, pos)
         }
     }
+
     /// Create a new `SizeCursor` which starts reading at offset zero.
     ///
     /// Pass in a `ReadAt` or `WriteAt` as `io`.
+    #[inline]
     pub fn new(io: I) -> Self {
         SizeCursor {
             cursor: Cursor::new(io)
         }
     }
 
+    #[inline]
     pub fn as_cursor(&self) -> &Cursor<I> {
         &self.cursor
     }
 
+    #[inline]
     pub fn as_cursor_mut(&mut self) -> &mut Cursor<I> {
         &mut self.cursor
     }
 
+    #[inline]
     pub fn into_cursor(self) -> Cursor<I> {
         self.cursor
     }
 
+    #[inline]
     pub fn into_inner(self) -> I {
         self.cursor.io
     }
 
+    #[inline]
     pub fn as_inner(&self) -> &I {
         &self.cursor.io
     }
 
+    #[inline]
     pub fn as_inner_mut(&mut self) -> &mut I {
         &mut self.cursor.io
     }
 
+    #[inline]
     pub fn position(&self) -> u64 {
         self.cursor.position()
     }
 
+    #[inline]
     pub fn set_position(&mut self, pos: u64) {
         self.cursor.set_position(pos)
     }
 }
 
 impl<I: Size + ReadAt> Read for SizeCursor<I> {
+    #[inline]
     fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
         self.cursor.read(buf)
     }
 }
 
 impl<I: Size + WriteAt> Write for SizeCursor<I> {
+    #[inline]
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
         self.cursor.write(buf)
     }
 
+    #[inline]
     fn flush(&mut self) -> io::Result<()> {
         self.cursor.flush()
     }
