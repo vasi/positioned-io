@@ -180,6 +180,9 @@ pub trait ReadAt {
 /// Implementations should be able to write bytes at an offset, without
 /// changing any sort of write position. Self should not change at all.
 ///
+/// When writing beyond the end of the underlying object it is extended and
+/// intermediate bytes are filled with the value 0.
+///
 /// # Examples
 ///
 /// ```
