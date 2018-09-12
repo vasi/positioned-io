@@ -8,23 +8,20 @@
 //!
 //! [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
 //!
-//! The repository is at https://github.com/vasi/positioned-io
-//!
-//!
 //! # Examples
 //!
 //! Read the fifth 512-byte sector of a file:
 //!
 //! ```no_run
 //! # use std::io;
-//! # use std::fs::File;
+//! use std::fs::File;
 //! use positioned_io::ReadAt;
 //!
 //! # fn foo() -> io::Result<()> {
 //! // Note that file does not need to be mut!
-//! let file = try!(File::open("foo.data"));
+//! let file = File::open("foo.data")?;
 //! let mut buf = vec![0; 512];
-//! let bytes_read = try!(file.read_at(2048, &mut buf));
+//! let bytes_read = file.read_at(2048, &mut buf)?;
 //! # Ok(())
 //! # }
 //! ```
@@ -35,7 +32,7 @@
 //! # extern crate positioned_io;
 //! # extern crate byteorder;
 //! # use std::io;
-//! # use std::fs::OpenOptions;
+//! use std::fs::OpenOptions;
 //! use positioned_io::WriteAt;
 //! use byteorder::{ByteOrder, LittleEndian};
 //!
@@ -45,8 +42,8 @@
 //! LittleEndian::write_u32(&mut buf, 1234);
 //!
 //! // Write it to the file.
-//! let mut file = try!(OpenOptions::new().write(true).open("foo.data"));
-//! try!(file.write_all_at(1 << 20, &buf));
+//! let mut file = OpenOptions::new().write(true).open("foo.data")?;
+//! file.write_all_at(1 << 20, &buf)?;
 //! # Ok(())
 //! # }
 //! # fn main() { foo().unwrap() }
@@ -64,8 +61,8 @@
 //! use positioned_io::WriteBytesExt;
 //!
 //! # fn foo() -> io::Result<()> {
-//! let mut file = try!(OpenOptions::new().write(true).open("foo.data"));
-//! try!(file.write_u32_at::<LittleEndian>(1 << 20, 1234));
+//! let mut file = OpenOptions::new().write(true).open("foo.data")?;
+//! file.write_u32_at::<LittleEndian>(1 << 20, 1234)?;
 //! # Ok(())
 //! # }
 //! # fn main() { foo().unwrap() }
@@ -82,7 +79,7 @@
 //!
 //! # fn foo() -> io::Result<()> {
 //! let buf = [0, 5, 254, 212, 0, 3];
-//! let n = try!(buf.as_ref().read_i16_at::<BigEndian>(2));
+//! let n = buf.as_ref().read_i16_at::<BigEndian>(2)?;
 //! assert_eq!(n, -300);
 //! # Ok(())
 //! # }
@@ -122,9 +119,9 @@ use std::fs::File;
 /// use positioned_io::ReadAt;
 ///
 /// # fn foo() -> io::Result<()> {
-/// let file = try!(File::open("foo.data"));
+/// let file = File::open("foo.data")?;
 /// let mut buf = vec![0; 512];
-/// let bytes_read = try!(file.read_at(2048, &mut buf));
+/// let bytes_read = file.read_at(2048, &mut buf)?;
 /// # Ok(())
 /// # }
 /// ```
@@ -182,8 +179,8 @@ pub trait ReadAt {
 /// LittleEndian::write_u32(&mut buf, 1234);
 ///
 /// // Write it to the file.
-/// let mut file = try!(OpenOptions::new().write(true).open("foo.data"));
-/// try!(file.write_all_at(1 << 20, &buf));
+/// let mut file = OpenOptions::new().write(true).open("foo.data")?;
+/// file.write_all_at(1 << 20, &buf)?;
 /// # Ok(())
 /// # }
 /// # fn main() { foo().unwrap() }
@@ -236,13 +233,13 @@ pub trait WriteAt {
 /// use positioned_io::Size;
 ///
 /// # fn foo() -> io::Result<()> {
-/// let file = try!(File::open("foo.txt"));
-/// let size = try!(file.size());
+/// let file = File::open("foo.txt")?;
+/// let size = file.size()?;
 /// assert_eq!(size, Some(22));
 ///
 /// // Special files probably don't have a size.
-/// let file = try!(File::open("/dev/stdin"));
-/// let size = try!(file.size());
+/// let file = File::open("/dev/stdin")?;
+/// let size = file.size()?;
 /// assert_eq!(size, None);
 /// # Ok(())
 /// # }
@@ -259,7 +256,7 @@ pub trait Size {
 
 impl Size for File {
     fn size(&self) -> Result<Option<u64>> {
-        let md = try!(self.metadata());
+        let md = self.metadata()?;
         if md.is_file() {
             Ok(Some(md.len()))
         } else {

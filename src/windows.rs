@@ -41,13 +41,13 @@ impl ReadAt for File {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
         let mut bytes: DWORD = 0;
         let mut ov = overlapped(pos);
-        try!(result(unsafe {
+        result(unsafe {
             ReadFile(self.as_raw_handle() as HANDLE,
                      buf.as_mut_ptr() as LPVOID,
                      buf.len() as DWORD,
                      &mut bytes,
                      &mut ov)
-        }));
+        })?;
         Ok(bytes as usize)
     }
 }
@@ -56,13 +56,13 @@ impl WriteAt for File {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
         let mut bytes: DWORD = 0;
         let mut ov = overlapped(pos);
-        try!(result(unsafe {
+        result(unsafe {
             ReadFile(self.as_raw_handle() as HANDLE,
                      buf.as_ptr() as LPVOID,
                      buf.len() as DWORD,
                      &mut bytes,
                      &mut ov)
-        }));
+        })?;
         Ok(bytes as usize)
     }
     fn flush(&mut self) -> Result<()> {

@@ -20,7 +20,7 @@ use std::io::{Result, Error, ErrorKind};
 /// let slice = Slice::new(a.as_ref(), 4, Some(4));
 ///
 /// let mut buf = [0; 4];
-/// let bytes = try!(slice.read_at(2, &mut buf));
+/// let bytes = slice.read_at(2, &mut buf)?;
 /// assert_eq!(bytes, 2);
 /// assert_eq!(buf, [6, 7, 0, 0]);
 /// # Ok(())
@@ -39,7 +39,7 @@ use std::io::{Result, Error, ErrorKind};
 /// let buf = [9; 3];
 /// {
 ///     let mut slice = Slice::new(&mut v, 2, None);
-///     try!(slice.write_all_at(3, &buf));
+///     slice.write_all_at(3, &buf)?;
 /// }
 /// // The write goes right past the end.
 /// assert_eq!(v, vec![0, 1, 2, 3, 4, 9, 9, 9]);

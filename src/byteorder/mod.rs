@@ -24,7 +24,7 @@ use super::{ReadAt, WriteAt};
 ///
 /// # fn foo() -> io::Result<()> {
 /// let buf = [0, 5, 254, 212, 0, 3];
-/// let n = try!(buf.as_ref().read_i16_at::<BigEndian>(2));
+/// let n = buf.as_ref().read_i16_at::<BigEndian>(2)?;
 /// assert_eq!(n, -300);
 /// # Ok(())
 /// # }
@@ -36,73 +36,73 @@ pub trait ReadBytesExt: ReadAt {
     /// Reads an unsigned 8-bit integer at an offset.
     fn read_u8_at(&self, pos: u64) -> Result<u8> {
         let mut buf = [0; 1];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(buf[0])
     }
     /// Reads a signed 8-bit integer at an offset.
     fn read_i8_at(&self, pos: u64) -> Result<i8> {
         let mut buf = [0; 1];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(buf[0] as i8)
     }
     /// Reads an unsigned 16-bit integer at an offset.
     fn read_u16_at<T: ByteOrder>(&self, pos: u64) -> Result<u16> {
         let mut buf = [0; 2];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_u16(&buf))
     }
     /// Reads a signed 16-bit integer at an offset.
     fn read_i16_at<T: ByteOrder>(&self, pos: u64) -> Result<i16> {
         let mut buf = [0; 2];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_i16(&buf))
     }
     /// Reads an unsigned 32-bit integer at an offset.
     fn read_u32_at<T: ByteOrder>(&self, pos: u64) -> Result<u32> {
         let mut buf = [0; 4];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_u32(&buf))
     }
     /// Reads a signed 32-bit integer at an offset.
     fn read_i32_at<T: ByteOrder>(&self, pos: u64) -> Result<i32> {
         let mut buf = [0; 4];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_i32(&buf))
     }
     /// Reads an unsigned 64-bit integer at an offset.
     fn read_u64_at<T: ByteOrder>(&self, pos: u64) -> Result<u64> {
         let mut buf = [0; 8];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_u64(&buf))
     }
     /// Reads a signed 64-bit integer at an offset.
     fn read_i64_at<T: ByteOrder>(&self, pos: u64) -> Result<i64> {
         let mut buf = [0; 8];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_i64(&buf))
     }
     /// Reads an unsigned `nbytes`-bit integer at an offset.
     fn read_uint_at<T: ByteOrder>(&self, pos: u64, nbytes: usize) -> Result<u64> {
         let mut buf = [0; 8];
-        try!(self.read_exact_at(pos, &mut buf[..nbytes]));
+        self.read_exact_at(pos, &mut buf[..nbytes])?;
         Ok(T::read_uint(&buf[..nbytes], nbytes))
     }
     /// Reads a signed `nbytes`-bit integer at an offset.
     fn read_int_at<T: ByteOrder>(&self, pos: u64, nbytes: usize) -> Result<i64> {
         let mut buf = [0; 8];
-        try!(self.read_exact_at(pos, &mut buf[..nbytes]));
+        self.read_exact_at(pos, &mut buf[..nbytes])?;
         Ok(T::read_int(&buf[..nbytes], nbytes))
     }
     /// Reads a single-precision floating point number at an offset.
     fn read_f32_at<T: ByteOrder>(&self, pos: u64) -> Result<f32> {
         let mut buf = [0; 4];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_f32(&buf))
     }
     /// Reads a double-precision floating point number at an offset.
     fn read_f64_at<T: ByteOrder>(&self, pos: u64) -> Result<f64> {
         let mut buf = [0; 8];
-        try!(self.read_exact_at(pos, &mut buf));
+        self.read_exact_at(pos, &mut buf)?;
         Ok(T::read_f64(&buf))
     }
 }
@@ -125,7 +125,7 @@ pub trait ReadBytesExt: ReadAt {
 ///
 /// # fn foo() -> io::Result<()> {
 /// let mut buf = [0; 6];
-/// try!(buf.as_mut().write_u16_at::<BigEndian>(2, 300));
+/// buf.as_mut().write_u16_at::<BigEndian>(2, 300)?;
 /// assert_eq!(buf, [0, 0, 1, 44, 0, 0]);
 /// # Ok(())
 /// # }

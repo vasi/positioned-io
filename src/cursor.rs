@@ -41,8 +41,8 @@ use super::{ReadAt, WriteAt, Size};
 ///
 /// // Copy a segment to a file.
 /// let mut input = curs.take(1 << 20);
-/// let mut output = try!(File::create("segment.out"));
-/// try!(io::copy(&mut input, &mut output));
+/// let mut output = File::create("segment.out")?;
+/// io::copy(&mut input, &mut output)?;
 /// # Ok(())
 /// # }
 /// ```
@@ -110,7 +110,7 @@ impl<I> Read for Cursor<I>
     where I: ReadAt
 {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
-        let bytes = try!(self.get_ref().read_at(self.pos, buf));
+        let bytes = self.get_ref().read_at(self.pos, buf)?;
         self.pos += bytes as u64;
         Ok(bytes)
     }
@@ -120,7 +120,7 @@ impl<I> Write for Cursor<I>
 {
     fn write(&mut self, buf: &[u8]) -> Result<usize> {
         let pos = self.pos;
-        let bytes = try!(self.get_mut().write_at(pos, buf));
+        let bytes = self.get_mut().write_at(pos, buf)?;
         self.pos += bytes as u64;
         Ok(bytes)
     }

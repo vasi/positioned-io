@@ -192,9 +192,9 @@ pub trait WriteIntAt: WriteAt {
 /// {
 ///     let mut io : ByteIo<_, BigEndian> = ByteIo::new(buf.as_mut());
 ///     // All writes will automatically be BigEndian.
-///     try!(io.write_u16(300));
-///     try!(io.write_u32(1_000_000));
-///     try!(io.write_i16(-1));
+///     io.write_u16(300)?;
+///     io.write_u32(1_000_000)?;
+///     io.write_i16(-1)?;
 ///  }
 /// assert_eq!(buf, [1, 44, 0, 15, 66, 64, 255, 255]);
 /// # Ok(())

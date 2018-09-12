@@ -24,9 +24,9 @@ Read the fifth 512-byte sector of a file:
 use positioned_io::ReadAt;
 
 // Note that file does not need to be mut!
-let file = try!(File::open("foo.data"));
+let file = File::open("foo.data")?;
 let mut buf = vec![0; 512];
-let bytes_read = try!(file.read_at(2048, &mut buf));
+let bytes_read = file.read_at(2048, &mut buf)?;
 ```
 
 Documentation
