@@ -18,6 +18,18 @@ fn test_read_at() {
     assert_eq!(s, "name");
 }
 
+#[test]
+fn test_read_position() {
+    let mut file = File::open("tests/pi.txt").unwrap();
+    let mut buf = [0; 4];
+    file.read_exact(&mut buf[..]).unwrap();
+    assert_eq!(&buf, b"3.14");
+    file.read_exact_at(0, &mut buf[..]).unwrap();
+    assert_eq!(&buf, b"3.14");
+    file.read_exact(&mut buf[..]).unwrap();
+    assert_eq!(&buf, b"1592");
+}
+
 // A ReadAt that has weird behavior.
 struct ReadCustom<I: ReadAt, F: Fn() -> Result<usize>> {
     i: I,
