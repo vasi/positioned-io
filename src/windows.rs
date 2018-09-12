@@ -1,16 +1,17 @@
 use std::fs::File;
 use std::io::{Result, Error, Write};
-use std::ptr::null_mut;
+use std::mem;
+use std::ptr;
 
 use super::{ReadAt, WriteAt};
 
 use std::os::windows::io::AsRawHandle;
 
-extern crate kernel32;
 extern crate winapi;
-use self::winapi::{BOOL, DWORD, LPVOID};
-use self::winapi::minwinbase::OVERLAPPED;
-use self::kernel32::ReadFile;
+use self::winapi::shared::minwindef::{BOOL, DWORD, LPVOID};
+use self::winapi::um::winnt::HANDLE;
+use self::winapi::um::minwinbase::{OVERLAPPED, OVERLAPPED_u, OVERLAPPED_u_s};
+use self::winapi::um::fileapi::ReadFile;
 
 fn result(e: BOOL) -> Result<()> {
     if e == 0 {
@@ -24,9 +25,15 @@ fn overlapped(pos: u64) -> OVERLAPPED {
     OVERLAPPED {
         Internal: 0,
         InternalHigh: 0,
-        Offset: pos as u32,
-        OffsetHigh: (pos >> 32) as u32,
-        hEvent: null_mut(),
+        u: unsafe {
+            let mut u: OVERLAPPED_u = mem::zeroed();
+            *u.s_mut() = OVERLAPPED_u_s {
+                Offset: pos as u32,
+                OffsetHigh: (pos >> 32) as u32,
+            };
+            u
+        },
+        hEvent: ptr::null_mut(),
     }
 }
 
@@ -35,7 +42,7 @@ impl ReadAt for File {
         let mut bytes: DWORD = 0;
         let mut ov = overlapped(pos);
         try!(result(unsafe {
-            ReadFile(self.as_raw_handle(),
+            ReadFile(self.as_raw_handle() as HANDLE,
                      buf.as_mut_ptr() as LPVOID,
                      buf.len() as DWORD,
                      &mut bytes,
@@ -50,7 +57,7 @@ impl WriteAt for File {
         let mut bytes: DWORD = 0;
         let mut ov = overlapped(pos);
         try!(result(unsafe {
-            ReadFile(self.as_raw_handle(),
+            ReadFile(self.as_raw_handle() as HANDLE,
                      buf.as_ptr() as LPVOID,
                      buf.len() as DWORD,
                      &mut bytes,
