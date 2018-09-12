@@ -14,7 +14,6 @@ extern crate winapi;
 use self::winapi::shared::basetsd::SIZE_T;
 use self::winapi::shared::minwindef::{BOOL, DWORD};
 use self::winapi::um::handleapi::CloseHandle;
-use self::winapi::um::minwinbase::{OVERLAPPED_u, OVERLAPPED_u_s, OVERLAPPED};
 use self::winapi::um::sysinfoapi::GetSystemInfo;
 use self::winapi::um::winnt::{HANDLE, PAGE_READONLY};
 use self::winapi::um::memoryapi::{CreateFileMappingW, MapViewOfFile, UnmapViewOfFile, FILE_MAP_READ};
