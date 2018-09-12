@@ -21,11 +21,14 @@ Example
 Read the fifth 512-byte sector of a file:
 
 ```rust
+use std::fs::File;
 use positioned_io::ReadAt;
 
-// Note that file does not need to be mut!
-let file = File::open("foo.data")?;
-let mut buf = vec![0; 512];
+// note that file does not need to be mut
+let file = File::open("tests/pi.txt")?;
+let mut buf = [0; 512];
+
+// read up to 512 bytes
 let bytes_read = file.read_at(2048, &mut buf)?;
 ```
 

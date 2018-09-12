@@ -124,6 +124,7 @@ use std::io::{Error, ErrorKind, Result};
 /// use std::fs::File;
 /// use positioned_io::ReadAt;
 ///
+/// // note that file does not need to be mut
 /// let file = File::open("tests/pi.txt")?;
 /// let mut buf = [0; 512];
 ///
