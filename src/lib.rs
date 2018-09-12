@@ -280,6 +280,3 @@ mod windows;
 mod array;
 mod vec;
 mod refs;
-
-#[cfg(test)]
-mod test;

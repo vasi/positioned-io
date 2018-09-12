@@ -3,10 +3,11 @@ use std::io::{Read, Seek, SeekFrom, ErrorKind, Result, Error};
 use std::fs::File;
 use std::str;
 
+extern crate positioned_io;
 extern crate byteorder;
 use self::byteorder::LittleEndian;
 
-use super::{ReadAt, WriteAt, Size, Cursor, SizeCursor, ByteIo, Slice, ReadIntAt};
+use positioned_io::{ReadAt, WriteAt, Size, Cursor, SizeCursor, ByteIo, Slice, ReadIntAt};
 
 #[test]
 fn test_read_at() {
