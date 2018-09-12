@@ -138,7 +138,7 @@ use std::io::{Error, ErrorKind, Result};
 /// # }
 /// ```
 pub trait ReadAt {
-    /// Read bytes from an offset in this source into a buffer, returning how
+    /// Reads bytes from an offset in this source into a buffer, returning how
     /// many bytes were read.
     ///
     /// This function may yield fewer bytes than the size of `buf`, if it was
@@ -148,7 +148,7 @@ pub trait ReadAt {
     /// for details.
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize>;
 
-    /// Read the exact number of bytes required to fill `buf` from an offset.
+    /// Reads the exact number of bytes required to fill `buf` from an offset.
     ///
     /// Errors if the "end of file" is encountered before filling the buffer.
     ///
@@ -175,45 +175,48 @@ pub trait ReadAt {
     }
 }
 
-/// Trait for writing at an offset.
+/// Trait for writing bytes at an offset.
 ///
-/// Implementations should be able to write bytes at an offset, without changing any sort of
-/// write-position. Self should not change at all.
+/// Implementations should be able to write bytes at an offset, without
+/// changing any sort of write position. Self should not change at all.
 ///
 /// # Examples
 ///
-/// ```no_run
-/// # extern crate positioned_io;
-/// # extern crate byteorder;
-/// # use std::io;
-/// # use std::fs::OpenOptions;
+/// ```
+/// # use std::error::Error;
+/// #
+/// # fn try_main() -> Result<(), Box<Error>> {
+/// use std::fs::OpenOptions;
 /// use positioned_io::WriteAt;
-/// use byteorder::{ByteOrder, LittleEndian};
 ///
-/// # fn foo() -> io::Result<()> {
-/// // Put the integer in a buffer.
-/// let mut buf = vec![0; 4];
-/// LittleEndian::write_u32(&mut buf, 1234);
+/// let mut file = OpenOptions::new().write(true).open("tests/pi.txt")?;
 ///
-/// // Write it to the file.
-/// let mut file = OpenOptions::new().write(true).open("foo.data")?;
-/// file.write_all_at(1 << 20, &buf)?;
-/// # Ok(())
+/// // write some bytes
+/// let bytes_written = file.write_at(2, b"1415926535897932384626433")?;
+/// #     Ok(())
 /// # }
-/// # fn main() { foo().unwrap() }
+/// #
+/// # fn main() {
+/// #     try_main().unwrap();
+/// # }
 /// ```
 pub trait WriteAt {
-    /// Write a buffer at an offset, returning the number of bytes written.
+    /// Writes bytes from a buffer to an offset, returning the number of bytes
+    /// written.
     ///
-    /// This function may write fewer bytes than the size of `buf`, for example if it is
-    /// interrupted.
+    /// This function may write fewer bytes than the size of `buf`, for example
+    /// if it is interrupted.
     ///
-    /// See [`Write::write()`](https://doc.rust-lang.org/std/io/trait.Write.html#tymethod.write).
+    /// See [`Write::write()`](https://doc.rust-lang.org/std/io/trait.Write.html#tymethod.write)
+    /// for details.
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize>;
 
-    /// Write a complete buffer at an offset.
+    /// Writes a complete buffer at an offset.
     ///
-    /// If only a lesser number of bytes can be written, will yield an error.
+    /// Errors if it could not write the entire buffer.
+    ///
+    /// See [`Write::write_all()`](https://doc.rust-lang.org/std/io/trait.Write.html#method.write_all)
+    /// for details.
     fn write_all_at(&mut self, mut pos: u64, mut buf: &[u8]) -> Result<()> {
         while !buf.is_empty() {
             match self.write_at(pos, buf) {
@@ -230,9 +233,11 @@ pub trait WriteAt {
         Ok(())
     }
 
-    /// Flush this writer, ensuring that any buffered data is written.
+    /// Flush this writer, ensuring that any intermediately buffered data
+    /// reaches its destination.
     ///
-    /// This should rarely do anything, since buffering is not very useful for positioned writes.
+    /// This should rarely do anything, since buffering is not very useful for
+    /// positioned writes.
     fn flush(&mut self) -> Result<()>;
 }
 
