@@ -58,7 +58,7 @@
 //! # use std::fs::OpenOptions;
 //! # use byteorder::LittleEndian;
 //! // Extend files with writing integers at offsets.
-//! use positioned_io::WriteBytesExt;
+//! use positioned_io::WriteBytesAtExt;
 //!
 //! # fn foo() -> io::Result<()> {
 //! let mut file = OpenOptions::new().write(true).open("foo.data")?;
@@ -75,7 +75,7 @@
 //! # extern crate byteorder;
 //! # use std::io;
 //! # use byteorder::BigEndian;
-//! use positioned_io::ReadBytesExt;
+//! use positioned_io::ReadBytesAtExt;
 //!
 //! # fn foo() -> io::Result<()> {
 //! let buf = [0, 5, 254, 212, 0, 3];
@@ -92,7 +92,7 @@
 #![warn(bare_trait_objects)]
 
 mod byteorder;
-pub use byteorder::{ReadBytesExt, WriteBytesExt};
+pub use byteorder::{ReadBytesAtExt, WriteBytesAtExt};
 pub use byteorder::byteio::{ByteIo, ReadInt, WriteInt, ReadIntAt, WriteIntAt};
 
 mod cursor;

@@ -7,7 +7,7 @@ use std::io::{Result, Read, Write};
 use std::ops::{Deref, DerefMut};
 
 use super::super::{ReadAt, WriteAt};
-use super::{ReadBytesExt, WriteBytesExt};
+use super::{ReadBytesAtExt, WriteBytesAtExt};
 
 /// Trait for reading integers.
 ///
