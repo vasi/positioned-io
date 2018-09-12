@@ -14,7 +14,7 @@ use self::winapi::um::fileapi::ReadFile;
 use self::winapi::um::minwinbase::{OVERLAPPED_u, OVERLAPPED_u_s, OVERLAPPED};
 use self::winapi::um::winnt::HANDLE;
 
-fn result(e: BOOL) -> Result<()> {
+fn result(e: BOOL) -> io::Result<()> {
     if e == 0 {
         Err(io::Error::last_os_error())
     } else {
