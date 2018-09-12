@@ -201,6 +201,7 @@ pub trait WriteIntAt: WriteAt {
 /// # }
 /// # fn main() { foo().unwrap() }
 /// ```
+#[derive(Debug, Clone)]
 pub struct ByteIo<I, E: ByteOrder> {
     io: I,
     endianness: PhantomData<E>,

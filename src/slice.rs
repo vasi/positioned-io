@@ -47,6 +47,7 @@ use std::io::{Result, Error, ErrorKind};
 /// # }
 /// # fn main() { foo().unwrap(); }
 /// ```
+#[derive(Debug, Clone)]
 pub struct Slice<I> {
     io: I,
     offset: u64,

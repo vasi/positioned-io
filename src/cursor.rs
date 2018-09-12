@@ -46,6 +46,7 @@ use super::{ReadAt, WriteAt, Size};
 /// # Ok(())
 /// # }
 /// ```
+#[derive(Debug, Clone)]
 pub struct Cursor<I> {
     io: I,
     pos: u64,
@@ -140,6 +141,7 @@ impl<I> Write for Cursor<I>
 /// [Cursor]: struct.Cursor.html
 /// [Size]: trait.Size.html
 /// [RFC]: https://github.com/rust-lang/rfcs/pull/1210
+#[derive(Debug, Clone)]
 pub struct SizeCursor<I: Size>(Cursor<I>);
 impl<I> SizeCursor<I>
     where I: Size

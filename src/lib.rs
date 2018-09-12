@@ -88,6 +88,9 @@
 
 #![doc(html_root_url = "https://docs.rs/positioned-io/0.2.2")]
 
+#![warn(missing_debug_implementations)]
+#![warn(bare_trait_objects)]
+
 mod byteorder;
 pub use byteorder::{ReadBytesExt, WriteBytesExt};
 pub use byteorder::byteio::{ByteIo, ReadInt, WriteInt, ReadIntAt, WriteIntAt};
