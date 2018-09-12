@@ -26,31 +26,29 @@ fn result(e: BOOL) -> io::Result<()> {
     }
 }
 
-fn allocation_granularity() -> u64 {
+fn allocation_granularity() -> usize {
     unsafe {
         let mut info = mem::zeroed();
         GetSystemInfo(&mut info);
-        info.dwAllocationGranularity as u64
+        info.dwAllocationGranularity as usize
     }
 }
 
 impl ReadAt for File {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
         let file_len = self.metadata()?.len();
-        if (usize::max_value() as u64) < file_len {
-            return Err(io::Error::new(io::ErrorKind::InvalidData, "file length overflows usize"));
-        }
 
         if buf.is_empty() || pos >= file_len {
             return Ok(0);
         }
 
-        let len = min(file_len, pos + buf.len() as u64) - pos;
+        // cast is safe because only relevant if less than buf.len()
+        let len = min((file_len - pos) as usize, buf.len());
 
         unsafe {
-            let alignment = pos % allocation_granularity();
+            let alignment = pos % allocation_granularity() as u64;
             let aligned_pos = pos - alignment;
-            let aligned_len = len + alignment;
+            let aligned_len = len + alignment as usize;
 
             let mapping = CreateFileMappingW(
                 self.as_raw_handle() as HANDLE,
@@ -80,12 +78,12 @@ impl ReadAt for File {
             }
 
             let ptr = (aligned_ptr as *const u8).offset(alignment as isize);
-            ptr::copy_nonoverlapping(ptr, buf.as_mut_ptr(), len as usize);
+            ptr::copy_nonoverlapping(ptr, buf.as_mut_ptr(), len);
 
             result(UnmapViewOfFile(aligned_ptr))?;
         }
 
-        Ok(len as usize)
+        Ok(len)
     }
 }
 
