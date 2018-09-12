@@ -327,13 +327,13 @@ impl<I, E: ByteOrder> ByteIo<I, E> {
 
     /// Borrows the underlying reader or writer.
     #[inline]
-    pub fn as_inner(&self) -> &I {
+    pub fn get_ref(&self) -> &I {
         &self.io
     }
 
     /// Mutably borrows the underlying reader or writer.
     #[inline]
-    pub fn as_inner_mut(&mut self) -> &mut I {
+    pub fn get_mut(&mut self) -> &mut I {
         &mut self.io
     }
 }

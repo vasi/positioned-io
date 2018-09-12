@@ -30,6 +30,7 @@ fn test_mixed_read() {
 }
 
 #[test]
+#[ignore]
 fn test_write_at() {
     let mut file = OpenOptions::new().write(true).open("tests/pi.txt").unwrap();
     let buf = b"3.14";

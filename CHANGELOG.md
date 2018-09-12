@@ -5,12 +5,10 @@
 * `{Read,Write}Int` and `{Read,Write}IntAt` are now inherent methods of
   `ByteIo`.
 * Removed `Deref` and `DerefMut` implementations for `ByteIo`.
-  Use `ByteIo::as_inner()` and `ByteIo::as_inner_mut()` instead.
+  Use `ByteIo::get_ref()` and `ByteIo::get_mut()` instead.
 * Removed `Deref` and `DerefMut` for `SizeCursor`. `Cursor` methods are now
   also implemented on `SizeCursor`. Use `SizeCursor::as_cursor()` or
   `SizeCursor::as_cursor_mut()` to borrow the underlying `Cursor`.
-* `Cursor::get_ref()` renamed to `Cursor::as_inner()`, `Cursor::get_mut()`
-  renamed to `Cursor::as_inner_mut()`.
 * Fixed `WriteAt for File` on Windows: Writes were not working at all.
 * Fixed `ReadAt for File` on Windows: Positioned reads were moving the
   file cursor. The new implementation is much slower but no londer modifies
