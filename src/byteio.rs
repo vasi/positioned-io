@@ -1,8 +1,8 @@
-use byteorder::{ByteOrder, ReadBytesExt, WriteBytesExt};
-
 use std::marker::PhantomData;
 use std::io;
 use std::io::{Read, Write};
+
+use byteorder::{ByteOrder, ReadBytesExt, WriteBytesExt};
 
 use super::{ReadAt, WriteAt};
 
@@ -210,31 +210,38 @@ impl<W: WriteAt> WriteBytesAtExt for W {}
 
 /// Read or write with a given inherent byte-order.
 ///
-/// If you know that you'll always be using a single endianness, an instance of `ByteIo` will
-/// allow you to omit the endian specifier on every read or write.
+/// If you know that you'll always be using a single endianness, an instance of
+/// `ByteIo` will allow you to omit the endian specifier on every read or write.
 ///
 /// # Examples
 ///
 /// ```rust
-/// # extern crate positioned_io;
 /// # extern crate byteorder;
+/// # extern crate positioned_io;
+/// #
 /// # use std::io;
-/// # use byteorder::BigEndian;
+/// #
+/// # fn try_main() -> io::Result<()> {
+/// use byteorder::BigEndian;
 /// use positioned_io::ByteIo;
 ///
-/// # fn foo() -> io::Result<()> {
 /// let mut buf = [0; 8];
+///
 /// {
-///     let mut io : ByteIo<_, BigEndian> = ByteIo::new(buf.as_mut());
+///     let mut io : ByteIo<_, BigEndian> = ByteIo::new(&mut buf[..]);
 ///     // All writes will automatically be BigEndian.
 ///     io.write_u16(300)?;
 ///     io.write_u32(1_000_000)?;
 ///     io.write_i16(-1)?;
-///  }
+/// }
+///
 /// assert_eq!(buf, [1, 44, 0, 15, 66, 64, 255, 255]);
-/// # Ok(())
+/// #     Ok(())
 /// # }
-/// # fn main() { foo().unwrap() }
+/// #
+/// # fn main() {
+/// #     try_main().unwrap()
+/// # }
 /// ```
 #[derive(Debug, Clone)]
 pub struct ByteIo<I, E: ByteOrder> {
@@ -245,20 +252,20 @@ pub struct ByteIo<I, E: ByteOrder> {
 impl<I, E: ByteOrder> ByteIo<I, E> {
     /// Create a new `ByteIo` from some sort of reader or writer.
     ///
-    /// You will need to specify the byte-order when creating a ByteIo.
+    /// You will need to specify the byte-order when creating a `ByteIo`.
     ///
     /// # Examples
     ///
     /// ```rust
     /// # extern crate positioned_io;
     /// # extern crate byteorder;
-    /// # use byteorder::BigEndian;
+    /// use byteorder::BigEndian;
     /// use positioned_io::ByteIo;
     ///
     /// # fn main() {
     /// let buf = [0; 10];
     /// // Add a type specifier for the byte order.
-    /// let io : ByteIo<_, BigEndian> = ByteIo::new(buf.as_ref());
+    /// let io : ByteIo<_, BigEndian> = ByteIo::new(&buf[..]);
     /// # }
     /// ```
     pub fn new(io: I) -> Self {
