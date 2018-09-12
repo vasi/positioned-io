@@ -1,5 +1,7 @@
 use super::{ReadAt, Size, WriteAt};
-use std::io::{Error, ErrorKind, Read, Result, Seek, SeekFrom, Write};
+
+use std::io;
+use std::io::{Read, Seek, SeekFrom, Write};
 
 /// Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`.
 ///
@@ -88,18 +90,18 @@ impl<I> Cursor<I> {
 }
 
 impl<I> Seek for Cursor<I> {
-    fn seek(&mut self, pos: SeekFrom) -> Result<u64> {
+    fn seek(&mut self, pos: SeekFrom) -> io::Result<u64> {
         match pos {
             SeekFrom::Start(p) => self.pos = p,
             SeekFrom::Current(p) => {
                 let pos = self.pos as i64 + p;
                 if pos < 0 {
-                    return Err(Error::new(ErrorKind::InvalidInput, "seek to a negative position"));
+                    return Err(io::Error::new(io::ErrorKind::InvalidInput, "seek to a negative position"));
                 }
                 self.pos = pos as u64;
             }
             SeekFrom::End(_) => {
-                return Err(Error::new(ErrorKind::InvalidInput, "seek from unknown end"))
+                return Err(io::Error::new(io::ErrorKind::InvalidInput, "seek from unknown end"))
             }
         };
         Ok(self.pos)
@@ -110,7 +112,7 @@ impl<I> Read for Cursor<I>
 where
     I: ReadAt,
 {
-    fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
+    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
         let bytes = self.get_ref().read_at(self.pos, buf)?;
         self.pos += bytes as u64;
         Ok(bytes)
@@ -120,13 +122,13 @@ impl<I> Write for Cursor<I>
 where
     I: WriteAt,
 {
-    fn write(&mut self, buf: &[u8]) -> Result<usize> {
+    fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
         let pos = self.pos;
         let bytes = self.get_mut().write_at(pos, buf)?;
         self.pos += bytes as u64;
         Ok(bytes)
     }
-    fn flush(&mut self) -> Result<()> {
+    fn flush(&mut self) -> io::Result<()> {
         WriteAt::flush(self.get_mut())
     }
 }
@@ -199,16 +201,16 @@ impl<I: Size> SizeCursor<I> {
 }
 
 impl<I: Size + ReadAt> Read for SizeCursor<I> {
-    fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
+    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
         self.cursor.read(buf)
     }
 }
 
 impl<I: Size + WriteAt> Write for SizeCursor<I> {
-    fn write(&mut self, buf: &[u8]) -> Result<usize> {
+    fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
         self.cursor.write(buf)
     }
-    fn flush(&mut self) -> Result<()> {
+    fn flush(&mut self) -> io::Result<()> {
         self.cursor.flush()
     }
 }
@@ -218,7 +220,7 @@ impl<I> Seek for SizeCursor<I>
 where
     I: Size,
 {
-    fn seek(&mut self, pos: SeekFrom) -> Result<u64> {
+    fn seek(&mut self, pos: SeekFrom) -> io::Result<u64> {
         let pos = match pos {
             SeekFrom::Start(p) => p as i64,
             SeekFrom::Current(p) => self.cursor.pos as i64 + p,
@@ -226,7 +228,7 @@ where
                 match self.get_ref().size() {
                     Err(e) => return Err(e),
                     Ok(None) => {
-                        return Err(Error::new(ErrorKind::InvalidData, "seek from unknown end"))
+                        return Err(io::Error::new(io::ErrorKind::InvalidData, "seek from unknown end"))
                     }
                     Ok(Some(s)) => s as i64 + p,
                 }

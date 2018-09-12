@@ -1,7 +1,7 @@
 use super::{ReadAt, WriteAt, Size};
 
 use std::cmp::min;
-use std::io::{Result, Error, ErrorKind};
+use std::io;
 
 /// A window into another `ReatAt` or `WriteAt`.
 ///
@@ -80,10 +80,10 @@ where
     ///
     /// Note that you can create a larger slice by passing a larger size to `new()`, but it won't
     /// do you any good for reading.
-    pub fn new_to_end(io: I, offset: u64) -> Result<Self> {
+    pub fn new_to_end(io: I, offset: u64) -> io::Result<Self> {
         match io.size() {
             Ok(Some(size)) => Ok(Self::new(io, offset, Some(size - offset))),
-            _ => Err(Error::new(ErrorKind::InvalidData, "unknown base size")),
+            _ => Err(io::Error::new(io::ErrorKind::InvalidData, "unknown base size")),
         }
     }
 }
@@ -92,7 +92,7 @@ impl<I> ReadAt for Slice<I>
 where
     I: ReadAt,
 {
-    fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
+    fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
         let bytes = self.avail(pos, buf.len());
         self.io.read_at(pos + self.offset, &mut buf[..bytes])
     }
@@ -102,18 +102,18 @@ impl<I> WriteAt for Slice<I>
 where
     I: WriteAt,
 {
-    fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
+    fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
         let bytes = self.avail(pos, buf.len());
         self.io.write_at(pos + self.offset, &buf[..bytes])
     }
 
-    fn flush(&mut self) -> Result<()> {
+    fn flush(&mut self) -> io::Result<()> {
         self.io.flush()
     }
 }
 
 impl<I> Size for Slice<I> {
-    fn size(&self) -> Result<Option<u64>> {
+    fn size(&self) -> io::Result<Option<u64>> {
         Ok(self.size)
     }
 }

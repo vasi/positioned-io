@@ -1,5 +1,6 @@
 use std::fs::File;
-use std::io::{Error, Result, Write};
+use std::io;
+use std::io::Write;
 use std::mem;
 use std::ptr;
 

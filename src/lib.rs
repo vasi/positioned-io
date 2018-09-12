@@ -103,7 +103,7 @@ mod byteio;
 pub use byteio::{ByteIo, ReadBytesAtExt, WriteBytesAtExt};
 
 use std::fs::File;
-use std::io::{Error, ErrorKind, Result};
+use std::io;
 
 /// Trait for reading bytes at an offset.
 ///
@@ -146,7 +146,7 @@ pub trait ReadAt {
     ///
     /// See [`Read::read()`](https://doc.rust-lang.org/std/io/trait.Read.html#tymethod.read)
     /// for details.
-    fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize>;
+    fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize>;
 
     /// Reads the exact number of bytes required to fill `buf` from an offset.
     ///
@@ -154,7 +154,7 @@ pub trait ReadAt {
     ///
     /// See [`Read::read_exact()`](https://doc.rust-lang.org/std/io/trait.Read.html#method.read_exact)
     /// for details.
-    fn read_exact_at(&self, mut pos: u64, mut buf: &mut [u8]) -> Result<()> {
+    fn read_exact_at(&self, mut pos: u64, mut buf: &mut [u8]) -> io::Result<()> {
         while !buf.is_empty() {
             match self.read_at(pos, buf) {
                 Ok(0) => break,
@@ -163,12 +163,12 @@ pub trait ReadAt {
                     buf = &mut tmp[n..];
                     pos += n as u64;
                 }
-                Err(ref e) if e.kind() == ErrorKind::Interrupted => {}
+                Err(ref e) if e.kind() == io::ErrorKind::Interrupted => {}
                 Err(e) => return Err(e),
             }
         }
         if !buf.is_empty() {
-            Err(Error::new(ErrorKind::UnexpectedEof, "failed to fill whole buffer"))
+            Err(io::Error::new(io::ErrorKind::UnexpectedEof, "failed to fill whole buffer"))
         } else {
             Ok(())
         }
@@ -212,7 +212,7 @@ pub trait WriteAt {
     ///
     /// See [`Write::write()`](https://doc.rust-lang.org/std/io/trait.Write.html#tymethod.write)
     /// for details.
-    fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize>;
+    fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize>;
 
     /// Writes a complete buffer at an offset.
     ///
@@ -220,7 +220,7 @@ pub trait WriteAt {
     ///
     /// See [`Write::write_all()`](https://doc.rust-lang.org/std/io/trait.Write.html#method.write_all)
     /// for details.
-    fn write_all_at(&mut self, mut pos: u64, mut buf: &[u8]) -> Result<()> {
+    fn write_all_at(&mut self, mut pos: u64, mut buf: &[u8]) -> io::Result<()> {
         while !buf.is_empty() {
             match self.write_at(pos, buf) {
                 Ok(0) => break,
@@ -229,7 +229,7 @@ pub trait WriteAt {
                     buf = &tmp[n..];
                     pos += n as u64;
                 }
-                Err(ref e) if e.kind() == ErrorKind::Interrupted => {}
+                Err(ref e) if e.kind() == io::ErrorKind::Interrupted => {}
                 Err(e) => return Err(e),
             }
         }
@@ -241,7 +241,7 @@ pub trait WriteAt {
     ///
     /// This should rarely do anything, since buffering is not very useful for
     /// positioned writes.
-    fn flush(&mut self) -> Result<()>;
+    fn flush(&mut self) -> io::Result<()>;
 }
 
 /// Trait to get the size in bytes of an I/O object.
@@ -280,11 +280,11 @@ pub trait Size {
     ///
     /// This function may return `Ok(None)` if the size is unknown, for example
     /// for pipes.
-    fn size(&self) -> Result<Option<u64>>;
+    fn size(&self) -> io::Result<Option<u64>>;
 }
 
 impl Size for File {
-    fn size(&self) -> Result<Option<u64>> {
+    fn size(&self) -> io::Result<Option<u64>> {
         let md = self.metadata()?;
         if md.is_file() {
             Ok(Some(md.len()))
