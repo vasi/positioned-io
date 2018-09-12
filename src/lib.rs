@@ -93,7 +93,7 @@
 
 mod byteorder;
 pub use byteorder::{ReadBytesAtExt, WriteBytesAtExt};
-pub use byteorder::byteio::{ByteIo, ReadInt, WriteInt, ReadIntAt, WriteIntAt};
+pub use byteorder::byteio::ByteIo;
 
 mod cursor;
 pub use cursor::{Cursor, SizeCursor};

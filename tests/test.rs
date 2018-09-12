@@ -7,7 +7,7 @@ extern crate positioned_io;
 extern crate byteorder;
 use self::byteorder::LittleEndian;
 
-use positioned_io::{ReadAt, WriteAt, Size, Cursor, SizeCursor, ByteIo, Slice, ReadIntAt};
+use positioned_io::{ReadAt, WriteAt, Size, Cursor, SizeCursor, ByteIo, Slice};
 
 #[test]
 fn test_read_at() {
