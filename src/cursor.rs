@@ -1,6 +1,5 @@
 use super::{ReadAt, Size, WriteAt};
 use std::io::{Error, ErrorKind, Read, Result, Seek, SeekFrom, Write};
-use std::ops::{Deref, DerefMut};
 
 /// Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`.
 ///
@@ -144,41 +143,73 @@ where
 /// [Size]: trait.Size.html
 /// [RFC]: https://github.com/rust-lang/rfcs/pull/1210
 #[derive(Debug, Clone)]
-pub struct SizeCursor<I: Size>(Cursor<I>);
-impl<I> SizeCursor<I>
-where
-    I: Size,
-{
+pub struct SizeCursor<I: Size> {
+    cursor: Cursor<I>,
+}
+
+impl<I: Size> SizeCursor<I> {
     /// Create a new `SizeCursor` which starts reading at a specified offset.
     ///
     /// Pass in a `ReadAt` or `WriteAt` as `io`.
     pub fn new_pos(io: I, pos: u64) -> Self {
-        SizeCursor(Cursor::new_pos(io, pos))
+        SizeCursor {
+            cursor: Cursor::new_pos(io, pos)
+        }
     }
     /// Create a new `SizeCursor` which starts reading at offset zero.
     ///
     /// Pass in a `ReadAt` or `WriteAt` as `io`.
     pub fn new(io: I) -> Self {
-        SizeCursor(Cursor::new(io))
+        SizeCursor {
+            cursor: Cursor::new(io)
+        }
+    }
+
+    pub fn as_cursor(&self) -> &Cursor<I> {
+        &self.cursor
+    }
+
+    pub fn as_cursor_mut(&mut self) -> &mut Cursor<I> {
+        &mut self.cursor
+    }
+
+    pub fn into_cursor(self) -> Cursor<I> {
+        self.cursor
+    }
+
+    pub fn into_inner(self) -> I {
+        self.cursor.io
+    }
+
+    pub fn get_ref(&self) -> &I {
+        &self.cursor.io
+    }
+
+    pub fn get_mut(&mut self) -> &mut I {
+        &mut self.cursor.io
+    }
+
+    pub fn position(&self) -> u64 {
+        self.cursor.position()
+    }
+
+    pub fn set_position(&mut self, pos: u64) {
+        self.cursor.set_position(pos)
     }
 }
 
-// Automatically fall back to Cursor.
-impl<I> Deref for SizeCursor<I>
-where
-    I: Size,
-{
-    type Target = Cursor<I>;
-    fn deref(&self) -> &Cursor<I> {
-        &self.0
+impl<I: Size + ReadAt> Read for SizeCursor<I> {
+    fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
+        self.cursor.read(buf)
     }
 }
-impl<I> DerefMut for SizeCursor<I>
-where
-    I: Size,
-{
-    fn deref_mut(&mut self) -> &mut Cursor<I> {
-        &mut self.0
+
+impl<I: Size + WriteAt> Write for SizeCursor<I> {
+    fn write(&mut self, buf: &[u8]) -> Result<usize> {
+        self.cursor.write(buf)
+    }
+    fn flush(&mut self) -> Result<()> {
+        self.cursor.flush()
     }
 }
 
@@ -190,7 +221,7 @@ where
     fn seek(&mut self, pos: SeekFrom) -> Result<u64> {
         let pos = match pos {
             SeekFrom::Start(p) => p as i64,
-            SeekFrom::Current(p) => self.pos as i64 + p,
+            SeekFrom::Current(p) => self.cursor.pos as i64 + p,
             SeekFrom::End(p) => {
                 match self.get_ref().size() {
                     Err(e) => return Err(e),
@@ -201,7 +232,7 @@ where
                 }
             }
         };
-        self.0.pos = pos as u64;
-        Ok(self.pos)
+        self.cursor.pos = pos as u64;
+        Ok(self.cursor.pos)
     }
 }

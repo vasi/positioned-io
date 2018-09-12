@@ -4,7 +4,6 @@ use extbyteorder::WriteBytesExt as ExtWriteBytesExt;
 
 use std::marker::PhantomData;
 use std::io::{Result, Read, Write};
-use std::ops::{Deref, DerefMut};
 
 use super::super::{ReadAt, WriteAt};
 use super::{ReadBytesAtExt, WriteBytesAtExt};
@@ -71,28 +70,14 @@ where
             endianness: PhantomData,
         }
     }
-}
 
-// Auto-coerce back to the base IO.
-impl<I, E> Deref for ByteIo<I, E>
-where
-    E: ByteOrder,
-{
-    type Target = I;
-    fn deref(&self) -> &I {
-        &self.io
-    }
-}
-impl<I, E> DerefMut for ByteIo<I, E>
-where
-    E: ByteOrder,
-{
-    fn deref_mut(&mut self) -> &mut I {
-        &mut self.io
+    /// Returns the underlying reader or writer.
+    pub fn into_inner(self) -> I {
+        self.io
     }
 }
 
-// Allow use as a trait object.
+// TODO: Allow use as a trait object.
 impl<I: Read, E: ByteOrder> Read for ByteIo<I, E> {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
         self.io.read(buf)
