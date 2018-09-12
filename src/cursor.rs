@@ -5,12 +5,13 @@ use std::io::{Read, Seek, SeekFrom, Write};
 
 /// Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`.
 ///
-/// This wraps anything that read and write at offsets, turning into an object that can
-/// read or write at a file position. This allows you to use those types with all the many
-/// functions that expect a `Read` or `Write`.
+/// This wraps anything that read and write at offsets, turning into an object
+/// that can read or write at a file position. This allows you to use those
+/// types with all the many functions that expect a `Read` or `Write`.
 ///
-/// Note that seeking on `Cursor` has limited functionality. We don't know how many bytes are
-/// available, so we can't use SeekFrom::End. See [`SizeCursor`][SizeCursor] for another option.
+/// Note that seeking on `Cursor` has limited functionality. We don't know how
+/// many bytes are available, so we can't use `SeekFrom::End`.
+/// See [`SizeCursor`][SizeCursor] for another option.
 ///
 /// [SizeCursor]: struct.SizeCursor.html
 ///
@@ -27,6 +28,7 @@ use std::io::{Read, Seek, SeekFrom, Write};
 /// # impl NetworkStorage {
 /// #   fn new(i: i32) -> Self { NetworkStorage { } }
 /// # }
+///
 /// impl ReadAt for NetworkStorage {
 ///     // ...
 /// #   fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
@@ -52,6 +54,7 @@ pub struct Cursor<I> {
     io: I,
     pos: u64,
 }
+
 impl<I> Cursor<I> {
     /// Create a new `Cursor` which starts reading at a specified offset.
     ///
@@ -59,6 +62,7 @@ impl<I> Cursor<I> {
     pub fn new_pos(io: I, pos: u64) -> Self {
         Cursor { io, pos }
     }
+
     /// Create a new Cursor which starts reading at offset zero.
     ///
     /// Pass in a `ReadAt` or `WriteAt` as `io`.
@@ -70,10 +74,12 @@ impl<I> Cursor<I> {
     pub fn into_inner(self) -> I {
         self.io
     }
+
     /// Borrow the inner `ReadAt` or `WriteAt`.
     pub fn get_ref(&self) -> &I {
         &self.io
     }
+
     /// Borrow the inner `ReadAt` or `WriteAt` mutably.
     pub fn get_mut(&mut self) -> &mut I {
         &mut self.io
@@ -83,6 +89,7 @@ impl<I> Cursor<I> {
     pub fn position(&self) -> u64 {
         self.pos
     }
+
     /// Set the current read/write position.
     pub fn set_position(&mut self, pos: u64) {
         self.pos = pos;
@@ -103,43 +110,41 @@ impl<I> Seek for Cursor<I> {
             SeekFrom::End(_) => {
                 return Err(io::Error::new(io::ErrorKind::InvalidInput, "seek from unknown end"))
             }
-        };
+        }
         Ok(self.pos)
     }
 }
 
-impl<I> Read for Cursor<I>
-where
-    I: ReadAt,
-{
+impl<I: ReadAt> Read for Cursor<I> {
     fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
         let bytes = self.get_ref().read_at(self.pos, buf)?;
         self.pos += bytes as u64;
         Ok(bytes)
     }
 }
-impl<I> Write for Cursor<I>
-where
-    I: WriteAt,
-{
+
+impl<I: WriteAt> Write for Cursor<I> {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
         let pos = self.pos;
         let bytes = self.get_mut().write_at(pos, buf)?;
         self.pos += bytes as u64;
         Ok(bytes)
     }
+
     fn flush(&mut self) -> io::Result<()> {
         WriteAt::flush(self.get_mut())
     }
 }
 
-/// Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`, with better seeking.
+/// Adapts a `ReadAt` or `WriteAt` into a `Read` or `Write`, with better
+/// seeking.
 ///
-/// This is just like [`Cursor`][Cursor], except that it requires an object that implements
-/// [`Size`][Size], and that it can seek from the end of the I/O object.
+/// This is just like [`Cursor`][Cursor], except that it requires an object
+/// that implements [`Size`][Size], and that it can seek from the end of the
+/// I/O object.
 ///
-/// Eventually it will be legal to specialize `Cursor` for types that implement `Size`, see
-/// [RFC 1210][RFC].
+/// Eventually it will be legal to specialize `Cursor` for types that implement
+/// `Size`, see [RFC 1210][RFC].
 ///
 /// [Cursor]: struct.Cursor.html
 /// [Size]: trait.Size.html
@@ -210,16 +215,14 @@ impl<I: Size + WriteAt> Write for SizeCursor<I> {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
         self.cursor.write(buf)
     }
+
     fn flush(&mut self) -> io::Result<()> {
         self.cursor.flush()
     }
 }
 
 // We know how to seek from the end for SizeCursor.
-impl<I> Seek for SizeCursor<I>
-where
-    I: Size,
-{
+impl<I: Size> Seek for SizeCursor<I> {
     fn seek(&mut self, pos: SeekFrom) -> io::Result<u64> {
         let pos = match pos {
             SeekFrom::Start(p) => p as i64,
