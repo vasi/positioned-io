@@ -8,8 +8,8 @@ use super::{ReadAt, WriteAt};
 
 /// Extends `ReadAt` with methods for reading numbers at offsets.
 ///
-/// For most of these methods, you need to explicitly add a `ByteOrder` type parameter. See
-/// [`byteorder::ReadBytesExt`][byteorder].
+/// For most of these methods, you need to explicitly add a `ByteOrder`
+/// type parameter. Similar to [`byteorder::ReadBytesExt`][byteorder].
 ///
 /// # Examples
 ///
@@ -19,19 +19,19 @@ use super::{ReadAt, WriteAt};
 /// # extern crate positioned_io;
 /// # extern crate byteorder;
 /// # use std::io;
-/// # use byteorder::BigEndian;
+/// use byteorder::BigEndian;
 /// use positioned_io::ReadBytesAtExt;
 ///
-/// # fn foo() -> io::Result<()> {
+/// # fn try_main() -> io::Result<()> {
 /// let buf = [0, 5, 254, 212, 0, 3];
 /// let n = buf.as_ref().read_i16_at::<BigEndian>(2)?;
 /// assert_eq!(n, -300);
 /// # Ok(())
 /// # }
-/// # fn main() { foo().unwrap() }
+/// # fn main() { try_main().unwrap() }
 /// ```
 ///
-/// [byteorder]: http://burntsushi.net/rustdoc/byteorder/trait.ReadBytesExt.html
+/// [byteorder]: https://docs.rs/byteorder/1.2/byteorder/trait.ReadBytesExt.html
 pub trait ReadBytesAtExt: ReadAt {
     /// Reads an unsigned 8-bit integer at an offset.
     fn read_u8_at(&self, pos: u64) -> Result<u8> {
@@ -109,8 +109,8 @@ pub trait ReadBytesAtExt: ReadAt {
 
 /// Extends `WriteAt` with methods for writing numbers at offsets.
 ///
-/// For most of these methods, you need to explicitly add a `ByteOrder` type parameter. See
-/// [`byteorder::WriteBytesExt`][byteorder].
+/// For most of these methods, you need to explicitly add a `ByteOrder` type
+/// parameter. Similar to [`byteorder::WriteBytesExt`][byteorder].
 ///
 /// # Examples
 ///
@@ -120,19 +120,19 @@ pub trait ReadBytesAtExt: ReadAt {
 /// # extern crate positioned_io;
 /// # extern crate byteorder;
 /// # use std::io;
-/// # use byteorder::BigEndian;
+/// use byteorder::BigEndian;
 /// use positioned_io::WriteBytesAtExt;
 ///
-/// # fn foo() -> io::Result<()> {
+/// # fn try_main() -> io::Result<()> {
 /// let mut buf = [0; 6];
 /// buf.as_mut().write_u16_at::<BigEndian>(2, 300)?;
 /// assert_eq!(buf, [0, 0, 1, 44, 0, 0]);
 /// # Ok(())
 /// # }
-/// # fn main() { foo().unwrap() }
+/// # fn main() { try_main().unwrap() }
 /// ```
 ///
-/// [byteorder]: http://burntsushi.net/rustdoc/byteorder/trait.WriteBytesExt.html
+/// [byteorder]: https://docs.rs/byteorder/1.2/byteorder/trait.WriteBytesExt.html
 pub trait WriteBytesAtExt: WriteAt {
     /// Writes an unsigned 8-bit integer to an offset.
     fn write_u8_at(&mut self, pos: u64, n: u8) -> Result<()> {
@@ -204,6 +204,6 @@ pub trait WriteBytesAtExt: WriteAt {
     }
 }
 
-// Implement for everything that does positioned IO.
+// Implement for everything that does positioned I/O.
 impl<R: ReadAt> ReadBytesAtExt for R {}
 impl<W: WriteAt> WriteBytesAtExt for W {}
