@@ -13,6 +13,7 @@ The major advantages of this type of I/O are:
 
 [![Build Status](https://travis-ci.org/vasi/positioned-io.svg?branch=master)](https://travis-ci.org/vasi/positioned-io)
 [![Crates.io](https://img.shields.io/crates/v/positioned-io.svg?maxAge=2592000)](https://crates.io/crates/positioned-io)
+[![Documentation](https://docs.rs/positioned-io/badge.svg)](https://docs.rs/positioned-io)
 
 Example
 -------
