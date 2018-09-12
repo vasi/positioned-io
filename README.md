@@ -45,7 +45,7 @@ Add `positioned-io` to your `Cargo.toml` like so:
 
 ```toml
 [dependencies]
-positioned-io = "0.2"
+positioned-io = "0.3"
 ```
 
 License
