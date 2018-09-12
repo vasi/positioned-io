@@ -91,9 +91,7 @@
 #![warn(missing_debug_implementations)]
 #![warn(bare_trait_objects)]
 
-mod byteorder;
-pub use byteorder::{ReadBytesAtExt, WriteBytesAtExt};
-pub use byteorder::byteio::ByteIo;
+extern crate byteorder;
 
 mod cursor;
 pub use cursor::{Cursor, SizeCursor};
@@ -101,7 +99,8 @@ pub use cursor::{Cursor, SizeCursor};
 mod slice;
 pub use slice::Slice;
 
-extern crate byteorder as extbyteorder;
+mod byteio;
+pub use byteio::{ByteIo, ReadBytesAtExt, WriteBytesAtExt};
 
 use std::fs::File;
 use std::io::{Error, ErrorKind, Result};
