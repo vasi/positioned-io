@@ -241,38 +241,42 @@ pub trait WriteAt {
     fn flush(&mut self) -> Result<()>;
 }
 
-/// Trait to get the size of an I/O object.
+/// Trait to get the size in bytes of an I/O object.
 ///
-/// Implementing this for a ReadAt or WriteAt makes it easier for users to predict whether they
-/// will read past end-of-file. However, it may not be possible to implement for certain readers
-/// or writers that have unknown size.
+/// Implementing this for a types with `ReadAt` or `WriteAt` makes it easier
+/// for users to predict whether they will read past end-of-file. However, it
+/// may not be possible to implement for certain readers or writers that have
+/// unknown size.
 ///
 /// # Examples
 ///
-/// ```no_run
-/// # use std::io;
-/// # use std::fs::File;
+/// ```
+/// # use std::error::Error;
+/// #
+/// # fn try_main() -> Result<(), Box<Error>> {
+/// use std::fs::File;
 /// use positioned_io::Size;
 ///
-/// # fn foo() -> io::Result<()> {
-/// let file = File::open("foo.txt")?;
+/// let file = File::open("tests/pi.txt")?;
 /// let size = file.size()?;
-/// assert_eq!(size, Some(22));
+/// assert_eq!(size, Some(1000002));
 ///
-/// // Special files probably don't have a size.
+/// // some special files do not have a known size
 /// let file = File::open("/dev/stdin")?;
 /// let size = file.size()?;
 /// assert_eq!(size, None);
-/// # Ok(())
+/// #     Ok(())
+/// # }
+/// #
+/// # fn main() {
+/// #    try_main().unwrap();
 /// # }
 /// ```
 pub trait Size {
     /// Get the size of this object, in bytes.
     ///
-    /// This function may return Ok(None) if the size is unknown, for example if a file is a pipe.
-    ///
-    /// If a positive value is returned, it should be the value such that reading at greater
-    /// offsets always yields end-of-file.
+    /// This function may return `Ok(None)` if the size is unknown, for example
+    /// for pipes.
     fn size(&self) -> Result<Option<u64>>;
 }
 
