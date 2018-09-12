@@ -1,19 +1,19 @@
 use std::cmp::min;
-use std::io::{Result, Error, ErrorKind};
+use std::io;
 
 use super::{ReadAt, WriteAt, Size};
 
 impl ReadAt for Vec<u8> {
-    fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
+    fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
         self.as_slice().read_at(pos, buf)
     }
 }
 
 impl WriteAt for Vec<u8> {
-    fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
+    fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
         // Ensure no overflow.
         if pos > (usize::max_value() as u64) {
-            return Err(Error::new(ErrorKind::InvalidInput, "vector size too big"));
+            return Err(io::Error::new(io::ErrorKind::InvalidInput, "vector size too big"));
         }
         let pos = pos as usize;
 
@@ -36,13 +36,13 @@ impl WriteAt for Vec<u8> {
         Ok(buf.len())
     }
 
-    fn flush(&mut self) -> Result<()> {
+    fn flush(&mut self) -> io::Result<()> {
         Ok(())
     }
 }
 
 impl Size for Vec<u8> {
-    fn size(&self) -> Result<Option<u64>> {
+    fn size(&self) -> io::Result<Option<u64>> {
         Ok(Some(self.len() as u64))
     }
 }
