@@ -19,13 +19,13 @@ fn test_read_at() {
 }
 
 #[test]
-fn test_read_position() {
+fn test_mixed_read() {
     let mut file = File::open("tests/pi.txt").unwrap();
     let mut buf = [0; 4];
     file.read_exact(&mut buf[..]).unwrap();
     assert_eq!(&buf, b"3.14");
-    file.read_exact_at(0, &mut buf[..]).unwrap();
-    assert_eq!(&buf, b"3.14");
+    file.read_exact_at(764, &mut buf[..]).unwrap();
+    assert_eq!(&buf, b"9999");
     file.read_exact(&mut buf[..]).unwrap();
     assert_eq!(&buf, b"1592");
 }
