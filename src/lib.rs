@@ -89,6 +89,8 @@
 //! # fn main() { foo().unwrap() }
 //! ```
 
+#![doc(html_root_url = "https://docs.rs/positioned-io/0.2.2")]
+
 mod byteorder;
 pub use byteorder::{ReadBytesExt, WriteBytesExt};
 pub use byteorder::byteio::{ByteIo, ReadInt, WriteInt, ReadIntAt, WriteIntAt};

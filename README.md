@@ -38,9 +38,9 @@ Usage
 -----
 
 This crate works with Cargo and depends on
-[crates.io](https://crates.io/crates/byteorder). Add it to your `Cargo.toml` like so:
+[byteorder](https://crates.io/crates/byteorder). Add it to your `Cargo.toml` like so:
 
 ```toml
 [dependencies]
-positioned-io = "0.2.0"
+positioned-io = "0.2"
 ```

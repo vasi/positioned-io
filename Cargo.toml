@@ -1,13 +1,11 @@
 [package]
 name = "positioned-io"
-version = "0.2.2"
+version = "0.2.2" # remember to update html_root_url and readme
 authors = ["Dave Vasilevsky <dave@vasilevsky.ca>"]
 description = "Reading and writing at an offset"
 keywords = ["read", "offset", "pread", "pwrite", "endian"]
 license = "MIT"
-documentation = "http://vasi.github.io/positioned-io/positioned_io/"
 repository = "https://github.com/vasi/positioned-io"
-homepage = "https://github.com/vasi/positioned-io"
 readme = "README.md"
 
 [dependencies]
@@ -18,3 +16,6 @@ libc = "0.2"
 
 [target.'cfg(windows)'.dependencies]
 winapi = { version = "0.3", features = ["minwindef", "minwinbase", "fileapi", "winnt"] }
+
+[badges]
+travis-ci = { repository = "vasi/positioned-io", branch = "master" }
