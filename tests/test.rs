@@ -59,14 +59,13 @@ impl<I: ReadAt, F: Fn() -> Result<usize>> ReadAt for ReadCustom<I, F> {
 #[test]
 fn test_read_fails() {
     // Test interrupts.
-    let file = File::open("Cargo.toml").unwrap();
+    let file = File::open("tests/pi.txt").unwrap();
     let mut buf = [0; 4];
     {
         let interrupt = ReadCustom::new(&file,
                                     || Err(Error::new(ErrorKind::Interrupted, "interrupt!")));
         interrupt.read_exact_at(10, buf.as_mut()).unwrap();
-        let s = str::from_utf8(buf.as_ref()).unwrap();
-        assert_eq!(s, "name");
+        assert_eq!(&buf, b"3589");
     }
 
     // Test errors.
@@ -76,30 +75,28 @@ fn test_read_fails() {
     }
 
     // Test EOF.
-    assert!(file.read_exact_at(10000, buf.as_mut()).is_err());
+    assert!(file.read_exact_at(1000000000, buf.as_mut()).is_err());
 }
 
 #[test]
 fn test_size() {
-    let file = File::open("Cargo.toml").unwrap();
+    let file = File::open("tests/pi.txt").unwrap();
     let size = file.size().unwrap().unwrap();
-    assert!(size > 0);
+    assert_eq!(size, 1000002);
 }
 
 #[test]
 fn test_cursor() {
-    let file = File::open("Cargo.toml").unwrap();
+    let file = File::open("tests/pi.txt").unwrap();
     let mut curs = Cursor::new_pos(file, 10);
     let mut buf = [0; 4];
     {
         curs.read_exact(&mut buf).unwrap();
-        let s = str::from_utf8(buf.as_ref()).unwrap();
-        assert_eq!("name", s);
+        assert_eq!(&buf, b"3589");
     }
     curs.seek(SeekFrom::Current(4)).unwrap();
     curs.read_exact(&mut buf).unwrap();
-    let s = str::from_utf8(buf.as_ref()).unwrap();
-    assert_eq!("posi", s);
+    assert_eq!(&buf, b"3846");
 }
 
 #[test]
