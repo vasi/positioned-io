@@ -16,7 +16,7 @@ use self::winapi::um::winnt::HANDLE;
 
 fn result(e: BOOL) -> Result<()> {
     if e == 0 {
-        Err(Error::last_os_error())
+        Err(io::Error::last_os_error())
     } else {
         Ok(())
     }
@@ -39,7 +39,7 @@ fn overlapped(pos: u64) -> OVERLAPPED {
 }
 
 impl ReadAt for File {
-    fn read_at(&self, pos: u64, buf: &mut [u8]) -> Result<usize> {
+    fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
         let mut bytes: DWORD = 0;
         let mut ov = overlapped(pos);
         result(unsafe {
@@ -56,7 +56,7 @@ impl ReadAt for File {
 }
 
 impl WriteAt for File {
-    fn write_at(&mut self, pos: u64, buf: &[u8]) -> Result<usize> {
+    fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
         let mut bytes: DWORD = 0;
         let mut ov = overlapped(pos);
         result(unsafe {
@@ -71,7 +71,7 @@ impl WriteAt for File {
         Ok(bytes as usize)
     }
 
-    fn flush(&mut self) -> Result<()> {
+    fn flush(&mut self) -> io::Result<()> {
         Write::flush(self)
     }
 }
