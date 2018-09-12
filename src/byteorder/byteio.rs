@@ -229,7 +229,7 @@ impl<I, E> ByteIo<I, E>
     /// ```
     pub fn new(io: I) -> Self {
         ByteIo {
-            io: io,
+            io,
             endianness: PhantomData,
         }
     }

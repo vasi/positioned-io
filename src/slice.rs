@@ -60,9 +60,9 @@ impl<I> Slice<I> {
     /// pass a size, the size won't be limited.
     pub fn new(io: I, offset: u64, size: Option<u64>) -> Self {
         Slice {
-            io: io,
-            offset: offset,
-            size: size,
+            io,
+            offset,
+            size,
         }
     }
 

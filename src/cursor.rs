@@ -55,7 +55,7 @@ impl<I> Cursor<I> {
     ///
     /// Pass in a `ReadAt` or `WriteAt` as `io`.
     pub fn new_pos(io: I, pos: u64) -> Self {
-        Cursor { io: io, pos: pos }
+        Cursor { io, pos }
     }
     /// Create a new Cursor which starts reading at offset zero.
     ///
