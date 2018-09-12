@@ -324,6 +324,18 @@ impl<I, E: ByteOrder> ByteIo<I, E> {
     pub fn into_inner(self) -> I {
         self.io
     }
+
+    /// Borrows the underlying reader or writer.
+    #[inline]
+    pub fn as_inner(&self) -> &I {
+        &self.io
+    }
+
+    /// Mutably borrows the underlying reader or writer.
+    #[inline]
+    pub fn as_inner_mut(&mut self) -> &mut I {
+        &mut self.io
+    }
 }
 
 impl<I: Read, E: ByteOrder> Read for ByteIo<I, E> {
