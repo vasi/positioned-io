@@ -53,13 +53,13 @@ fn allocation_granularity() -> u64 {
 
 impl ReadAt for File {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
-        if buf.is_empty() {
-            return Ok(0);
-        }
-
         let file_len = self.metadata()?.len();
         if (usize::max_value() as u64) < file_len {
             return Err(io::Error::new(io::ErrorKind::InvalidData, "file length overflows usize"));
+        }
+
+        if buf.is_empty() || pos >= file_len {
+            return Ok(0);
         }
 
         let len = min(file_len, pos + buf.len() as u64) - pos;
