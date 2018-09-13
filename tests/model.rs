@@ -89,14 +89,24 @@ quickcheck! {
                 Op::ReadExact(bytes) => {
                     let mut a = vec![0; bytes];
                     let mut b = vec![0; bytes];
-                    assert_eq!(model.read_exact(&mut a), file.read_exact(&mut b).is_ok());
-                    assert_eq!(a, b);
+
+                    let success = model.read_exact(&mut a);
+                    assert_eq!(success, file.read_exact(&mut b).is_ok());
+
+                    if success {
+                        assert_eq!(a, b);
+                    }
                 },
                 Op::ReadExactAt(at, bytes) => {
                     let mut a = vec![0; bytes];
                     let mut b = vec![0; bytes];
-                    assert_eq!(model.vec.read_exact_at(at, &mut a).is_ok(),  file.read_exact_at(at, &mut b).is_ok());
-                    assert_eq!(a, b);
+
+                    let success = model.vec.read_exact_at(at, &mut a).is_ok();
+                    assert_eq!(success, file.read_exact_at(at, &mut b).is_ok());
+
+                    if success {
+                        assert_eq!(a, b);
+                    }
                 }
                 Op::Seek(pos) => {
                     // seeking past eof is implementation defined, so avoid that
