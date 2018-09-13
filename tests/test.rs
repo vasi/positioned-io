@@ -1,6 +1,6 @@
 use std::cell::{Cell, RefCell};
 use std::io::{Read, Seek, SeekFrom, ErrorKind, Result, Error};
-use std::fs::{File, OpenOptions};
+use std::fs::File;
 use std::str;
 
 extern crate positioned_io;
