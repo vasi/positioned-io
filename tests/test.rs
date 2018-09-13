@@ -29,14 +29,6 @@ fn test_mixed_read() {
     assert_eq!(&buf, b"1592");
 }
 
-#[test]
-#[ignore]
-fn test_write_at() {
-    let mut file = OpenOptions::new().write(true).open("tests/pi.txt").unwrap();
-    let buf = b"3.14";
-    file.write_all_at(0, buf).unwrap();
-}
-
 // A ReadAt that has weird behavior.
 struct ReadCustom<I: ReadAt, F: Fn() -> Result<usize>> {
     i: I,
