@@ -9,11 +9,21 @@
 //!
 //! [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
 //!
+//! # Preview release!
+//!
+//! This is a preview release of [positioned-io](https://docs.rs/positioned-io).
+//! All examples assume you are using it as:
+//!
+//! ```
+//! extern crate positioned_io_preview as positioned_io;
+//! ```
+//!
 //! # Examples
 //!
 //! Read the fifth 512-byte sector of a file:
 //!
 //! ```
+//! # use positioned_io_preview as positioned_io;
 //! # use std::error::Error;
 //! #
 //! # fn try_main() -> Result<(), Box<Error>> {
@@ -38,7 +48,7 @@
 //! Write an integer to the middle of a file:
 //!
 //! ```no_run
-//! # extern crate positioned_io;
+//! # extern crate positioned_io_preview as positioned_io;
 //! # extern crate byteorder;
 //! # use std::io;
 //! #
@@ -64,7 +74,7 @@
 //! Or, more simply:
 //!
 //! ```no_run
-//! # extern crate positioned_io;
+//! # extern crate positioned_io_preview as positioned_io;
 //! # extern crate byteorder;
 //! # use std::io;
 //! #
@@ -85,7 +95,7 @@
 //! Read from anything else that supports `ReadAt`, like a byte array:
 //!
 //! ```rust
-//! # extern crate positioned_io;
+//! # extern crate positioned_io_preview as positioned_io;
 //! # extern crate byteorder;
 //! # use std::io;
 //! #
@@ -134,6 +144,7 @@ use std::io;
 /// Read the fifth 512-byte sector of a file:
 ///
 /// ```
+/// # use positioned_io_preview as positioned_io;
 /// # use std::error::Error;
 /// #
 /// # fn try_main() -> Result<(), Box<Error>> {
@@ -203,6 +214,7 @@ pub trait ReadAt {
 /// # Examples
 ///
 /// ```no_run
+/// # use positioned_io_preview as positioned_io;
 /// # use std::error::Error;
 /// #
 /// # fn try_main() -> Result<(), Box<Error>> {
@@ -278,6 +290,7 @@ pub trait WriteAt {
 /// # Examples
 ///
 /// ```no_run
+/// # use positioned_io_preview as positioned_io;
 /// # use std::error::Error;
 /// #
 /// # fn try_main() -> Result<(), Box<Error>> {

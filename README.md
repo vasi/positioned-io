@@ -14,7 +14,7 @@ The major advantages of this type of I/O are:
 [![Build Status](https://travis-ci.org/vasi/positioned-io.svg?branch=master)](https://travis-ci.org/vasi/positioned-io)
 [![Windows build status](https://ci.appveyor.com/api/projects/status/walpg9hx45benhia?svg=true)](https://ci.appveyor.com/project/niklasf/positioned-io)
 [![Crates.io](https://img.shields.io/crates/v/positioned-io.svg)](https://crates.io/crates/positioned-io)
-[![Documentation](https://docs.rs/positioned-io/badge.svg)](https://docs.rs/positioned-io)
+[![Documentation](https://docs.rs/positioned-io-preview/badge.svg)](https://docs.rs/positioned-io-preview)
 
 Example
 -------
@@ -36,16 +36,23 @@ let bytes_read = file.read_at(2048, &mut buf)?;
 Documentation
 -------------
 
-https://docs.rs/positioned-io
+https://docs.rs/positioned-io-preview
 
-Usage
------
+Preview release!
+----------------
 
-Add `positioned-io` to your `Cargo.toml` like so:
+This is a preview release of [positioned-io](https://crates.io/positioned-io).
+Add it to your `Cargo.toml` like so:
 
 ```toml
 [dependencies]
-positioned-io = "0.3"
+positioned-io-preview = "0.3"
+```
+
+All examples assume you are using it as:
+
+```rust
+extern crate positioned_io_preview as positioned_io;
 ```
 
 License

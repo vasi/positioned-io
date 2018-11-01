@@ -2,7 +2,7 @@
 extern crate quickcheck;
 extern crate rand;
 extern crate tempfile;
-extern crate positioned_io;
+extern crate positioned_io_preview as positioned_io;
 
 use std::cmp::{max, min};
 use std::io::{Read, Write, Seek, SeekFrom};

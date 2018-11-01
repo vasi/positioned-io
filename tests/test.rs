@@ -3,7 +3,7 @@ use std::io::{Read, Seek, SeekFrom, ErrorKind, Result, Error};
 use std::fs::File;
 use std::str;
 
-extern crate positioned_io;
+extern crate positioned_io_preview as positioned_io;
 extern crate byteorder;
 use self::byteorder::LittleEndian;
 

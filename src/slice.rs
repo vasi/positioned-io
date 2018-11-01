@@ -12,6 +12,7 @@ use super::{ReadAt, WriteAt, Size};
 /// Some slices have size restrictions:
 ///
 /// ```rust
+/// # use positioned_io_preview as positioned_io;
 /// # use std::io;
 /// use positioned_io::{ReadAt, Slice};
 ///
@@ -31,6 +32,7 @@ use super::{ReadAt, WriteAt, Size};
 /// Some slices do not:
 ///
 /// ```rust
+/// # use positioned_io_preview as positioned_io;
 /// # use std::io;
 /// use positioned_io::{WriteAt, Slice};
 ///

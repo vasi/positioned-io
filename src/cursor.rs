@@ -18,6 +18,7 @@ use super::{ReadAt, Size, WriteAt};
 /// # Examples
 ///
 /// ```no_run
+/// # extern crate positioned_io_preview as positioned_io;
 /// # use std::io::{self, Result, Read};
 /// # use std::fs::File;
 /// use positioned_io::{ReadAt, Cursor};
