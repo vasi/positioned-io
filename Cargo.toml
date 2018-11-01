@@ -1,7 +1,7 @@
 [package]
 name = "positioned-io"
 version = "0.3.0" # remember to update html_root_url and readme
-authors = ["Dave Vasilevsky <dave@vasilevsky.ca>"]
+authors = ["Dave Vasilevsky <dave@vasilevsky.ca>", "Niklas Fiekas <niklas.fiekas@backscattering.de>"]
 description = "Reading and writing at an offset"
 keywords = ["read", "offset", "pread", "pwrite", "endian"]
 categories = ["filesystem", "os"]
