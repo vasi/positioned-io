@@ -109,6 +109,8 @@
 #![warn(bare_trait_objects)]
 
 extern crate byteorder;
+#[cfg(unix)]
+extern crate libc;
 
 mod cursor;
 pub use cursor::{Cursor, SizeCursor};

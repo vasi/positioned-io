@@ -27,6 +27,11 @@ impl RandomAccessFile {
 
     #[cfg(unix)]
     fn try_new_impl(file: File) -> io::Result<RandomAccessFile> {
+        unsafe {
+            use std::os::unix::io::AsRawFd;
+            libc::posix_fadvise(file.as_raw_fd(), 0, file.metadata()?.len() as i64, libc::POSIX_FADV_RANDOM);
+        }
+
         Ok(RandomAccessFile { file })
     }
 

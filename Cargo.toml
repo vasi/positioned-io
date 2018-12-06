@@ -12,13 +12,16 @@ readme = "README.md"
 [dependencies]
 byteorder = "1.2"
 
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["basetsd", "minwindef", "handleapi", "fileapi", "sysinfoapi", "memoryapi", "winnt"] }
+
 [dev-dependencies]
 quickcheck = "0.7"
 rand = "0.5"
 tempfile = "3.0"
-
-[target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3", features = ["basetsd", "minwindef", "handleapi", "fileapi", "sysinfoapi", "memoryapi", "winnt"] }
 
 [badges]
 travis-ci = { repository = "vasi/positioned-io", branch = "master" }
