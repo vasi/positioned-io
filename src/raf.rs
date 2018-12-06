@@ -24,6 +24,7 @@ use super::{ReadAt, WriteAt};
 /// Read the fifth 512-byte sector of a file:
 ///
 /// ```
+/// # extern crate positioned_io_preview as positioned_io;
 /// # use std::error::Error;
 /// #
 /// # fn try_main() -> Result<(), Box<Error>> {
