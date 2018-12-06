@@ -20,7 +20,7 @@ winapi = { version = "0.3", features = ["basetsd", "minwindef", "handleapi", "fi
 
 [dev-dependencies]
 quickcheck = "0.7"
-rand = "0.5"
+rand = "0.6"
 tempfile = "3.0"
 
 [badges]
