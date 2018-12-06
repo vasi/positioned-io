@@ -1,6 +1,8 @@
 use std::fs::File;
 use std::io;
 use std::io::Write;
+#[cfg(windows)]
+use std::io::{Seek, SeekFrom};
 use std::path::Path;
 #[cfg(unix)]
 use std::os::unix::fs::FileExt;
