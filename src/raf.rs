@@ -9,6 +9,37 @@ use std::os::windows::fs::FileExt;
 
 use super::{ReadAt, WriteAt};
 
+/// A wrapper for `File` that provides optimized random access through
+/// `ReadAt` and `WriteAt`.
+///
+/// * On Unix the operating system is advised that reads will be in random
+///   order (`FADV_RANDOM`).
+/// * On Windows the implementation is orders of magnitude faster than `ReadAt`
+///   directly on `File`.
+///
+/// # Examples
+///
+/// Read the fifth 512-byte sector of a file:
+///
+/// ```
+/// # use std::error::Error;
+/// #
+/// # fn try_main() -> Result<(), Box<Error>> {
+/// use positioned_io::{RandomAccessFile, ReadAt};
+///
+/// // open a file (note: binding does not need to be mut)
+/// let raf = RandomAccessFile::open("tests/pi.txt")?;
+///
+/// // read up to 512 bytes
+/// let mut buf = [0; 512];
+/// let bytes_read = raf.read_at(2048, &mut buf)?;
+/// #     assert!(buf.starts_with(b"4"));
+/// #     Ok(())
+/// # }
+/// #
+/// # fn main() {
+/// #     try_main().unwrap();
+/// # }
 #[derive(Debug)]
 pub struct RandomAccessFile {
     file: File,
@@ -17,10 +48,13 @@ pub struct RandomAccessFile {
 }
 
 impl RandomAccessFile {
+    /// [Opens](https://doc.rust-lang.org/std/fs/struct.File.html#method.open)
+    /// a file for random access.
     pub fn open<P: AsRef<Path>>(path: P) -> io::Result<RandomAccessFile> {
         RandomAccessFile::try_new(File::open(path)?)
     }
 
+    /// Creates a `RandomAccessFile` wrapper around a `File`.
     pub fn try_new(file: File) -> io::Result<RandomAccessFile> {
         RandomAccessFile::try_new_impl(file)
     }
@@ -43,6 +77,7 @@ impl RandomAccessFile {
         })
     }
 
+    /// Tries to unwrap the inner `File`.
     pub fn try_into_inner(self) -> Result<File, (RandomAccessFile, io::Error)> {
         RandomAccessFile::try_into_inner_impl(self)
     }

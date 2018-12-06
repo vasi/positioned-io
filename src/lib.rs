@@ -35,6 +35,10 @@
 //! # }
 //! ```
 //!
+//! **Note:** If possible use the
+//! [`RandomAccessFile`](struct.RandomAccessFile.html) wrapper. `ReadAt`
+//! directly on `File` is very slow on Windows.
+//!
 //! Write an integer to the middle of a file:
 //!
 //! ```no_run
