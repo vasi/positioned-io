@@ -45,6 +45,10 @@
 //! # }
 //! ```
 //!
+//! **Note:** If possible use the
+//! [`RandomAccessFile`](struct.RandomAccessFile.html) wrapper. `ReadAt`
+//! directly on `File` is very slow on Windows.
+//!
 //! Write an integer to the middle of a file:
 //!
 //! ```no_run
@@ -119,6 +123,8 @@
 #![warn(bare_trait_objects)]
 
 extern crate byteorder;
+#[cfg(unix)]
+extern crate libc;
 
 mod cursor;
 pub use cursor::{Cursor, SizeCursor};
@@ -338,6 +344,10 @@ mod unix;
 // Implementation for Windows files.
 #[cfg(windows)]
 mod windows;
+
+// RandomAccess file wrapper.
+mod raf;
+pub use raf::RandomAccessFile;
 
 // Implementation for arrays, vectors.
 mod array;
