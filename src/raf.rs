@@ -72,11 +72,9 @@ impl RandomAccessFile {
     }
 
     #[cfg(not(unix))]
-    fn try_new_impl(file: File) -> io::Result<RandomAccessFile> {
-        Ok(RandomAccessFile {
-            file,
-            pos: file.seek(SeekFrom::Current(0))?,
-        })
+    fn try_new_impl(mut file: File) -> io::Result<RandomAccessFile> {
+        let pos = file.seek(SeekFrom::Current(0))?;
+        Ok(RandomAccessFile { file, pos })
     }
 
     /// Tries to unwrap the inner `File`.
@@ -90,7 +88,7 @@ impl RandomAccessFile {
     }
 
     #[cfg(not(unix))]
-    fn try_into_inner_impl(self) -> Result<File, (RandomAccessFile, io::Error)> {
+    fn try_into_inner_impl(mut self) -> Result<File, (RandomAccessFile, io::Error)> {
         match self.file.seek(SeekFrom::Start(self.pos)) {
             Ok(_) => Ok(self.file),
             Err(err) => Err((self, err)),
