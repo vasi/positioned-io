@@ -122,7 +122,7 @@ impl WriteAt for RandomAccessFile {
 impl ReadAt for RandomAccessFile {
     #[inline]
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
-        FileExt::seek_read(&self.file, pos, buf)
+        FileExt::seek_read(&self.file, buf, pos)
     }
 }
 
