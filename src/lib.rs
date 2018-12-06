@@ -326,6 +326,10 @@ mod unix;
 #[cfg(windows)]
 mod windows;
 
+// RandomAccess file wrapper.
+mod raf;
+pub use raf::RandomAccessFile;
+
 // Implementation for arrays, vectors.
 mod array;
 mod vec;
