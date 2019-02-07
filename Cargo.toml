@@ -19,7 +19,7 @@ libc = "0.2"
 winapi = { version = "0.3", features = ["basetsd", "minwindef", "handleapi", "fileapi", "sysinfoapi", "memoryapi", "winnt"] }
 
 [dev-dependencies]
-quickcheck = "0.7"
+quickcheck = "0.8"
 rand = "0.6"
 tempfile = "3.0"
 
