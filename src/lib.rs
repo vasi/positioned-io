@@ -258,10 +258,9 @@ pub trait WriteAt {
     fn write_all_at(&mut self, mut pos: u64, mut buf: &[u8]) -> io::Result<()> {
         while !buf.is_empty() {
             match self.write_at(pos, buf) {
-                Ok(0) => break,
+                Ok(0) => return Err(io::Error::new(io::ErrorKind::WriteZero, "failed to write whole buffer")),
                 Ok(n) => {
-                    let tmp = buf;
-                    buf = &tmp[n..];
+                    buf = &buf[n..];
                     pos += n as u64;
                 }
                 Err(ref e) if e.kind() == io::ErrorKind::Interrupted => {}
