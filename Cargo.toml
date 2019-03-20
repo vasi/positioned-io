@@ -1,6 +1,6 @@
 [package]
 name = "positioned-io-preview"
-version = "0.3.2" # remember to update html_root_url and readme
+version = "0.3.3" # remember to update html_root_url and readme
 authors = ["Dave Vasilevsky <dave@vasilevsky.ca>", "Niklas Fiekas <niklas.fiekas@backscattering.de>"]
 description = "Reading and writing at an offset"
 keywords = ["read", "offset", "pread", "pwrite", "endian"]

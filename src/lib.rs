@@ -117,7 +117,7 @@
 //! # }
 //! ```
 
-#![doc(html_root_url = "https://docs.rs/positioned-io-preview/0.3.2")]
+#![doc(html_root_url = "https://docs.rs/positioned-io-preview/0.3.3")]
 
 #![warn(missing_debug_implementations)]
 #![warn(bare_trait_objects)]
