@@ -9,8 +9,11 @@ license = "MIT"
 repository = "https://github.com/vasi/positioned-io"
 readme = "README.md"
 
+[features]
+default = ["byteorder"]
+
 [dependencies]
-byteorder = "1.2"
+byteorder = { version = "1.2", optional = true }
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"
