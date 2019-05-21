@@ -4,10 +4,15 @@ use std::fs::File;
 use std::str;
 
 extern crate positioned_io_preview as positioned_io;
+#[cfg(feature = "byteorder")]
 extern crate byteorder;
+#[cfg(feature = "byteorder")]
 use self::byteorder::LittleEndian;
 
-use positioned_io::{ReadAt, WriteAt, Size, Cursor, SizeCursor, ByteIo, Slice};
+use positioned_io::{ReadAt, WriteAt, Size, Cursor, SizeCursor, Slice};
+
+#[cfg(feature = "byteorder")]
+use positioned_io::ByteIo;
 
 #[test]
 fn test_read_at() {
@@ -111,6 +116,7 @@ fn test_size_cursor() {
 }
 
 #[test]
+#[cfg(feature = "byteorder")]
 fn test_byteio() {
     let file = File::open("Cargo.toml").unwrap();
     let io: ByteIo<_, LittleEndian> = ByteIo::new(file);
