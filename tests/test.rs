@@ -1,15 +1,16 @@
 use std::cell::{Cell, RefCell};
-use std::io::{Read, Seek, SeekFrom, ErrorKind, Result, Error};
 use std::fs::File;
+use std::io::{Error, ErrorKind, Read, Result, Seek, SeekFrom};
 use std::str;
 
-extern crate positioned_io_preview as positioned_io;
 #[cfg(feature = "byteorder")]
 extern crate byteorder;
+extern crate positioned_io_preview as positioned_io;
+extern crate tempfile;
 #[cfg(feature = "byteorder")]
 use self::byteorder::LittleEndian;
 
-use positioned_io::{ReadAt, WriteAt, Size, Cursor, SizeCursor, Slice};
+use positioned_io::{Cursor, RandomAccessFile, ReadAt, Size, SizeCursor, Slice, WriteAt};
 
 #[cfg(feature = "byteorder")]
 use positioned_io::ByteIo;
@@ -67,8 +68,9 @@ fn test_read_fails() {
     let file = File::open("tests/pi.txt").unwrap();
     let mut buf = [0; 4];
     {
-        let interrupt = ReadCustom::new(&file,
-                                    || Err(Error::new(ErrorKind::Interrupted, "interrupt!")));
+        let interrupt = ReadCustom::new(&file, || {
+            Err(Error::new(ErrorKind::Interrupted, "interrupt!"))
+        });
         interrupt.read_exact_at(10, buf.as_mut()).unwrap();
         assert_eq!(&buf, b"3589");
     }
@@ -256,4 +258,15 @@ fn test_refcell() {
     let buf = [9; 4];
     rv.write_at(0, &buf).unwrap();
     assert_eq!(*rv.borrow(), &vec![9; 4]);
+}
+
+#[test]
+fn shared_refs() {
+    let file = tempfile::tempfile().unwrap();
+    // no mut
+    let file = RandomAccessFile::try_new(file).unwrap();
+    (&file).write_at(1, &[1, 2, 3, 4]).unwrap();
+    let mut buf = [0; 3];
+    (&file).read_exact_at(0, &mut buf[..]).unwrap();
+    assert_eq!(buf, [0, 1, 2])
 }

@@ -112,13 +112,13 @@ impl ReadAt for RandomAccessFile {
 }
 
 #[cfg(unix)]
-impl WriteAt for RandomAccessFile {
+impl WriteAt for &RandomAccessFile {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
         FileExt::write_at(&self.file, buf, pos)
     }
 
     fn flush(&mut self) -> io::Result<()> {
-        Write::flush(&mut self.file)
+        Write::flush(&mut &self.file)
     }
 }
 
@@ -131,12 +131,22 @@ impl ReadAt for RandomAccessFile {
 }
 
 #[cfg(windows)]
-impl WriteAt for RandomAccessFile {
+impl WriteAt for &RandomAccessFile {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
         FileExt::seek_write(&self.file, buf, pos)
     }
 
     fn flush(&mut self) -> io::Result<()> {
-        Write::flush(&mut self.file)
+        Write::flush(&mut &self.file)
+    }
+}
+
+impl WriteAt for RandomAccessFile {
+    fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
+        WriteAt::write_at(&mut &*self, pos, buf)
+    }
+
+    fn flush(&mut self) -> io::Result<()> {
+        WriteAt::flush(&mut &*self)
     }
 }
