@@ -1,6 +1,5 @@
 #[macro_use]
 extern crate quickcheck;
-extern crate rand;
 extern crate tempfile;
 extern crate positioned_io_preview as positioned_io;
 
@@ -8,7 +7,6 @@ use std::cmp::{max, min};
 use std::io::{Read, Write, Seek, SeekFrom};
 
 use self::quickcheck::{Arbitrary, Gen};
-use self::rand::Rng;
 use positioned_io::{ReadAt, WriteAt};
 
 #[derive(Clone, Debug)]
@@ -22,13 +20,13 @@ enum Op {
 }
 
 impl Arbitrary for Op {
-    fn arbitrary<G: Gen>(g: &mut G) -> Op {
-        match g.gen_range(0, 6) {
+    fn arbitrary(g: &mut Gen) -> Op {
+        match u8::arbitrary(g) {
             0 => Op::WriteAll(Vec::arbitrary(g)),
-            1 => Op::WriteAllAt(g.gen_range(0, 123456), Vec::arbitrary(g)),
-            2 => Op::ReadExact(usize::arbitrary(g)),
-            3 => Op::ReadExactAt(u64::arbitrary(g), usize::arbitrary(g)),
-            4 => Op::Seek(g.gen_range(0, 123456)),
+            1 => Op::WriteAllAt(u64::arbitrary(g) % 12345, Vec::arbitrary(g)),
+            2 => Op::ReadExact(usize::arbitrary(g) % 12345),
+            3 => Op::ReadExactAt(u64::arbitrary(g), usize::arbitrary(g) % 12345),
+            4 => Op::Seek(u64::arbitrary(g) % 12345),
             _ => Op::Flush,
         }
     }
