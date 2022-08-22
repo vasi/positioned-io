@@ -45,17 +45,11 @@ Preview release!
 ----------------
 
 This is a preview release of [positioned-io](https://crates.io/positioned-io).
-Add it to your `Cargo.toml` like so:
+All examples assume you are using it via:
 
 ```toml
 [dependencies]
-positioned-io-preview = "0.3"
-```
-
-All examples assume you are using it as:
-
-```rust
-extern crate positioned_io_preview as positioned_io;
+positioned-io = { package = "positioned-io-preview", version = "0.3" }
 ```
 
 License
