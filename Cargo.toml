@@ -1,6 +1,6 @@
 [package]
 name = "positioned-io-preview"
-version = "0.3.4" # remember to update html_root_url and readme
+version = "0.3.5" # remember to update html_root_url and readme
 authors = ["Dave Vasilevsky <dave@vasilevsky.ca>", "Niklas Fiekas <niklas.fiekas@backscattering.de>"]
 description = "Reading and writing at an offset"
 keywords = ["read", "offset", "pread", "pwrite", "endian"]
@@ -26,5 +26,6 @@ quickcheck = "1"
 tempfile = "3.0"
 
 [badges]
+maintenance = { status = "deprecated" }
 travis-ci = { repository = "vasi/positioned-io", branch = "master" }
 appveyor = { repository = "niklasf/positioned-io" }
