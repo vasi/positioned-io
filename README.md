@@ -41,18 +41,6 @@ Documentation
 
 https://docs.rs/positioned-io
 
-Usage
------
-
-Add `positioned-io` to your `Cargo.toml` like so:
-
-```toml
-[dependencies]
-positioned-io = "0.2"
-```
-
-Or check out the [preview branch](https://github.com/vasi/positioned-io/tree/positioned-io-preview#preview-release).
-
 License
 -------
 

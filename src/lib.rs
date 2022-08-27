@@ -42,11 +42,13 @@
 //! Write an integer to the middle of a file:
 //!
 //! ```no_run
-//! # extern crate positioned_io;
+//! # #[cfg(feature = "byteorder")]
 //! # extern crate byteorder;
 //! # use std::io;
 //! #
 //! # fn try_main() -> io::Result<()> {
+//! # #[cfg(feature = "byteorder")]
+//! # {
 //! use std::fs::OpenOptions;
 //! use positioned_io::WriteAt;
 //! use byteorder::{ByteOrder, LittleEndian};
@@ -58,6 +60,7 @@
 //! // write it to the file
 //! let mut file = OpenOptions::new().write(true).open("foo.data")?;
 //! file.write_all_at(1 << 20, &buf)?;
+//! # }
 //! #     Ok(())
 //! # }
 //! # fn main() {
@@ -68,17 +71,20 @@
 //! Or, more simply:
 //!
 //! ```no_run
-//! # extern crate positioned_io;
+//! # #[cfg(feature = "byteorder")]
 //! # extern crate byteorder;
 //! # use std::io;
 //! #
 //! # fn try_main() -> io::Result<()> {
+//! # #[cfg(feature = "byteorder")]
+//! # {
 //! use std::fs::OpenOptions;
 //! use byteorder::LittleEndian;
 //! use positioned_io::WriteBytesAtExt;
 //!
 //! let mut file = OpenOptions::new().write(true).open("foo.data")?;
 //! file.write_u32_at::<LittleEndian>(1 << 20, 1234)?;
+//! # }
 //! #     Ok(())
 //! # }
 //! # fn main() {
@@ -89,17 +95,20 @@
 //! Read from anything else that supports `ReadAt`, like a byte array:
 //!
 //! ```rust
-//! # extern crate positioned_io;
+//! # #[cfg(feature = "byteorder")]
 //! # extern crate byteorder;
 //! # use std::io;
 //! #
 //! # fn try_main() -> io::Result<()> {
+//! # #[cfg(feature = "byteorder")]
+//! {
 //! use byteorder::BigEndian;
 //! use positioned_io::ReadBytesAtExt;
 //!
 //! let buf = [0, 5, 254, 212, 0, 3];
 //! let n = buf.as_ref().read_i16_at::<BigEndian>(2)?;
 //! assert_eq!(n, -300);
+//! # }
 //! #     Ok(())
 //! # }
 //! # fn main() {
@@ -112,6 +121,7 @@
 #![warn(missing_debug_implementations)]
 #![warn(bare_trait_objects)]
 
+#[cfg(feature = "byteorder")]
 extern crate byteorder;
 #[cfg(unix)]
 extern crate libc;
@@ -122,7 +132,9 @@ pub use cursor::{Cursor, SizeCursor};
 mod slice;
 pub use slice::Slice;
 
+#[cfg(feature = "byteorder")]
 mod byteio;
+#[cfg(feature = "byteorder")]
 pub use byteio::{ByteIo, ReadBytesAtExt, WriteBytesAtExt};
 
 use std::fs::File;

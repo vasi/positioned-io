@@ -9,8 +9,11 @@ license = "MIT"
 repository = "https://github.com/vasi/positioned-io"
 readme = "README.md"
 
+[features]
+default = ["byteorder"]
+
 [dependencies]
-byteorder = "1.2"
+byteorder = { version = "1.2", optional = true }
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"
@@ -19,8 +22,7 @@ libc = "0.2"
 winapi = { version = "0.3", features = ["basetsd", "minwindef", "handleapi", "fileapi", "sysinfoapi", "memoryapi", "winnt"] }
 
 [dev-dependencies]
-quickcheck = "0.8"
-rand = "0.6"
+quickcheck = "1"
 tempfile = "3.0"
 
 [badges]

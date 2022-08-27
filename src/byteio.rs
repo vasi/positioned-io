@@ -16,7 +16,6 @@ use super::{ReadAt, WriteAt};
 /// Read an integer from the middle of a byte array:
 ///
 /// ```rust
-/// # extern crate positioned_io;
 /// # extern crate byteorder;
 /// # use std::io;
 /// use byteorder::BigEndian;
@@ -140,7 +139,6 @@ pub trait ReadBytesAtExt: ReadAt {
 /// Write an integer to the middle of a byte array:
 ///
 /// ```rust
-/// # extern crate positioned_io;
 /// # extern crate byteorder;
 /// # use std::io;
 /// use byteorder::BigEndian;
@@ -263,7 +261,6 @@ impl<W: WriteAt> WriteBytesAtExt for W {}
 ///
 /// ```rust
 /// # extern crate byteorder;
-/// # extern crate positioned_io;
 /// #
 /// # use std::io;
 /// #
@@ -303,7 +300,6 @@ impl<I, E: ByteOrder> ByteIo<I, E> {
     /// # Examples
     ///
     /// ```rust
-    /// # extern crate positioned_io;
     /// # extern crate byteorder;
     /// use byteorder::BigEndian;
     /// use positioned_io::ByteIo;
