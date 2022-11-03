@@ -1,7 +1,6 @@
-use std::cell::RefCell;
-use std::io;
+use std::{cell::RefCell, io};
 
-use super::{ReadAt, WriteAt, Size};
+use super::{ReadAt, Size, WriteAt};
 
 impl<'a, R: ReadAt + ?Sized> ReadAt for &'a R {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {

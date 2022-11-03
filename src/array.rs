@@ -1,7 +1,6 @@
-use std::cmp::min;
-use std::io;
+use std::{cmp::min, io};
 
-use super::{ReadAt, WriteAt, Size};
+use super::{ReadAt, Size, WriteAt};
 
 impl<'a> ReadAt for &'a [u8] {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {

@@ -1,6 +1,8 @@
-use std::marker::PhantomData;
-use std::io;
-use std::io::{Read, Write};
+use std::{
+    io,
+    io::{Read, Write},
+    marker::PhantomData,
+};
 
 use byteorder::{ByteOrder, ReadBytesExt, WriteBytesExt};
 
@@ -312,7 +314,10 @@ impl<I, E: ByteOrder> ByteIo<I, E> {
     /// ```
     #[inline]
     pub fn new(io: I) -> Self {
-        ByteIo { io, endianness: PhantomData }
+        ByteIo {
+            io,
+            endianness: PhantomData,
+        }
     }
 
     /// Returns the underlying reader or writer.

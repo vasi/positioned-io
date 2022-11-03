@@ -1,7 +1,6 @@
-use std::cmp::min;
-use std::io;
+use std::{cmp::min, io};
 
-use super::{ReadAt, WriteAt, Size};
+use super::{ReadAt, Size, WriteAt};
 
 impl ReadAt for Vec<u8> {
     fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
@@ -13,7 +12,10 @@ impl WriteAt for Vec<u8> {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
         // Ensure no overflow.
         if pos > (usize::max_value() as u64) {
-            return Err(io::Error::new(io::ErrorKind::InvalidInput, "vector size too big"));
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "vector size too big",
+            ));
         }
         let pos = pos as usize;
 

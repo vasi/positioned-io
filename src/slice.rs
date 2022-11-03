@@ -1,7 +1,6 @@
-use std::cmp::min;
-use std::io;
+use std::{cmp::min, io};
 
-use super::{ReadAt, WriteAt, Size};
+use super::{ReadAt, Size, WriteAt};
 
 /// A window into another `ReadAt` or `WriteAt`.
 ///
@@ -82,7 +81,10 @@ impl<I: Size> Slice<I> {
     pub fn new_to_end(io: I, offset: u64) -> io::Result<Self> {
         match io.size() {
             Ok(Some(size)) => Ok(Self::new(io, offset, Some(size - offset))),
-            _ => Err(io::Error::new(io::ErrorKind::InvalidData, "unknown base size")),
+            _ => Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                "unknown base size",
+            )),
         }
     }
 }

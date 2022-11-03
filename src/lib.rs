@@ -116,8 +116,7 @@
 //! # }
 //! ```
 
-#![doc(html_root_url = "https://docs.rs/positioned-io/0.3.0")]
-
+#![doc(html_root_url = "https://docs.rs/positioned-io/0.3.1")]
 #![warn(missing_debug_implementations)]
 #![warn(bare_trait_objects)]
 
@@ -134,11 +133,10 @@ pub use slice::Slice;
 
 #[cfg(feature = "byteorder")]
 mod byteio;
+use std::{fs::File, io};
+
 #[cfg(feature = "byteorder")]
 pub use byteio::{ByteIo, ReadBytesAtExt, WriteBytesAtExt};
-
-use std::fs::File;
-use std::io;
 
 /// Trait for reading bytes at an offset.
 ///
@@ -203,7 +201,10 @@ pub trait ReadAt {
             }
         }
         if !buf.is_empty() {
-            Err(io::Error::new(io::ErrorKind::UnexpectedEof, "failed to fill whole buffer"))
+            Err(io::Error::new(
+                io::ErrorKind::UnexpectedEof,
+                "failed to fill whole buffer",
+            ))
         } else {
             Ok(())
         }
@@ -258,7 +259,12 @@ pub trait WriteAt {
     fn write_all_at(&mut self, mut pos: u64, mut buf: &[u8]) -> io::Result<()> {
         while !buf.is_empty() {
             match self.write_at(pos, buf) {
-                Ok(0) => return Err(io::Error::new(io::ErrorKind::WriteZero, "failed to write whole buffer")),
+                Ok(0) => {
+                    return Err(io::Error::new(
+                        io::ErrorKind::WriteZero,
+                        "failed to write whole buffer",
+                    ))
+                }
                 Ok(n) => {
                     buf = &buf[n..];
                     pos += n as u64;
@@ -349,8 +355,8 @@ pub use raf::RandomAccessFile;
 
 // Implementation for arrays, vectors.
 mod array;
-mod vec;
 mod refs;
+mod vec;
 
 #[cfg(test)]
 mod tests {

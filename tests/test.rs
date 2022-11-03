@@ -1,19 +1,20 @@
-use std::cell::{Cell, RefCell};
-use std::fs::File;
-use std::io::{Error, ErrorKind, Read, Result, Seek, SeekFrom};
-use std::str;
+use std::{
+    cell::{Cell, RefCell},
+    fs::File,
+    io::{Error, ErrorKind, Read, Result, Seek, SeekFrom},
+    str,
+};
 
-extern crate positioned_io;
 #[cfg(feature = "byteorder")]
 extern crate byteorder;
+extern crate positioned_io;
 extern crate tempfile;
 #[cfg(feature = "byteorder")]
-use self::byteorder::LittleEndian;
-
+use positioned_io::ByteIo;
 use positioned_io::{Cursor, RandomAccessFile, ReadAt, Size, SizeCursor, Slice, WriteAt};
 
 #[cfg(feature = "byteorder")]
-use positioned_io::ByteIo;
+use self::byteorder::LittleEndian;
 
 #[test]
 fn test_read_at() {

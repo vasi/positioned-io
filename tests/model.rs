@@ -3,11 +3,14 @@ extern crate positioned_io;
 extern crate quickcheck;
 extern crate tempfile;
 
-use std::cmp::{max, min};
-use std::io::{Read, Write, Seek, SeekFrom};
+use std::{
+    cmp::{max, min},
+    io::{Read, Seek, SeekFrom, Write},
+};
+
+use positioned_io::{ReadAt, WriteAt};
 
 use self::quickcheck::{Arbitrary, Gen};
-use positioned_io::{ReadAt, WriteAt};
 
 #[derive(Clone, Debug)]
 enum Op {
@@ -52,7 +55,7 @@ impl Model {
         self.pos += buf.len();
     }
 
-    fn read_exact(&mut self, buf: &mut[u8]) -> bool {
+    fn read_exact(&mut self, buf: &mut [u8]) -> bool {
         if buf.is_empty() {
             return true;
         }

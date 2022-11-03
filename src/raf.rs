@@ -1,13 +1,10 @@
-use std::fs::File;
-use std::io;
-use std::io::Write;
 #[cfg(windows)]
 use std::io::{Seek, SeekFrom};
-use std::path::Path;
 #[cfg(unix)]
 use std::os::unix::fs::FileExt;
 #[cfg(windows)]
 use std::os::windows::fs::FileExt;
+use std::{fs::File, io, io::Write, path::Path};
 
 use super::{ReadAt, WriteAt};
 
@@ -100,7 +97,6 @@ impl RandomAccessFile {
         }
     }
 }
-
 
 #[cfg(unix)]
 impl ReadAt for RandomAccessFile {

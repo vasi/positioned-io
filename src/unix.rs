@@ -1,7 +1,4 @@
-use std::fs::File;
-use std::io;
-use std::io::Write;
-use std::os::unix::fs::FileExt;
+use std::{fs::File, io, io::Write, os::unix::fs::FileExt};
 
 use super::{ReadAt, WriteAt};
 
