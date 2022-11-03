@@ -1,4 +1,8 @@
-# [0.3.0] - 2018-09-12
+# [0.3.1] - 2022-11-03
+
+* Fixed compilation on 32-bit systems due to `posix_fadvise()` signature.
+
+# [0.3.0] - 2022-08-27
 
 * Renamed `{Read,Write}BytesExt` to `{Read,Write}BytesAtExt` to avoid overlap
   with `byteorder`.
