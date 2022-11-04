@@ -20,7 +20,7 @@
   `SizeCursor::as_cursor_mut()` to borrow the underlying `Cursor`.
 * Fixed `WriteAt for File` on Windows: Writes were not working at all.
 * Fixed `ReadAt for File` on Windows: Positioned reads were moving the
-  file cursor. The new implementation is much slower but no londer modifies
+  file cursor. The new implementation is much slower but no longer modifies
   the read position.
 * Various methods are now inlinable across crate boundaries.
 
