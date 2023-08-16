@@ -6,7 +6,7 @@ use std::os::unix::fs::FileExt;
 use std::os::windows::fs::FileExt;
 use std::{fs::File, io, io::Write, path::Path};
 
-use super::{ReadAt, WriteAt};
+use super::{ReadAt, Size, WriteAt};
 
 /// A wrapper for `File` that provides optimized random access through
 /// `ReadAt` and `WriteAt`.
@@ -143,5 +143,11 @@ impl WriteAt for RandomAccessFile {
 
     fn flush(&mut self) -> io::Result<()> {
         WriteAt::flush(&mut &*self)
+    }
+}
+
+impl Size for RandomAccessFile {
+    fn size(&self) -> io::Result<Option<u64>> {
+        self.file.size()
     }
 }
