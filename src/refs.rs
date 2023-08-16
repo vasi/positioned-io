@@ -56,3 +56,25 @@ impl<'a, S: Size> Size for &'a RefCell<S> {
         self.borrow().size()
     }
 }
+
+impl<R: ReadAt + ?Sized> ReadAt for Box<R> {
+    fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
+        (**self).read_at(pos, buf)
+    }
+}
+
+impl<R: WriteAt + ?Sized> WriteAt for Box<R> {
+    fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
+        (**self).write_at(pos, buf)
+    }
+
+    fn flush(&mut self) -> io::Result<()> {
+        (**self).flush()
+    }
+}
+
+impl<S: Size + ?Sized> Size for Box<S> {
+    fn size(&self) -> io::Result<Option<u64>> {
+        (**self).size()
+    }
+}
