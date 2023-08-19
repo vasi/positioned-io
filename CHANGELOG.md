@@ -1,3 +1,8 @@
+# [0.3.2] - 2023-08-19
+
+* Forward `ReatAt`, `WriteAt`, and `Size` for boxed types.
+* Implement `Size for RandomAccessFile`.
+
 # [0.3.1] - 2022-11-03
 
 * Fixed compilation on 32-bit systems due to `posix_fadvise()` signature.
