@@ -11,8 +11,6 @@ The major advantages of this type of I/O are:
 
 [pread]: http://man7.org/linux/man-pages/man2/pread.2.html
 
-[![Build Status](https://travis-ci.org/vasi/positioned-io.svg?branch=master)](https://travis-ci.org/vasi/positioned-io)
-[![Windows build status](https://ci.appveyor.com/api/projects/status/walpg9hx45benhia?svg=true)](https://ci.appveyor.com/project/niklasf/positioned-io)
 [![Crates.io](https://img.shields.io/crates/v/positioned-io.svg)](https://crates.io/crates/positioned-io)
 [![Documentation](https://docs.rs/positioned-io/badge.svg)](https://docs.rs/positioned-io)
 

@@ -24,7 +24,3 @@ winapi = { version = "0.3", features = ["basetsd", "minwindef", "handleapi", "fi
 [dev-dependencies]
 quickcheck = "1"
 tempfile = "3.0"
-
-[badges]
-travis-ci = { repository = "vasi/positioned-io", branch = "master" }
-appveyor = { repository = "niklasf/positioned-io" }
