@@ -72,6 +72,31 @@ impl<I> Slice<I> {
             Some(size) => min(bytes as u64, size - pos) as usize,
         }
     }
+
+    /// Consumes the slice, returning the underlying value.
+    pub fn into_inner(self) -> I {
+        self.io
+    }
+    /// Get a reference to the underlying value in this slice.
+    ///
+    /// Note that IO on the returned value may escape the slice.
+    pub fn get_ref(&self) -> &I {
+        &self.io
+    }
+    /// Get a mutable reference to the underlying value in this slice.
+    ///
+    /// Note that IO on the returned value may escape the slice.
+    pub fn get_mut(&mut self) -> &mut I {
+        &mut self.io
+    }
+    /// Get the offset that this slice starts at within the underlying IO.
+    pub fn offset(&self) -> u64 {
+        self.offset
+    }
+    /// Set the offset that this slice starts at within the underlying IO.
+    pub fn set_offset(&mut self, offset: u64) {
+        self.offset = offset
+    }
 }
 impl<I: Size> Slice<I> {
     /// Create a new `Slice` that goes to the end of `io`.
