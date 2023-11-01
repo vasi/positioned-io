@@ -1,3 +1,7 @@
+# 0.3.3 - 2023-11-01
+
+* Add `Slice::{into_inner,get_ref,get_mut,offset,set_offset}()`.
+
 # [0.3.2] - 2023-08-19
 
 * Forward `ReatAt`, `WriteAt`, and `Size` for boxed types.
