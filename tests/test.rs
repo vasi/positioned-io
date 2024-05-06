@@ -3,6 +3,7 @@ use std::{
     fs::File,
     io::{Error, ErrorKind, Read, Result, Seek, SeekFrom},
     str,
+    sync::Arc,
 };
 
 #[cfg(feature = "byteorder")]
@@ -116,6 +117,22 @@ fn test_size_cursor() {
     assert_eq!(2, curs.read(&mut buf).unwrap());
     let s = str::from_utf8(buf.as_ref()).unwrap();
     assert!(s.contains("\n"));
+}
+
+#[test]
+fn test_clone_size_cursor() {
+    let file = Arc::new(RandomAccessFile::open("tests/pi.txt").unwrap());
+    let mut curs = SizeCursor::new(file);
+    let mut curs_copy = curs.clone();
+
+    let mut buf = [0; 4];
+    assert_eq!(4, curs.read(&mut buf).unwrap());
+    let s = str::from_utf8(buf.as_ref()).unwrap();
+    assert_eq!(s, "3.14");
+
+    assert_eq!(4, curs_copy.read(&mut buf).unwrap());
+    let s = str::from_utf8(buf.as_ref()).unwrap();
+    assert_eq!(s, "3.14");
 }
 
 #[test]

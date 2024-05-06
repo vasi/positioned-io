@@ -4,7 +4,7 @@ use std::io::{Seek, SeekFrom};
 use std::os::unix::fs::FileExt;
 #[cfg(windows)]
 use std::os::windows::fs::FileExt;
-use std::{fs::File, io, io::Write, path::Path};
+use std::{fs::File, io, io::Write, path::Path, sync::Arc};
 
 use super::{ReadAt, Size, WriteAt};
 
@@ -149,5 +149,19 @@ impl WriteAt for RandomAccessFile {
 impl Size for RandomAccessFile {
     fn size(&self) -> io::Result<Option<u64>> {
         self.file.size()
+    }
+}
+
+impl ReadAt for Arc<RandomAccessFile> {
+    #[inline]
+    fn read_at(&self, pos: u64, buf: &mut [u8]) -> io::Result<usize> {
+        (**self).read_at(pos, buf)
+    }
+}
+
+impl Size for Arc<RandomAccessFile> {
+    #[inline]
+    fn size(&self) -> io::Result<Option<u64>> {
+        (**self).size()
     }
 }
