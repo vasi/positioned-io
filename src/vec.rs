@@ -11,7 +11,7 @@ impl ReadAt for Vec<u8> {
 impl WriteAt for Vec<u8> {
     fn write_at(&mut self, pos: u64, buf: &[u8]) -> io::Result<usize> {
         // Ensure no overflow.
-        if pos > (usize::max_value() as u64) {
+        if pos > (usize::MAX as u64) {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
                 "vector size too big",
@@ -21,7 +21,7 @@ impl WriteAt for Vec<u8> {
 
         // Resize the vector so pos <= self.len().
         if pos >= self.len() {
-            self.resize(pos as usize, 0);
+            self.resize(pos, 0);
         }
 
         // Copy anything that fits into existing space.
