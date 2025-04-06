@@ -1,4 +1,9 @@
-# 0.3.3 - 2023-11-01
+# [0.3.4] - 2025-04-06
+
+- Implement `ReadAt` and `Size` for `Arc<RandomAccessFile>`.
+- Start specifying minimum supported Rust version (currently 1.71).
+
+# [0.3.3] - 2023-11-01
 
 * Add `Slice::{into_inner,get_ref,get_mut,offset,set_offset}()`.
 
