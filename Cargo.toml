@@ -8,6 +8,7 @@ categories = ["filesystem", "os"]
 license = "MIT"
 repository = "https://github.com/vasi/positioned-io"
 readme = "README.md"
+edition = "2018"
 
 [features]
 default = ["byteorder"]

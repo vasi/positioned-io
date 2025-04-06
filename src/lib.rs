@@ -126,17 +126,17 @@ extern crate byteorder;
 extern crate libc;
 
 mod cursor;
-pub use cursor::{Cursor, SizeCursor};
+pub use crate::cursor::{Cursor, SizeCursor};
 
 mod slice;
-pub use slice::Slice;
+pub use crate::slice::Slice;
 
 #[cfg(feature = "byteorder")]
 mod byteio;
 use std::{fs::File, io};
 
 #[cfg(feature = "byteorder")]
-pub use byteio::{ByteIo, ReadBytesAtExt, WriteBytesAtExt};
+pub use crate::byteio::{ByteIo, ReadBytesAtExt, WriteBytesAtExt};
 
 /// Trait for reading bytes at an offset.
 ///
@@ -351,7 +351,7 @@ mod windows;
 
 // RandomAccess file wrapper.
 mod raf;
-pub use raf::RandomAccessFile;
+pub use crate::raf::RandomAccessFile;
 
 // Implementation for arrays, vectors.
 mod array;
