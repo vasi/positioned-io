@@ -8,6 +8,7 @@ categories = ["filesystem", "os"]
 license = "MIT"
 repository = "https://github.com/vasi/positioned-io"
 readme = "README.md"
+rust-version = "1.71"
 edition = "2021"
 
 [features]
