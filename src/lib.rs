@@ -16,7 +16,7 @@
 //! ```
 //! # use std::error::Error;
 //! #
-//! # fn try_main() -> Result<(), Box<Error>> {
+//! # fn try_main() -> Result<(), Box<dyn Error>> {
 //! use std::fs::File;
 //! use positioned_io::ReadAt;
 //!
@@ -152,7 +152,7 @@ pub use crate::byteio::{ByteIo, ReadBytesAtExt, WriteBytesAtExt};
 /// ```
 /// # use std::error::Error;
 /// #
-/// # fn try_main() -> Result<(), Box<Error>> {
+/// # fn try_main() -> Result<(), Box<dyn Error>> {
 /// use std::fs::File;
 /// use positioned_io::ReadAt;
 ///
@@ -224,7 +224,7 @@ pub trait ReadAt {
 /// ```no_run
 /// # use std::error::Error;
 /// #
-/// # fn try_main() -> Result<(), Box<Error>> {
+/// # fn try_main() -> Result<(), Box<dyn Error>> {
 /// use std::fs::OpenOptions;
 /// use positioned_io::WriteAt;
 ///
@@ -303,7 +303,7 @@ pub trait WriteAt {
 /// ```no_run
 /// # use std::error::Error;
 /// #
-/// # fn try_main() -> Result<(), Box<Error>> {
+/// # fn try_main() -> Result<(), Box<dyn Error>> {
 /// use std::fs::File;
 /// use positioned_io::Size;
 ///
