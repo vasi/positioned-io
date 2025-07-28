@@ -21,5 +21,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.toolchain }}
+          targets: wasm32-unknown-unknown
       - run: cargo test
       - run: cargo doc
+      - run: cargo check --target wasm32-unknown-unknown
