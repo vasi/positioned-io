@@ -350,7 +350,9 @@ mod unix;
 mod windows;
 
 // RandomAccess file wrapper.
+#[cfg(any(windows, unix))]
 mod raf;
+#[cfg(any(windows, unix))]
 pub use crate::raf::RandomAccessFile;
 
 // Implementation for arrays, vectors.
