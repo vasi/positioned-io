@@ -1,3 +1,8 @@
+# [0.3.5] - 2025-10-03
+
+- Fix compilation on platforms other than Unix and Windows by not
+  providing `RandomAccessFile`.
+
 # [0.3.4] - 2025-04-06
 
 - Implement `ReadAt` and `Size` for `Arc<RandomAccessFile>`.

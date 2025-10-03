@@ -116,7 +116,7 @@
 //! # }
 //! ```
 
-#![doc(html_root_url = "https://docs.rs/positioned-io/0.3.4")]
+#![doc(html_root_url = "https://docs.rs/positioned-io/0.3.5")]
 #![warn(missing_debug_implementations)]
 #![warn(bare_trait_objects)]
 
