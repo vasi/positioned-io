@@ -25,4 +25,12 @@ winapi = { version = "0.3", features = ["basetsd", "minwindef", "handleapi", "fi
 
 [dev-dependencies]
 quickcheck = "1"
-tempfile = "3.0"
+tempfile = "3"
+
+[package.metadata.docs.rs]
+targets = [
+    "x86_64-unknown-linux-gnu",
+    "x86_64-pc-windows-msvc",
+    "x86_64-apple-darwin",
+    "wasm32-unknown-unknown",
+]
